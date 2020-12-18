@@ -1,37 +1,48 @@
-import SignupPageContainer from "./signup/SignupPageContainer";
+import BrowsePageContainer from "./browse/BrowsePageContainer";
+// HOMEPAGE IS THE EXCEPTION
 import LoginPageContainer from "./login/LoginPageContainer";
-import BrowseContainer from "./browse/BrowseContainer";
+import ProfilePageContainer from "./profile/ProfilePageContainer";
+import SignupPageContainer from "./signup/SignupPageContainer";
 
+//HOMEPAGE PATH "/"
+const HOMEPAGE_PATH = "/";
 const LOGIN_PATH = "/login";
 const SIGNUP_PATH = "/signup";
+
 const BROWSE_PATH = "/browse";
+const PROFILE_PATH = "/profile";
 
 export const PATHS = {
+	HOMEPAGE_PATH,
 	LOGIN_PATH,
 	SIGNUP_PATH,
-	BROWSE_PATH
+	BROWSE_PATH,
+	PROFILE_PATH
 }
 
-export const LOGIN = {
+const LOGIN = {
 	component: LoginPageContainer,
 	path: LOGIN_PATH
 }
-
-export const SIGNUP = {
+const SIGNUP = {
 	component: SignupPageContainer,
 	path: SIGNUP_PATH
 }
-
-export const BROWSE = {
-	component: BrowseContainer,
+const BROWSE = {
+	component: BrowsePageContainer,
 	path: BROWSE_PATH,
 	isPrivate: true
 }
-
+const PROFILE = {
+	component: ProfilePageContainer,
+	path: PROFILE_PATH,
+	isPrivate: true
+}
 const views = [
 	LOGIN,
 	SIGNUP,
-	BROWSE
+	BROWSE,
+	PROFILE,
 ];
 
 export default views;

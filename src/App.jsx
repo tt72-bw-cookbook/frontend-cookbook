@@ -11,7 +11,7 @@ const App = () => {
 				{views.map(route => {
 					return (<AppRoute key={route.path} path={route.path} component={route.component} isPrivate={route.isPrivate} />);
 				})}
-				<Route exact="/">
+				<Route exact path="/">
 					<HomePageContainer />
 				</Route>
 			</Switch>
