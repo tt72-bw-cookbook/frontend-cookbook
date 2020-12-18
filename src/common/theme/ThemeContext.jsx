@@ -1,7 +1,7 @@
 import React, { createContext, useContext } from "react";
 import styled, { ThemeProvider, css } from "styled-components";
 import theme from "styled-theming";
-import { useLocalTheme } from "./useLocalTheme";
+import { useLocalTheme } from "../hooks/useLocalTheme";
 import { rootVars } from "./theme";
 
 const ThemeToggleContext = createContext();
