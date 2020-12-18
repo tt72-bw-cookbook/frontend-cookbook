@@ -1,6 +1,15 @@
 // import React from 'react'
 import styled, { css } from 'styled-components'
 
+
+const Heading = ({ h2, h3, h4, h5, noMargin, right, center, ...props }) => {
+	if (h2) return <HeadingTwo noMargin={noMargin} right={right} center={center} {...props} />
+	if (h3) return <HeadingThree noMargin={noMargin} right={right} center={center} {...props} />
+	if (h4) return <HeadingFour noMargin={noMargin} right={right} center={center} {...props} />
+	if (h5) return <HeadingFive noMargin={noMargin} right={right} center={center} {...props} />
+	return <HeadingOne noMargin={noMargin} right={right} center={center} {...props} />
+}
+
 const baseStyle = css`
 	margin-bottom: ${props => props.noMargin && '0'};
 	color: var(--pText);
@@ -52,12 +61,5 @@ const HeadingFive = styled.h5`
     ${baseStyle};
 `
 
-const Heading = ({ h2, h3, h4, h5, noMargin, right, center, ...props }) => {
-	if (h2) return <HeadingTwo noMargin={noMargin} right={right} center={center} {...props} />
-	if (h3) return <HeadingThree noMargin={noMargin} right={right} center={center} {...props} />
-	if (h4) return <HeadingFour noMargin={noMargin} right={right} center={center} {...props} />
-	if (h5) return <HeadingFive noMargin={noMargin} right={right} center={center} {...props} />
-	return <HeadingOne noMargin={noMargin} right={right} center={center} {...props} />
-}
 
 export default Heading

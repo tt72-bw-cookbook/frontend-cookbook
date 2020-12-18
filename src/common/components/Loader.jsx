@@ -1,6 +1,16 @@
 // import React from 'react'
 import styled, { keyframes } from 'styled-components'
 
+const Loader = props => {
+	return (
+		<StyledDotsLoader {...props}>
+			<Dot {...props} style={{}} />
+			<Dot {...props} style={{}} />
+			<Dot {...props} style={{}} />
+		</StyledDotsLoader>
+	)
+}
+
 const Bounce = keyframes`
   0%, 80%, 100% { 
     transform: scale(0);
@@ -29,14 +39,6 @@ const Dot = styled.span`
     }
 `
 
-const Loader = props => {
-  return (
-    <StyledDotsLoader {...props}>
-      <Dot {...props} style={{}} />
-      <Dot {...props} style={{}} />
-      <Dot {...props} style={{}} />
-    </StyledDotsLoader>
-  )
-}
+
 
 export default Loader

@@ -1,5 +1,5 @@
 import { Route, Redirect } from "react-router-dom";
-const userIsLoggedIn = true;
+const userIsLoggedIn = false;
 
 const AppRoute = ({ component: Component, path, isPrivate = false, ...rest }) => {
 	return (

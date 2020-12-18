@@ -1,5 +1,6 @@
 import styled from "styled-components";
-import Header from "../../common/components/Header";
+import components from "../../common/components/";
+const { Header } = components;
 
 const HomePageContainer = props => {
 	return (
