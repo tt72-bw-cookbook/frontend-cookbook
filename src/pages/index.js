@@ -3,13 +3,13 @@ import BrowsePageContainer from "./browse/BrowsePageContainer";
 import LoginPageContainer from "./login/LoginPageContainer";
 import ProfilePageContainer from "./profile/ProfilePageContainer";
 import SignupPageContainer from "./signup/SignupPageContainer";
-
+import RecipeViewPageContainer from "./recipe-view/RecipeViewPageContainer";
 
 //HOMEPAGE PATH "/"
 const HOMEPAGE_PATH = "/";
 const LOGIN_PATH = "/login";
 const SIGNUP_PATH = "/signup";
-
+const RECIPE_VIEW_PATH = "/browse/recipe";
 const BROWSE_PATH = "/browse";
 const PROFILE_PATH = "/profile";
 
@@ -18,7 +18,8 @@ export const PATHS = {
 	LOGIN_PATH,
 	SIGNUP_PATH,
 	BROWSE_PATH,
-	PROFILE_PATH
+	PROFILE_PATH,
+	RECIPE_VIEW_PATH,
 }
 
 const LOGIN = {
@@ -31,19 +32,23 @@ const SIGNUP = {
 }
 const BROWSE = {
 	component: BrowsePageContainer,
-	path: BROWSE_PATH,
-	isPrivate: true
+	path: BROWSE_PATH
 }
 const PROFILE = {
 	component: ProfilePageContainer,
 	path: PROFILE_PATH,
 	isPrivate: true
 }
+const RECIPE_VIEW = {
+	component: RecipeViewPageContainer,
+	path: RECIPE_VIEW_PATH
+}
 const views = [
 	LOGIN,
 	SIGNUP,
 	BROWSE,
 	PROFILE,
+	RECIPE_VIEW
 ];
 
 export default views;

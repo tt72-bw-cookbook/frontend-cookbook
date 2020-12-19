@@ -1,9 +1,7 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-// import { PATHS } from "../../routes/routes";
 import { PATHS } from "../../pages/";
 import ThemeToggler from "./ThemeToggler";
-// import layout from "../layout";
 import MenuBurger from "./MenuBurger";
 import Heading from "./Heading";
 import Link from "./Link";
@@ -35,7 +33,8 @@ const Header = props => {
 					<Link to={PATHS.LOGIN_PATH}>Login</Link>
 					<Link to={PATHS.SIGNUP_PATH}>Signup</Link>
 					<Link to={PATHS.BROWSE_PATH}>Browse</Link>
-					<Link to={PATHS.PROFILE_PATH}>Paths</Link>
+					<Link to={PATHS.PROFILE_PATH}>Profile</Link>
+					<Link to={PATHS.RECIPE_VIEW_PATH}>View Recipe</Link>
 				</nav>
 			</NavContainer>
 		</>
