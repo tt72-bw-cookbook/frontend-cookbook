@@ -1,8 +1,12 @@
+import LoginForm from "./components/LoginForm";
+import { DefaultPageContainer } from "../../common/components";
+
 const LoginContainer = props => {
 	return (
-		<div>
-			<h1>Login Container</h1>
-		</div>
+		<DefaultPageContainer>
+			<h1>Login</h1>
+			<LoginForm />
+		</DefaultPageContainer>
 	)
 }
 

@@ -1,5 +1,5 @@
 import { Route, Redirect } from "react-router-dom";
-const userIsLoggedIn = false;
+const userIsLoggedIn = window.localStorage.getItem("token") ? true : false;
 
 const AppRoute = ({ component: Component, path, isPrivate = false, ...rest }) => {
 	return (

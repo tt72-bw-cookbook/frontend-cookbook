@@ -1,17 +1,13 @@
-import Button from "./Button";
-import Card from "./Card";
-import Container from "./Container";
-import Flex, { Column } from "./Flex";
-import Heading from "./Heading";
-import Link from "./Link";
-import Loader from "./Loader";
-
-import Header from "./Header";
-import Form from "./Form";
-import Input from "./Input";
-
-const components = {
-	Button, Card, Container, Flex, Heading, Link, Loader, Column, Header, Form, Input
-}
-
-export default components;
+export { default as Button } from "./Button";
+export { default as Card } from "./Card";
+export { default as Link } from "./Link";
+export { default as Container } from "./Container";
+export { default as Flex, Column } from "./Flex";
+export { default as Heading } from "./Heading";
+export { default as Loader } from "./Loader";
+export { default as Header } from "./Header";
+export { default as Form } from "./Form";
+export { default as Input } from "./Input";
+export { default as StyledForm } from "./StyledForm";
+export { default as StyledPageContainer } from "./StyledPageContainer";
+export { default as DefaultPageContainer } from "./DefaultPageContainer";

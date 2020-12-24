@@ -23,3 +23,5 @@ export const useLocalTheme = () => {
 	};
 	return [storedMode, setMode];
 }
+
+export default useLocalTheme;
