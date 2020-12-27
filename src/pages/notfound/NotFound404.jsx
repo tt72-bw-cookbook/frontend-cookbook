@@ -1,6 +1,5 @@
 import styled from "styled-components";
-import components from "../../common/components";
-const { Link } = components;
+import { Link } from "../../common/components";
 
 const NotFound404 = () => (
 	<>
