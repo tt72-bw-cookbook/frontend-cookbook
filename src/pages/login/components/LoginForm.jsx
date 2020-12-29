@@ -33,7 +33,7 @@ const LoginForm = props => {
 					<Input type="text" id="username" name="username" value={input.username} onChange={handleChanges} />
 				</div>
 				<div>
-					<label htmlFor="password">Password</label>
+					<label htmlFor="password">PASSWORD</label>
 					<Input type="password" name="password" value={input.password} onChange={handleChanges} />
 				</div>
 				<Button>Submit</Button>
