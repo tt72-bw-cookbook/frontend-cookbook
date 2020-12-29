@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import { Header } from "../../common/components/";
+import axios from 'axios';
+
 
 const HomePageContainer = props => {
 
@@ -9,6 +11,15 @@ const HomePageContainer = props => {
 		<>
 			<Header />
 			<HomeBody>
+				<div>
+					<h2> Search Container </h2>
+				</div>
+				<div>
+					<h2> Filter Container </h2>
+				</div>
+				<div>
+					<h1>Recipe Rendering</h1>
+				</div>
 				<h1> HOME PAGE </h1>
 			</HomeBody>
 		</>
