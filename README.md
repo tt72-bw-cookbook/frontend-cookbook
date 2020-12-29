@@ -1,3 +1,24 @@
+# frontend-cookbook
+
+## Team Git flow
+- `git checkout main`
+- `git pull origin main — everything up to date on your local repo`
+- `git checkout -b feature/whatever-youre-working-on`
+- Make one test change
+- `git add .`
+- `git commit -m "initial commit"`
+- `git push origin feature/whatever-youre-working-on`
+- Make a draft Pull Request
+- Do a lot of work
+- `git add .` and `git commit -m "helpful comment"` throughout
+- When you’re ready to MERGE
+- `git pull origin main`
+- Resolve any conflicts in the branch, Zoom if necessary
+- `git push origin main`
+- Wait for a review; once your changes are reviewed, the reviewer will MERGE and DELETE your branch.
+- boom, done
+
+## Auto-Generated README
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app), using the [Redux](https://redux.js.org/) and [Redux Toolkit](https://redux-toolkit.js.org/) template.
 
 ## Available Scripts
