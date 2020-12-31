@@ -35,7 +35,6 @@ const SignupForm = props => {
 	return (
 		<StyledWrap>
 			<StyledForm onSubmit={handleSubmit}>
-
 				<StInput
 					id="username"
 					type="text"
@@ -45,7 +44,6 @@ const SignupForm = props => {
 					onChange={handleChanges}
 					error={errors.username}
 				/>
-
 				<StInput
 					id="password"
 					type="password"
@@ -55,7 +53,6 @@ const SignupForm = props => {
 					onChange={handleChanges}
 					error={errors.password}
 				/>
-
 				{/* <StInput
 					id="passwordConfirm"
 					type="password"
@@ -65,7 +62,6 @@ const SignupForm = props => {
 					onChange={handleChanges}
 					error={errors.passwordConfirm}
 				/> */}
-
 				<StInput
 					id="email"
 					type="email"
@@ -75,14 +71,7 @@ const SignupForm = props => {
 					placeholder="EMAIL"
 					error={errors.email}
 				/>
-
-				<StError>{errors.username}</StError>
-				<StError>{errors.password}</StError>
-				<StError>{errors.email}</StError>
-
 				<Button disabled={disabled}>Submit</Button>
-
-
 			</StyledForm>
 			<Prompt>
 				<p>Already signed up? </p><Link to="login">Log In</Link>
@@ -108,13 +97,13 @@ const StInput = styled(Input)`
 `;
 
 
-const StError = styled.p`
-font-size: 1.5rem;
-font-weight: 500;
-background-color: rgba(255, 255, 255, 0.5);
-color: red;
-line-height: 1.4;
-`;
+// const StError = styled.p`
+// font-size: 1.5rem;
+// font-weight: 500;
+// background-color: rgba(255, 255, 255, 0.5);
+// color: red;
+// line-height: 1.4;
+// `;
 
 const Prompt = styled.div`
 /* text-align: center; */

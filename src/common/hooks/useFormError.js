@@ -25,11 +25,6 @@ export const useFormError = (initInput, schema) => {
 			.catch((err) => {
 				console.log({ err, value })
 				setErrors({ ...errors, [name]: err.errors[0] });
-				// if (err.errors) {
-				// }
-				// else {
-				// 	setErrors({ ...errors, [name]: err })
-				// }
 			});
 
 		setInput({ ...input, [name]: value });
