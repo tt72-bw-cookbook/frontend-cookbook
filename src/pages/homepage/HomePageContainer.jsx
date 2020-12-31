@@ -56,7 +56,7 @@ const HomePageContainer = props => {
 				</FilterDiv>
 				<RecipesContainer>
 					{
-						recipes.map(recipes => {
+						recipes.slice(0, 15).map(recipes => {
 						return <HomePageRecipes key={recipes.recipeid} recipes={recipes}/>;
 						})
 					}   
