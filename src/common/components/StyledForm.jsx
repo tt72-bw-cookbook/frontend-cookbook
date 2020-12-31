@@ -6,6 +6,7 @@ const StyledForm = styled.form`
 	display: flex;
 	flex-flow: column nowrap;
 	align-items: center;
+	justify-content: center;
 	div {
 		display: flex;
 		flex-flow: row nowrap;

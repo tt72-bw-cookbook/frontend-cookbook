@@ -18,11 +18,18 @@ export const useFormError = (initInput, schema) => {
 		const { name, value } = evt.target;
 		yup.reach(schema, name)
 			.validate(value)
-			.then(() => {
+			.then((res) => {
+				console.log({ res, value })
 				setErrors({ ...errors, [name]: "" });
 			})
 			.catch((err) => {
+				console.log({ err, value })
 				setErrors({ ...errors, [name]: err.errors[0] });
+				// if (err.errors) {
+				// }
+				// else {
+				// 	setErrors({ ...errors, [name]: err })
+				// }
 			});
 
 		setInput({ ...input, [name]: value });
