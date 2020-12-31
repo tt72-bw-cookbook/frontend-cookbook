@@ -3,12 +3,24 @@ import styled from "styled-components";
 import { Header } from "../../common/components/";
 import axios from 'axios';
 import HomePageRecipes from './homePageRecipes';
+import HomePageFilter from './HomePageFilterForm';
 
 const recipesURL = 'https://tt72-cookbook.herokuapp.com/recipes';
+
+const initialFormValues = {
+	popular: '',
+	course: '',
+	cuisine: '',
+	diet: '',
+	ingredient: '',
+	occasion: '',
+	technique: '',
+  }
 
 const HomePageContainer = props => {
 
 	const [recipes, setRecipes] = useState([]);
+	const [formValues, setFormValues] = useState(initialFormValues);
 
 	useEffect( () => {
 		axios
@@ -23,16 +35,24 @@ const HomePageContainer = props => {
 	}, [])
 
 
+
+
 	return (
 		<>
 			<Header />
 			<HomeBody>
-				<h1> What are you cooking tonight? </h1>
+				<HomeH1> Find a Family Recipe </HomeH1>
 				<Search>
-					<h2> Search Container </h2>
+					<SearchInput 
+						key='random1'
+						value={''}
+						placeholder={'Type in recipes, ingredients, or types of food'}
+						onChange={(e) => e.target.value}
+					/>
 				</Search>
 				<FilterDiv>
-					<h2> Filter Container </h2>
+					<h2> Advanced Filtering </h2>
+					<HomePageFilter formValues={formValues}/>
 				</FilterDiv>
 				<RecipesContainer>
 					{
@@ -51,11 +71,20 @@ const HomeBody = styled.div`
 	flex-flow: column wrap;
 	justify-content: center;
 	align-items: center;
-	border: 1px solid white;
+`;
+
+const HomeH1 = styled.h1`
+	font-size: 5rem;
+	padding-top: 1%;
+	font-family: 'Italianno', cursive;
+`;
+
+const SearchInput = styled.input`
+	width: 100%;
+	height: 40px;
 `;
 
 const Search = styled.div`
-	border: 2px solid white;
 	width: 60%;
 	text-align: center;
 	padding: 1%;
@@ -71,8 +100,9 @@ const FilterDiv = styled.div`
 const RecipesContainer = styled.div`
 	display: flex;
 	flex-flow: wrap;
-	border: 1px solid teal;
-	width: 98%;
+	justify-content: space-evenly;
+	width: 90%;
+	padding-top: 1%;
 `;
 
 export default HomePageContainer;

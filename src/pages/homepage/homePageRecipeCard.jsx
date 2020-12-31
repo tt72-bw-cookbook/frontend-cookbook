@@ -9,16 +9,38 @@ const HomePageRecipeCard= props => {
 
 	return (
 		<>
-        <RecipeH2>{recipes.title} </RecipeH2>
-        <img src = {recipes.pictureurl} />
-
+        <RecipeCard>
+            <Recipeimg src = {recipes.pictureurl} />
+            <RecipeH2>{recipes.title} </RecipeH2>
+            <RecipeDes> {recipes.instructions} </RecipeDes>
+        </RecipeCard>
 		</>
     );
     
 };
 
+const RecipeCard = styled.div`
+   background-color: white;
+   flex: 1;
+`
+
 const RecipeH2 = styled.h2`
-    font-size: 2rem;
+    font-size: 2.4rem;
+    font-style: italic;
+    color: black;
+    padding-bottom: 2%;
+`
+
+const RecipeDes = styled.h2`
+    font-size: 1.8rem;
+    font-style: italic;
+    color: black;
+    padding-bottom: 1%;
+`
+
+const Recipeimg = styled.img`
+    width: 100%;
+    height: 240px;
 `
 
 export default HomePageRecipeCard;

@@ -60,6 +60,8 @@ const StyledHeader = styled.header`
 	}
 `;
 
+
+
 const NavContainer = styled.nav`
 	display: ${pr => pr.show ? "flex" : "none"};
 	width: 100vw;

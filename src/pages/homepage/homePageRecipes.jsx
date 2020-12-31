@@ -22,7 +22,10 @@ const HomePageRecipes= props => {
 const RecipeContain = styled.div`
     display: flex;
     flex-direction: column;
-    width: 30%;
+    justify-content: space-evenly;
+    width: 32.5%;
+    background-color: white;
+    margin: .2%;
 `;
 
 export default HomePageRecipes;
