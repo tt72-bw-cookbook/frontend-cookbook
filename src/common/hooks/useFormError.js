@@ -33,7 +33,7 @@ export const useFormError = (initInput, schema) => {
 		setErrors(initInput);
 	};
 
-	return [input, errors, disabled, handleChanges, clearForm,];
+	return [input, errors, disabled, handleChanges, clearForm];
 }
 
 export default useFormError;
