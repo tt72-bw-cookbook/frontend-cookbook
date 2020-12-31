@@ -60,12 +60,12 @@ const StInput = styled(Input)`
 	color: ${props => (props.error !== "") ? "red" : "var(--pText)"};
 `;
 
-const StError = styled.p`
-	font-size: 1.4rem;
-	background-color: rgba(255,255,255,0.5);
-	color: red;
-	/* padding: 0.5rem; */
-`;
+// const StError = styled.p`
+// 	font-size: 1.4rem;
+// 	background-color: rgba(255,255,255,0.5);
+// 	color: red;
+// 	/* padding: 0.5rem; */
+// `;
 
 const Prompt = styled.div`
 /* text-align: center; */

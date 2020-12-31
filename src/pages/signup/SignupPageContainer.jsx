@@ -1,5 +1,4 @@
 import styled from "styled-components";
-import { Link } from "react-router-dom";
 import SignupForm from "./components/SignupForm";
 import { DefaultPageContainer } from "../../common/components";
 
@@ -7,13 +6,8 @@ const SignupPageContainer = props => {
 	return (
 		<DefaultPageContainer>
 			<StyledParent>
-
 				<h1>Sign up</h1>
-
 				<SignupForm />
-
-
-
 			</StyledParent>
 		</DefaultPageContainer>
 	)
