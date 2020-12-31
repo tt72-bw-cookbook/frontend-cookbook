@@ -18,10 +18,12 @@ export const useFormError = (initInput, schema) => {
 		const { name, value } = evt.target;
 		yup.reach(schema, name)
 			.validate(value)
-			.then(() => {
+			.then((res) => {
+				console.log({ res, value })
 				setErrors({ ...errors, [name]: "" });
 			})
 			.catch((err) => {
+				console.log({ err, value })
 				setErrors({ ...errors, [name]: err.errors[0] });
 			});
 
@@ -33,7 +35,7 @@ export const useFormError = (initInput, schema) => {
 		setErrors(initInput);
 	};
 
-	return [input, errors, disabled, handleChanges, clearForm,];
+	return [input, errors, disabled, handleChanges, clearForm];
 }
 
 export default useFormError;

@@ -26,7 +26,7 @@ export const useLocalToken = () => {
 		window.localStorage.removeItem("token");
 	}
 
-	return [storedToken, setToken, removeToken];
+	return { storedToken, setToken, removeToken };
 }
 
 export default useLocalToken;
