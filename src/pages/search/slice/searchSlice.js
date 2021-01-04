@@ -26,5 +26,5 @@ const searchSlice = createSlice({
 });
 
 export const { addFilter, removeFilter } = searchSlice.actions;
-// export selectSearch = 
+
 export default searchSlice.reducer;

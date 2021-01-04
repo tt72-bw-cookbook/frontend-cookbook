@@ -36,11 +36,9 @@ const CheckboxGroup = props => {
 			<OptionsContainer>
 				{
 					Object.entries(search.facets).map(([k, v]) => {
-						return <div key={k} onClick={() => handleOptionClick(k)}>{k}</div>
+						return <div key={k} onClick={() => handleOptionClick(k)}>{v["_name"] ? v["_name"] : k}</div>
 					})
 				}
-				<div onClick={() => handleOptionClick("one")}>Option 1</div>
-				<div onClick={() => handleOptionClick("two")}>Option 2</div>
 			</OptionsContainer>
 
 			{
@@ -50,41 +48,39 @@ const CheckboxGroup = props => {
 							<SCheckContainer shown={filter === k}>
 								{
 									Object.entries(v).map(([k2, v2]) => {
-										return (
-											<div>
-												<input name={k2} id={k2} type="checkbox" key={k2} checked={activeFilters.includes(k2)} onChange={handleCheck} />
-												<label htmlFor={k2}>{k2}</label>
-											</div>
-										)
+										if (k2 !== "_name") {
+											return (
+												<CheckPair>
+													<input
+														type="checkbox"
+														checked={activeFilters.includes(k2)}
+														onChange={handleCheck}
+														key={k2}
+														name={k2}
+														id={k2}
+													/>
+													<label htmlFor={k2}>{v2.name ?? k2}</label>
+												</CheckPair>
+											)
+										} else {
+											return null;
+										}
 									})
 								}
 							</SCheckContainer>
 						)
 					}
+					return null;
 				})
 			}
-
-			<SCheckContainer shown={filter === "one"}>
-				<input name="type-yoga" type="checkbox" filter="type" key="typeBox1" checked={activeFilters.includes("yoga")} onChange={handleCheck} />
-				<label for="type-yoga">yoga</label>
-			</SCheckContainer>
-			<SCheckContainer shown={filter === "two"}>
-				<input name="type-cardio" type="checkbox" key="typeBox4" checked={activeFilters.includes("cardio")} onChange={handleCheck} />
-				<label for="type-cardio">cardio</label>
-				<input name="type-stretch" type="checkbox" key="typeBox5" checked={activeFilters.includes("stretch")} onChange={handleCheck} />
-				<label for="type-stretch">stretch</label>
-			</SCheckContainer>
-
 		</>
 	)
 }
 
-
-const SCheckContainer = styled.div`
-	display: ${({ shown }) => shown ? "flex" : "none"};
-	flex-flow: column nowrap;
-	width: 50rem;
-	justify-content: center;
+const CheckPair = styled.div`
+	display: flex;
+	flex-flow: row nowrap;
+	justify-content: space-between;
 	align-items: center;
 	input, label {
 		font-size: 2rem;
@@ -92,16 +88,26 @@ const SCheckContainer = styled.div`
 	}
 `;
 
+const SCheckContainer = styled.div`
+	display: ${({ shown }) => shown ? "flex" : "none"};
+	flex-flow: column nowrap;
+	width: 50rem;
+	justify-content: center;
+	align-items: flex-start;
+
+`;
+
 const OptionsContainer = styled.div`
 	display: flex;
 	flex-flow: row nowrap;
 	align-items: center;
 	height: 60px;
+	cursor: pointer;
 	div {
 		display: block;
 		width: 20rem;
-		margin: 2rem;
-		border-radius: 50px;
+		/* margin: 2rem; */
+		/* border-radius: 50px; */
 		border: 2px solid black;
 		padding: 1rem;
 		text-align: center;
