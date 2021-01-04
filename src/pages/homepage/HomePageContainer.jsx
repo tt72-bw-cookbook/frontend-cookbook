@@ -1,34 +1,16 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
-import { Header } from "../../common/components/";
+// import { Header } from "../../common/components/";
 import axios from 'axios';
-import { HomePageRecipes, HomePageFilterForm } from './components';
+import { HomePageRecipes } from './components';
 import SearchContainer from "../search/SearchContainer";
-// import HomePageFilter from './components/HomePageFilterForm';
-
 
 // GET Recipes data 
 const recipesURL = 'https://tt72-cookbook.herokuapp.com/recipes';
 
-//Advanced Filtering Form
-const initialFormValues = {
-	popular: '',
-	course: '',
-	cuisine: '',
-	diet: '',
-	ingredient: '',
-	occasion: '',
-	technique: '',
-}
-
-
-
 const HomePageContainer = props => {
-
 	const [recipes, setRecipes] = useState([]);
-	const [formValues, setFormValues] = useState(initialFormValues);
 
-	//Axios call for GET recipe data
 	useEffect(() => {
 		axios
 			.get(recipesURL)
@@ -41,31 +23,15 @@ const HomePageContainer = props => {
 			})
 	}, [])
 
-
-
-
 	return (
 		<>
-			<Header />
+			{/* <Header /> */}
+			<SearchContainer />
 			<HomeBody>
-				<HomeH1> Find a Family Recipe </HomeH1>
-				<SearchContainer />
-				<Search>
-					<SearchInput
-						key='random1'
-						value={''}
-						placeholder={'Type in recipes, ingredients, or types of food'}
-						onChange={(e) => e.target.value}
-					/>
-				</Search>
-				<FilterDiv>
-					<h2> Advanced Filtering </h2>
-					<HomePageFilterForm formValues={formValues} />
-				</FilterDiv>
 				<RecipesContainer>
 					{
-						recipes.slice(0, 18).map(recipes => {
-							return <HomePageRecipes key={recipes.recipeid} recipes={recipes} />;
+						recipes.slice(0, 18).map(recipe => {
+							return <HomePageRecipes key={recipe.recipeid} recipes={recipe} />;
 						})
 					}
 				</RecipesContainer>
@@ -79,30 +45,6 @@ const HomeBody = styled.div`
 	flex-flow: column wrap;
 	justify-content: center;
 	align-items: center;
-`;
-
-const HomeH1 = styled.h1`
-	font-size: 5rem;
-	padding-top: 1%;
-	font-family: 'Italianno', cursive;
-`;
-
-const SearchInput = styled.input`
-	width: 100%;
-	height: 40px;
-`;
-
-const Search = styled.div`
-	width: 60%;
-	text-align: center;
-	padding: 1%;
-`;
-
-const FilterDiv = styled.div`
-	border: 2px solid white;
-	width: 100%;
-	text-align: center;
-	padding: 1%;
 `;
 
 const RecipesContainer = styled.div`
