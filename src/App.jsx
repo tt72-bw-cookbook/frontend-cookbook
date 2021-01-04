@@ -4,6 +4,7 @@ import AppRoute from "./AppRoute";
 // import routes from "./routes/routes";
 import NotFound404 from "./pages/notfound/NotFound404";
 import views from "./pages"
+import RecipeViewPageContainer from "./pages/recipe-view/RecipeViewPageContainer";
 
 const App = () => {
 	return (
@@ -12,9 +13,14 @@ const App = () => {
 				{views.map(route => {
 					return (<AppRoute key={route.path} path={route.path} component={route.component} isPrivate={route.isPrivate} />);
 				})}
+				{/* <Route exact path="/recipe">
+					<RecipeViewPageContainer />
+				</Route> */}
+
 				<Route exact path="/">
 					<HomePageContainer />
 				</Route>
+
 				<Route path="*">
 					<NotFound404 />
 				</Route>
