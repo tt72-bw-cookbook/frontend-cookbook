@@ -5,8 +5,11 @@ import axios from 'axios';
 import HomePageRecipes from './homePageRecipes';
 import HomePageFilter from './HomePageFilterForm';
 
+
+// GET Recipes data 
 const recipesURL = 'https://tt72-cookbook.herokuapp.com/recipes';
 
+//Advanced Filtering Form
 const initialFormValues = {
 	popular: '',
 	course: '',
@@ -17,11 +20,14 @@ const initialFormValues = {
 	technique: '',
   }
 
+
+
 const HomePageContainer = props => {
 
 	const [recipes, setRecipes] = useState([]);
 	const [formValues, setFormValues] = useState(initialFormValues);
 
+	//Axios call for GET recipe data
 	useEffect( () => {
 		axios
 		.get(recipesURL)

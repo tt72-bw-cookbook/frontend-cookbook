@@ -7,8 +7,6 @@ const HomePageRecipes= props => {
 
     const { recipes } = props
 
-    console.log('recipe data', recipes);
-
 	return (
 		<>
     <RecipeContain>
