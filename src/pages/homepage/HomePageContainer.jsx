@@ -2,8 +2,9 @@ import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import { Header } from "../../common/components/";
 import axios from 'axios';
-import HomePageRecipes from './homePageRecipes';
-import HomePageFilter from './HomePageFilterForm';
+import { HomePageRecipes, HomePageFilterForm } from './components';
+import SearchContainer from "../search/SearchContainer";
+// import HomePageFilter from './components/HomePageFilterForm';
 
 
 // GET Recipes data 
@@ -18,7 +19,7 @@ const initialFormValues = {
 	ingredient: '',
 	occasion: '',
 	technique: '',
-  }
+}
 
 
 
@@ -28,16 +29,16 @@ const HomePageContainer = props => {
 	const [formValues, setFormValues] = useState(initialFormValues);
 
 	//Axios call for GET recipe data
-	useEffect( () => {
+	useEffect(() => {
 		axios
-		.get(recipesURL)
-		.then ( (res) => {
-			console.log(res.data.elements)
-			setRecipes(res.data.elements)
-		})
-		.catch ( (err) => {
-			console.log(err)
-		})
+			.get(recipesURL)
+			.then((res) => {
+				console.log(res.data.elements)
+				setRecipes(res.data.elements)
+			})
+			.catch((err) => {
+				console.log(err)
+			})
 	}, [])
 
 
@@ -48,8 +49,9 @@ const HomePageContainer = props => {
 			<Header />
 			<HomeBody>
 				<HomeH1> Find a Family Recipe </HomeH1>
+				<SearchContainer />
 				<Search>
-					<SearchInput 
+					<SearchInput
 						key='random1'
 						value={''}
 						placeholder={'Type in recipes, ingredients, or types of food'}
@@ -58,14 +60,14 @@ const HomePageContainer = props => {
 				</Search>
 				<FilterDiv>
 					<h2> Advanced Filtering </h2>
-					<HomePageFilter formValues={formValues}/>
+					<HomePageFilterForm formValues={formValues} />
 				</FilterDiv>
 				<RecipesContainer>
 					{
 						recipes.slice(0, 18).map(recipes => {
-						return <HomePageRecipes key={recipes.recipeid} recipes={recipes}/>;
+							return <HomePageRecipes key={recipes.recipeid} recipes={recipes} />;
 						})
-					}   
+					}
 				</RecipesContainer>
 			</HomeBody>
 		</>
