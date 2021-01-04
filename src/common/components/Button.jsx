@@ -1,11 +1,10 @@
-// import React from 'react'
 import styled from 'styled-components';
 import Loader from './Loader';
-import { clickerStyles, secondaryClickerStyles } from "./Link.styles";
+import { clickerStyles, secondaryClickerStyles, disabledClicker, baseStyles } from "./Link.styles";
 
-const Button = ({ secondary, loading, children, ...props }) => {
+const Button = ({ secondary, loading, children, disabled, ...props }) => {
 	return (
-		<StyledButton secondary={secondary} {...props}>
+		<StyledButton secondary={secondary} disabled={disabled} {...props}>
 			{loading ? <Loader small white /> : children}
 		</StyledButton>
 	)
@@ -16,8 +15,16 @@ const StyledButton = styled.button`
 	appearance: none;
 	-moz-appearance: none;
 	-webkit-appearance: none;
-	${clickerStyles};
-	${props => { return (props.secondary && secondaryClickerStyles) }};
+	${baseStyles}
+	${props => {
+		if (props.disabled) {
+			return disabledClicker;
+		} else if (props.secondary) {
+			return secondaryClickerStyles;
+		} else {
+			return clickerStyles;
+		}
+	}}
 `;
 
 

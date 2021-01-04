@@ -1,7 +1,7 @@
 import styled, { css } from 'styled-components';
 import { Link as RouteLink } from "react-router-dom";
 
-export const clickerStyles = css`
+export const baseStyles = css`
 	appearance: none;
 	-moz-appearance: none;
 	-webkit-appearance: none;
@@ -21,6 +21,14 @@ export const clickerStyles = css`
 	outline: none;
 	border: none;
 	border-radius: 10px;
+`;
+export const disabledClicker = css`
+	${baseStyles};
+	background-color: var(--pBase);
+`;
+
+export const clickerStyles = css`
+	${baseStyles};
 	cursor: pointer;
 	&:hover {
 		transition-duration: 0;
@@ -46,9 +54,15 @@ export const secondaryClickerStyles = css`
 	}
 `;
 const StyledLink = styled(RouteLink)`
-	${clickerStyles};
+	${baseStyles};
 	${props => {
-		return (props.secondary && secondaryClickerStyles)
+		if (props.disabled) {
+			return disabledClicker;
+		} else if (props.secondary) {
+			return secondaryClickerStyles;
+		} else {
+			return clickerStyles;
+		}
 	}};
 `;
 

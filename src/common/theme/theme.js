@@ -30,9 +30,15 @@ const buildThemePallette = (colorsArr) => {
 	`;
 }
 
+// ? pDarkest, pDarker, pDark, pBase, pLight, pLighter, pLightest ( DARK MODE )
 const darkArr = ["000000", "080708", "242525", "404342", "5c615f", "787e7c", "999f9d"];
+
+// ? pDarkest, pDarker, pDark, pBase, pLight, pLighter, pLightest ( LIGHT MODE )
 const lightArr = ["9ba1a8", "b9c0c7", "ced4da", "e0e4e8", "e9ecef", "f1f3f5", "f8f9fa"];
+
+// ? tDarker, tDark, tBase, tLight, tLighter ( THEME COLORS STAY FOR BOTH LIGHT AND DARK )
 const themeArr = ["af0b14", "be1c1f", "da3c33", "ee5c4b", "f57463"];
+
 const darkPrimary = buildPrimaryPallette(darkArr);
 const lightPrimary = buildPrimaryPallette(lightArr);
 const themeColors = buildThemePallette(themeArr);
