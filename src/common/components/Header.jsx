@@ -32,7 +32,7 @@ const Header = props => {
 					<Link to={PATHS.HOMEPAGE_PATH}>Home</Link>
 					<Link to={PATHS.LOGIN_PATH}>Login</Link>
 					<Link to={PATHS.SIGNUP_PATH}>Signup</Link>
-					<Link to={PATHS.BROWSE_PATH}>Browse</Link>
+					{/* <Link to={PATHS.BROWSE_PATH}>Browse</Link> */}
 					<Link to={PATHS.PROFILE_PATH}>Profile</Link>
 					<Link to={PATHS.RECIPE_VIEW_PATH}>View Recipe</Link>
 				</nav>
