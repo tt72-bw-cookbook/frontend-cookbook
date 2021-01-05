@@ -1,18 +1,49 @@
 import { Header } from "../../common/components";
 import styled from "styled-components";
 
-const RecipeViewPageContainer = props => {
+import axios from "axios";
+import * as yup from "yup";
+
+const RecipeViewPageContainer = ({ details }) => {
+	// const getIngredients = () => {
+	// 	axios
+	// 		.get()
+	// 		.then()
+	// 		.catch((err) => {
+	// 			console.log(err);
+	// 			debugger;
+	// 		});
+	// };
+
 	return (
 		<>
 			<Header />
 			<StyledRecipes>
-				<div className="">
+				<div className="red-line">
 					<h1>Recipe View</h1>
 				</div>
-				<h2> Ingredients </h2>
-				<ul>
-					<li>stuff</li>
-				</ul>
+
+				<div>
+					<img src="https://images-gmi-pmc.edge-generalmills.com/087d17eb-500e-4b26-abd1-4f9ffa96a2c6.jpg" />
+				</div>
+
+
+				<div className="ingredients">
+					<h2>Ingredients</h2>
+					<ul>
+						<li>List</li>
+					</ul>
+				</div>
+
+
+				<h2>Directions</h2>
+				<ol>
+					<li>List</li>
+				</ol>
+
+
+
+
 			</StyledRecipes>
 		</>
 
@@ -28,11 +59,38 @@ const StyledRecipes = styled.div`
 	flex-flow: column nowrap;
 	justify-content: center;
 	align-items: center;
+	margin: 5rem;
+	font-size: 2rem;
+	font-weight: 600;
+	text-align: center;
+	margin-top: 10px;
+
+	.red-line{
+		border: 2px solid red;
+	}
 	h1 {
 		margin: 5rem;
+		font-size: 4rem;
+		font-weight: 650;
+		text-align: center;
+	}
+
+	h2 {
+		margin: 5rem;
 		font-size: 5rem;
+		font-weight: 100;
+		text-align: center;
+	}
+	 ul, ol{
+		margin: 5rem;
+		font-size: 2rem;
 		font-weight: 800;
 		text-align: center;
 	}
-margin-top: 10px;
+	img{
+		width: 100%;
+		height:150%;
+		
+	}
+
 `;

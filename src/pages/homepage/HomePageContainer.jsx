@@ -20,6 +20,7 @@ const HomeBody = styled.div`
 	flex-flow: column nowrap;
 	justify-content: center;
 	align-items: center;
+	
 	h1 {
 		margin: 20rem;
 		font-size: 5rem;
