@@ -21,30 +21,28 @@ const searchSlice = createSlice({
 	reducers: {
 		addFilter: (state, action) => {
 			const [category, option] = action.payload.split(",");
-			console.log(option);
-			console.log(state.activeFacets);
-			if (!state.facets[category][option] || state.activeFacets.includes(x => {
-				console.log(x);
-				console.log({ id: x.id, option })
-				return x.id === option
-			}, 0)) {
-				console.log("fuck");
+			if (!state.facets[category][option]) {
+				console.error("line 25 —— no such facet exists");
 				return;
 			}
-
+			if (state.activeFacets.some(x => x.id === option)) {
+				console.error("line 29 —— facets is already part of active facets");
+				return;
+			}
 			const filter = state.facets[category][option];
-
-			if (state.activeFacets.includes(filter)) {
-				console.log("yes");
-				return;
-			} else {
-				state.activeFacets.push(filter);
-			}
+			state.activeFacets.push(filter);
 		},
 		removeFilter: (state, action) => {
-			const { filter } = action.payload;
-			if (state.activeFacets.includes(x => x.id === filter.id)) {
-				state.activeFacets = state.activeFacets.filter(x => x.id !== filter.id);
+			const [category, option] = action.payload.split(",");
+			if (!state.facets[category][option]) {
+				console.error("no such facet exists");
+				return;
+			}
+			if (state.activeFacets.some(x => x.id === option)) {
+				state.activeFacets = state.activeFacets.filter(x => x.id !== option);
+			} else {
+				console.error("facet is not part of active facets");
+				return;
 			}
 		},
 	},

@@ -39,6 +39,8 @@ const CheckboxGroup = props => {
 		const { name, value, checked } = evt.target;
 		if (checked) {
 			dispatch(addFilter(name))
+		} else {
+			dispatch(removeFilter(name))
 		}
 
 		setActiveFilters(name);
@@ -73,7 +75,8 @@ const CheckboxGroup = props => {
 																<label htmlFor={k2}>
 																	<input
 																		type="checkbox"
-																		checked={activeFilters.includes(k2)}
+																		// checked={activeFilters.includes(k2)}
+																		checked={search.activeFacets.some(e => e.id === k2)}
 																		// value={search.facets[k][k2]}
 																		onChange={handleCheck}
 																		key={k2}
