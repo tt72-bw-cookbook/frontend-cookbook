@@ -9,10 +9,10 @@ const userURL = 'https://tt72-cookbook.herokuapp.com/users/current';
 
 const ProfilePageContainer = props => {
 
-	const [user, setUser] = useState({})
+	const [user, setUser] = useState(null)
 
 	useEffect(() => {
-		if (user) {
+		if (!user) {
 			axiosAuth()
 				.get(userURL)
 				.then((res) => {
