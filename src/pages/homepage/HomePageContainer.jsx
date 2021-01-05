@@ -1,15 +1,40 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import { Header } from "../../common/components/";
+import axios from 'axios';
+import { HomePageRecipes } from './components';
+import SearchContainer from "../search/SearchContainer";
+
+// GET Recipes data 
+const recipesURL = 'https://tt72-cookbook.herokuapp.com/recipes';
 
 const HomePageContainer = props => {
+	const [recipes, setRecipes] = useState([]);
 
+	useEffect(() => {
+		axios
+			.get(recipesURL)
+			.then((res) => {
+				console.log(res.data.elements)
+				setRecipes(res.data.elements)
+			})
+			.catch((err) => {
+				console.log(err)
+			})
+	}, [])
 
 	return (
 		<>
 			<Header />
+			<SearchContainer />
 			<HomeBody>
-				<h1> HOME PAGE </h1>
+				<RecipesContainer>
+					{
+						recipes.slice(0, 18).map(recipe => {
+							return <HomePageRecipes key={recipe.recipeid} recipes={recipe} />;
+						})
+					}
+				</RecipesContainer>
 			</HomeBody>
 		</>
 	);
@@ -17,7 +42,7 @@ const HomePageContainer = props => {
 
 const HomeBody = styled.div`
 	display: flex;
-	flex-flow: column nowrap;
+	flex-flow: column wrap;
 	justify-content: center;
 	align-items: center;
 	
@@ -27,6 +52,14 @@ const HomeBody = styled.div`
 		font-weight: 800;
 		text-align: center;
 	}
+`;
+
+const RecipesContainer = styled.div`
+	display: flex;
+	flex-flow: wrap;
+	justify-content: space-evenly;
+	width: 90%;
+	padding-top: 1%;
 `;
 
 export default HomePageContainer;
