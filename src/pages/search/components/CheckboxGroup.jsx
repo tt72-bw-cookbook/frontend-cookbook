@@ -1,20 +1,19 @@
 import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import styled, { css } from "styled-components";
+import { addFilter, removeFilter } from "../slice/searchSlice";
 
 const useActiveFilters = () => {
-
-
 	const [active, setActive] = useState([]);
 	const setActiveFilters = (name) => {
 		setActive(active.includes(name) ? active.filter(x => x !== name) : [...active, name]);
 	}
-
 	return [active, setActiveFilters];
 }
 
 const CheckboxGroup = props => {
 	const search = useSelector(state => state.search);
+	const dispatch = useDispatch();
 	const [activeFilters, setActiveFilters] = useActiveFilters();
 	const [filter, setFilter] = useState("");
 
@@ -26,18 +25,22 @@ const CheckboxGroup = props => {
 		}
 	}
 
-	const handleMouseIn = (name) => {
-		if (filter !== name) {
-			setFilter(name);
-		}
-	}
-	const handleMouseOut = (name) => {
-		if (filter === name) {
-			setFilter("");
-		}
-	}
+	// const handleMouseIn = (name) => {
+	// 	if (filter !== name) {
+	// 		setFilter(name);
+	// 	}
+	// }
+	// const handleMouseOut = (name) => {
+	// 	if (filter === name) {
+	// 		setFilter("");
+	// 	}
+	// }
 	const handleCheck = (evt) => {
-		const { name } = evt.target;
+		const { name, value, checked } = evt.target;
+		if (checked) {
+			dispatch(addFilter(name))
+		}
+
 		setActiveFilters(name);
 	}
 
@@ -67,15 +70,18 @@ const CheckboxGroup = props => {
 													if (k2 !== "_name") {
 														return (
 															<CheckPair>
-																<input
-																	type="checkbox"
-																	checked={activeFilters.includes(k2)}
-																	onChange={handleCheck}
-																	key={k2}
-																	name={k2}
-																	id={k2}
-																/>
-																<label htmlFor={k2}>{v2.name ?? k2}</label>
+																<label htmlFor={k2}>
+																	<input
+																		type="checkbox"
+																		checked={activeFilters.includes(k2)}
+																		// value={search.facets[k][k2]}
+																		onChange={handleCheck}
+																		key={k2}
+																		name={`${k},${k2}`}
+																		id={k2}
+																	/>
+																	{v2.name ?? k2}
+																</label>
 															</CheckPair>
 														)
 													} else {
@@ -104,12 +110,10 @@ const CheckPair = styled.div`
 	align-items: flex-start;
 	border: 2px solid black;
 	padding: 1rem;
-	font-family: Raleway;
 	font-size: 1.8rem;
 	font-weight: 700;
 	input, label {
 		font-size: 2rem;
-		font-family: Raleway;
 	}
 `;
 
@@ -128,20 +132,16 @@ const SCheckContainer = styled.div`
 			`;
 		}
 	}};
-	display: block;
-	font-family: Raleway;
-	font-size: 1.8rem;
-	font-weight: 700;
 	transition: max-height 0s, opacity 0.25s ease-in;
 	flex-flow: column nowrap;
 	justify-content: center;
-	align-items: flex-start;
+	align-items: stretch;
 	overflow: hidden;
 	position: absolute;
 	background-color: #FFF;
 	color: black;
-	z-index: 99999;
-
+	z-index: 9999;
+	width: 100%;
 
 `;
 
@@ -152,15 +152,24 @@ const OptionsContainer = styled.div`
 	height: 60px;
 	cursor: pointer;
 	.filter-group {
+		
+		h3 {
+			display: block;
+			height: 100%;
+			/* min-height: 60px; */
+		}
 		display: block;
+		box-sizing: border-box;
 		width: 20rem;
-		border: 2px solid black;
-		padding: 1rem;
-		text-align: center;
-		font-family: Raleway;
+		background-color: var(--pDark);
+		border: 1px solid black;		
 		text-align: center;
 		font-size: 1.8rem;
 		font-weight: 700;
+		height: 3rem;
+		/* padding: auto 0; */
+		padding: 5px 0;
+		position: relative;
 	}
 `;
 

@@ -19,8 +19,34 @@ const searchSlice = createSlice({
 	name: "search",
 	initialState: initialState,
 	reducers: {
-		addFilter: (state, action) => { },
-		removeFilter: (state, action) => { },
+		addFilter: (state, action) => {
+			const [category, option] = action.payload.split(",");
+			console.log(option);
+			console.log(state.activeFacets);
+			if (!state.facets[category][option] || state.activeFacets.includes(x => {
+				console.log(x);
+				console.log({ id: x.id, option })
+				return x.id === option
+			}, 0)) {
+				console.log("fuck");
+				return;
+			}
+
+			const filter = state.facets[category][option];
+
+			if (state.activeFacets.includes(filter)) {
+				console.log("yes");
+				return;
+			} else {
+				state.activeFacets.push(filter);
+			}
+		},
+		removeFilter: (state, action) => {
+			const { filter } = action.payload;
+			if (state.activeFacets.includes(x => x.id === filter.id)) {
+				state.activeFacets = state.activeFacets.filter(x => x.id !== filter.id);
+			}
+		},
 	},
 	extraReducers: {}
 });
