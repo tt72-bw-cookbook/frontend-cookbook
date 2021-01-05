@@ -32,21 +32,22 @@ const ProfilePageContainer = props => {
 		<>
 			<Header />
 			<ProfileBody>
-				<h2>Your Profile</h2>
-				<div>
+				<ProfileH2>Your Profile</ProfileH2>
+				<UserInfo>
 					<h1>{user.username}</h1>
-					<img src = {user.profilepicture} />
+					<UserImg src = {user.profilepicture} />
 					<h3> Email: {user.email} </h3>
 					<h3> Since: {date[0]} </h3>
-				</div>
-				<div>
-					<button> Create New Recipe </button>
+				</UserInfo>
+				<NewRecipeButton> Add New Recipe </NewRecipeButton>
+				<ProfileH2>Your Recipes</ProfileH2>
+				<UserRecipes>
 					{
 						user.recipes.map(userRecipes => {
 						return <ProfilePageRecipes key={userRecipes.userRecipeid} userRecipes={userRecipes}/>;
 						})
 					}   
-				</div>
+				</UserRecipes>
 				<div>
 
 				</div>
@@ -67,6 +68,36 @@ const ProfileBody = styled.div`
 		text-align: center;
 		text-transform: uppercase;
 	}
+`;
+
+const ProfileH2 = styled.h2`
+font-size: 2.5rem;
+text-align: center;
+Padding: 1%;
+`;
+
+const UserInfo = styled.div`
+display: flex;
+flex-direction: column;
+align-items: center;
+`;
+
+const UserImg = styled.img`
+height: 200px;
+width: 300px;
+`;
+
+const NewRecipeButton = styled.button`
+  background-color: skyblue;
+  color: white;
+  padding: 12px 30px;
+  margin: 2%;
+  text-align: center;
+  font-size: 14px;
+`;
+
+const UserRecipes = styled.div`
+width: 90%;
 `;
 
 
