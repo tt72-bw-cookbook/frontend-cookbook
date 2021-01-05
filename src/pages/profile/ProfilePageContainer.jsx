@@ -9,24 +9,30 @@ const userURL = 'https://tt72-cookbook.herokuapp.com/users/current';
 
 const ProfilePageContainer = props => {
 
-	const [user, setUser] = useState([])
+	const [user, setUser] = useState({})
 
-	useEffect( () => {
-		axiosAuth()
-		.get(userURL)
-		.then ( (res) => {
-			console.log(res.data)
-			setUser(res.data)
-		})
-		.catch ( (err) => {
-			console.log(err)
-		})
-	}, [])
+	useEffect(() => {
+		if (user) {
+			axiosAuth()
+				.get(userURL)
+				.then((res) => {
+					console.log(res.data)
+					setUser(res.data)
+				})
+				.catch((err) => {
+					console.log(err)
+				})
+		}
+	}, [user])
 
-	const date = user.createdDate.split(' ');
+	const date = user?.createdDate?.split(' ');
 
-	console.log('date', date[0]);
+	console.log('date', date ? date[0] : "undefined");
 
+
+	if (!user) {
+		return <h1>No user found</h1>
+	}
 
 	return (
 		<>
@@ -35,18 +41,18 @@ const ProfilePageContainer = props => {
 				<ProfileH2>Your Profile</ProfileH2>
 				<UserInfo>
 					<h1>{user.username}</h1>
-					<UserImg src = {user.profilepicture} />
-					<h3> Email: {user.email} </h3>
-					<h3> Since: {date[0]} </h3>
+					<UserImg src={user ? user.profilepicture : "none"} />
+					<h3> Email: {user.email ?? "unknown"} </h3>
+					<h3> Since: {date ? date[0] : "unknown"}</h3>
 				</UserInfo>
-				<NewRecipeButton> Add New Recipe </NewRecipeButton>
+				<NewRecipeButton disabled={!user}> Add New Recipe </NewRecipeButton>
 				<ProfileH2>Your Recipes</ProfileH2>
 				<UserRecipes>
 					{
-						user.recipes.map(userRecipes => {
-						return <ProfilePageRecipes key={userRecipes.userRecipeid} userRecipes={userRecipes}/>;
+						user?.recipes && user.recipes.map(userRecipes => {
+							return <ProfilePageRecipes key={userRecipes.userRecipeid} userRecipes={userRecipes} />;
 						})
-					}   
+					}
 				</UserRecipes>
 				<div>
 
