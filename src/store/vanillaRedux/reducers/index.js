@@ -85,12 +85,12 @@ export const reducer = (state = initialState, action) => {
       }
 
     case POST_USER_LOGIN_SUCCESS:
+      // window.localStorage.setItem('token', action.payload)
       return {
         ...state,
         isLoading: false,
         isLoggedIn: true,
         error: '',
-        // window.localStorage.setItem('token', action.payload)
       }
 
     case POST_USER_LOGIN_FAILURE:
@@ -108,12 +108,12 @@ export const reducer = (state = initialState, action) => {
       }
 
     case FETCH_USER_LOGOUT_SUCCESS:
+      // window.localStorage.removeItem('token')
       return {
         ...state,
         isLoading: false,
         isLoggedIn: false,
         error: '',
-        // window.localStorage.removeItem('token')
       }
 
     case FETCH_USER_LOGOUT_FAILURE:

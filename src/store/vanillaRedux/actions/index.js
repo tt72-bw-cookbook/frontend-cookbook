@@ -78,6 +78,7 @@ export const postUserLogin = (username, password) => {
 
     axiosLogin(username, password)
       .then((res) => {
+        window.localStorage.setItem('token', res.data.access_token)
         dispatch({
           type: POST_USER_LOGIN_SUCCESS,
           payload: res.data.access_token
@@ -98,6 +99,7 @@ export const fetchUserLogout = () => {
 
     axiosAuth().get('/logout')
       .then((res) => {
+        window.localStorage.removeItem('token')
         dispatch({
           type: FETCH_USER_LOGOUT_SUCCESS,
           payload: res.data
