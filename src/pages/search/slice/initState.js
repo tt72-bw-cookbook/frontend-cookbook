@@ -1,4 +1,9 @@
 export const initialState = {
+	searchData: {
+		searchTerm: "",
+		searchFacets: "",
+		sort: "",
+	},
 	activeFacets: [],
 	facets: {
 		course: {

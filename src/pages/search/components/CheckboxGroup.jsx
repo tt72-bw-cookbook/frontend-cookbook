@@ -3,18 +3,9 @@ import { useSelector, useDispatch } from "react-redux";
 import styled, { css } from "styled-components";
 import { addFilter, removeFilter } from "../slice/searchSlice";
 
-const useActiveFilters = () => {
-	const [active, setActive] = useState([]);
-	const setActiveFilters = (name) => {
-		setActive(active.includes(name) ? active.filter(x => x !== name) : [...active, name]);
-	}
-	return [active, setActiveFilters];
-}
-
 const CheckboxGroup = props => {
 	const search = useSelector(state => state.search);
 	const dispatch = useDispatch();
-	const [activeFilters, setActiveFilters] = useActiveFilters();
 	const [filter, setFilter] = useState("");
 
 	const handleOptionClick = (name) => {
@@ -36,14 +27,12 @@ const CheckboxGroup = props => {
 	// 	}
 	// }
 	const handleCheck = (evt) => {
-		const { name, value, checked } = evt.target;
+		const { name, checked } = evt.target;
 		if (checked) {
 			dispatch(addFilter(name))
 		} else {
 			dispatch(removeFilter(name))
 		}
-
-		setActiveFilters(name);
 	}
 
 	return (
@@ -53,7 +42,7 @@ const CheckboxGroup = props => {
 					Object.entries(search.facets).map(([k, v]) => {
 						return (
 							<div
-								key={k}
+								key={`${k},${v}`}
 								className="filter-group"
 								onClick={() => handleOptionClick(k)}
 							// onMouseEnter={() => handleMouseIn(k)}
@@ -71,7 +60,7 @@ const CheckboxGroup = props => {
 												Object.entries(v).map(([k2, v2]) => {
 													if (k2 !== "_name") {
 														return (
-															<CheckPair>
+															<CheckPair key={`${k},${k2}`}>
 																<label htmlFor={k2}>
 																	<input
 																		type="checkbox"

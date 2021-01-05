@@ -26,11 +26,22 @@ const searchSlice = createSlice({
 				return;
 			}
 			if (state.activeFacets.some(x => x.id === option)) {
-				console.error("line 29 —— facets is already part of active facets");
+				console.error("line 29 —— facet is already part of active facets");
 				return;
 			}
 			const filter = state.facets[category][option];
+			// const { course, id } = filter;
+			let queryString = "";
+			if (state.activeFacets.length === 0) {
+				queryString += "?";
+			} else {
+				queryString += "&";
+			}
 			state.activeFacets.push(filter);
+			state.searchData.searchTerm += queryString + `${category}=${option}`;
+			state.searchData[category] ?
+				state.searchData[category] += `,${option}`
+				: state.searchData[category] = `${category}=${option}`
 		},
 		removeFilter: (state, action) => {
 			const [category, option] = action.payload.split(",");
