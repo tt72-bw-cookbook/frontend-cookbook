@@ -1,5 +1,7 @@
 import { combineReducers } from "@reduxjs/toolkit";
-
-const rootReducer = combineReducers({});
+import searchReducer from "../pages/search/slice/searchSlice";
+const rootReducer = combineReducers({
+	search: searchReducer,
+});
 
 export default rootReducer;
