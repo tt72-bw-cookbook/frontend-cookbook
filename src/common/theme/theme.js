@@ -32,7 +32,7 @@ const buildThemePallette = (colorsArr) => {
 
 // ? pDarkest, pDarker, pDark, pBase, pLight, pLighter, pLightest ( DARK MODE )
 // const darkArr = ["000000", "080708", "242525", "404342", "5c615f", "787e7c", "999f9d"];
-const darkArr = ["000000", "242525", "242525", "242525", "5c615f", "787e7c", "999f9d"];
+const darkArr = ["000000", "080708", "080708", "242525", "5c615f", "787e7c", "999f9d"];
 
 // ? pDarkest, pDarker, pDark, pBase, pLight, pLighter, pLightest ( LIGHT MODE )
 // const lightArr = ["9ba1a8", "b9c0c7", "ced4da", "e0e4e8", "e9ecef", "f1f3f5", "f8f9fa"];
