@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
-// import { Header } from "../../common/components/";
+import { Header } from "../../common/components/";
 import axios from 'axios';
 import { HomePageRecipes } from './components';
 import SearchContainer from "../search/SearchContainer";
@@ -25,7 +25,7 @@ const HomePageContainer = props => {
 
 	return (
 		<>
-			{/* <Header /> */}
+			<Header />
 			<SearchContainer />
 			<HomeBody>
 				<RecipesContainer>
