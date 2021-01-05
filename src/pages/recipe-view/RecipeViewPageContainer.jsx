@@ -23,9 +23,9 @@ const RecipeViewPageContainer = ({ details }) => {
 					<h1>Recipe View</h1>
 				</div>
 
-				<div>
-					<img src="https://images-gmi-pmc.edge-generalmills.com/087d17eb-500e-4b26-abd1-4f9ffa96a2c6.jpg" />
-				</div>
+
+				<img alt="cookie" src="https://images-gmi-pmc.edge-generalmills.com/087d17eb-500e-4b26-abd1-4f9ffa96a2c6.jpg" />
+
 
 
 				<div className="ingredients">
@@ -71,7 +71,7 @@ const StyledRecipes = styled.div`
 	h1 {
 		margin: 5rem;
 		font-size: 4rem;
-		font-weight: 650;
+		font-weight: 500;
 		text-align: center;
 	}
 
@@ -88,8 +88,8 @@ const StyledRecipes = styled.div`
 		text-align: center;
 	}
 	img{
-		width: 100%;
-		height:150%;
+		width: 40%;
+		height:20%;
 		
 	}
 
