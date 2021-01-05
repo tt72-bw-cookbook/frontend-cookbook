@@ -1,19 +1,22 @@
 import { Header } from "../../common/components";
 import styled from "styled-components";
+import React, { useState, useEffect } from "react";
 
 import axios from "axios";
 import * as yup from "yup";
 
 const RecipeViewPageContainer = ({ details }) => {
-	// const getIngredients = () => {
+
+	// useEffect(() => {
 	// 	axios
-	// 		.get()
-	// 		.then()
+	// 		.get(``)
+	// 		.then(() => {
+	// 			;
+	// 		})
 	// 		.catch((err) => {
 	// 			console.log(err);
-	// 			debugger;
 	// 		});
-	// };
+	// }, []);
 
 	return (
 		<>
@@ -22,26 +25,36 @@ const RecipeViewPageContainer = ({ details }) => {
 				<div className="red-line">
 					<h1>Recipe View</h1>
 				</div>
+				<h2>Title</h2>
 
-
+				{/* comment this bottom line when ready */}
 				<img alt="cookie" src="https://images-gmi-pmc.edge-generalmills.com/087d17eb-500e-4b26-abd1-4f9ffa96a2c6.jpg" />
 
 
+				<div className="idc">
+					<div className="ingredients">
+						<h3>Ingredients</h3>
+						<ul>
+							<li>List</li>
+						</ul>
+					</div>
 
-				<div className="ingredients">
-					<h2>Ingredients</h2>
-					<ul>
-						<li>List</li>
-					</ul>
+					<div className="directions">
+						<h3>Directions</h3>
+
+						<ol>
+							<li>List</li>
+						</ol>
+					</div>
+
+					<div className="categories">
+						<p>course</p>
+						<p>dishtype</p>
+						<p>cuisine</p>
+						<p>dietaryconcerns</p>
+						<p>technique</p>
+					</div>
 				</div>
-
-
-				<h2>Directions</h2>
-				<ol>
-					<li>List</li>
-				</ol>
-
-
 
 
 			</StyledRecipes>
@@ -56,7 +69,7 @@ export default RecipeViewPageContainer;
 
 const StyledRecipes = styled.div`
 	display: flex;
-	flex-flow: column nowrap;
+	flex-direction: column;	
 	justify-content: center;
 	align-items: center;
 	margin: 5rem;
@@ -64,6 +77,10 @@ const StyledRecipes = styled.div`
 	font-weight: 600;
 	text-align: center;
 	margin-top: 10px;
+	margin: 50px;
+
+	/* border-left: 1px  solid red;
+	border-right: 1px  solid red; */
 
 	.red-line{
 		border: 2px solid red;
@@ -78,13 +95,19 @@ const StyledRecipes = styled.div`
 	h2 {
 		margin: 5rem;
 		font-size: 5rem;
-		font-weight: 100;
+		font-weight: 200;
+		text-align: center;
+	}
+	h3{
+		margin: 5rem;
+		font-size: 1.5em;
+		font-weight: 150;
 		text-align: center;
 	}
 	 ul, ol{
 		margin: 5rem;
-		font-size: 2rem;
-		font-weight: 800;
+		font-size: 1.5rem;
+		font-weight: 350;
 		text-align: center;
 	}
 	img{
@@ -92,5 +115,18 @@ const StyledRecipes = styled.div`
 		height:20%;
 		
 	}
+
+	.idc{
+		border: 1px solid black;
+		padding-left: 150px;
+		padding-right: 150px;
+
+	}
+
+	.directions {
+		border-top: 3px solid gray;
+	}
+
+
 
 `;
