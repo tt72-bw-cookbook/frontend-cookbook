@@ -1,9 +1,10 @@
-// import axios from 'axios';
-import { string } from 'yup/lib/locale';
+//imports
 import axiosAuth from '../../../utils/axiosAuth';
 import { axiosLogin } from '../../../utils/axiosSecret';
 
+
 //action types
+
 export const FETCH_CURRENT_USER_START = 'FETCH_CURRENT_USER_START';
 export const FETCH_CURRENT_USER_SUCCESS = 'FETCH_CURRENT_USER_SUCCESS';
 export const FETCH_CURRENT_USER_FAILURE = 'FETCH_CURRENT_USER_FAILURE';
@@ -32,7 +33,10 @@ export const PUT_RECIPE_BY_ID_START = 'PUT_RECIPE_BY_ID_START';
 export const PUT_RECIPE_BY_ID_SUCCESS = 'PUT_RECIPE_BY_ID_SUCCESS';
 export const PUT_RECIPE_BY_ID_FAILURE = 'PUT_RECIPE_BY_ID_FAILURE';
 
+
 //action creators
+
+
 export const fetchCurrentUser = () => {
 	return (dispatch) => {
 		dispatch({ type: FETCH_CURRENT_USER_START });
@@ -73,6 +77,7 @@ export const fetchCurrentUserRecipes = () => {
 	}
 }
 
+//implemented
 export const postUserLogin = (username, password) => {
 	return (dispatch) => {
 		dispatch({ type: POST_USER_LOGIN_START });
@@ -97,6 +102,7 @@ export const postUserLogin = (username, password) => {
 	}
 }
 
+//implemented
 export const fetchUserLogout = () => {
 	return (dispatch) => {
 		dispatch({ type: FETCH_USER_LOGOUT_START })

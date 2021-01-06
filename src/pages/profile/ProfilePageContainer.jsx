@@ -3,11 +3,23 @@ import { Header } from "../../common/components";
 import { axiosAuth } from "../../utils";
 import React, { useState, useEffect } from "react";
 import ProfilePageRecipes from './ProfilePageRecipes';
+import { useDispatch, useSelector } from 'react-redux';
+import { fetchUserLogout, fetchCurrentUser } from '../../store/vanillaRedux/actions/index';
 
 const userURL = 'https://tt72-cookbook.herokuapp.com/users/current';
 
 
 const ProfilePageContainer = props => {
+
+	const dispatch = useDispatch();
+	
+	// const user = useSelector(state => state.userData)
+
+	// useEffect(() => {
+	// 	if (!user) {
+	// 		dispatch(fetchCurrentUser())
+	// 	}
+	// }, [])
 
 	const [user, setUser] = useState(null)
 
@@ -34,6 +46,10 @@ const ProfilePageContainer = props => {
 		return <h1>No user found</h1>
 	}
 
+	const handleLogout = () => {
+		dispatch(fetchUserLogout());
+	}
+
 	return (
 		<>
 			<Header />
@@ -46,6 +62,7 @@ const ProfilePageContainer = props => {
 					<h3> Since: {date ? date[0] : "unknown"}</h3>
 				</UserInfo>
 				<NewRecipeButton disabled={!user}> Add New Recipe </NewRecipeButton>
+				<button onClick={handleLogout}> Logout </button>
 				<ProfileH2>Your Recipes</ProfileH2>
 				<UserRecipes>
 					{
