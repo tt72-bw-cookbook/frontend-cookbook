@@ -4,6 +4,7 @@ import React, { useState, useEffect } from "react";
 
 import axios from "axios";
 import * as yup from "yup";
+import userEvent from "@testing-library/user-event";
 
 const RecipeViewPageContainer = (props) => {
 	// const { recipeId } = props
@@ -27,50 +28,74 @@ const RecipeViewPageContainer = (props) => {
 			});
 	}, []);
 
+	function getIngredients(item) {
+		let ingredient = [item.quantity, item.measurement, item.ingredientname].join(" ");
+		return ingredient
+	};
+
+
+
 	return (
 		<>
 			<Header />
 			<StyledRecipes>
-				<div className="red-line">
-					<h1>Recipe View</h1>
-					<p> Date created</p>
+				<div>
+					{/* <h1>Recipe View</h1> */}
+					<h2>{recipes.title}</h2>
+					<p className="recipe-date"> Date created: {recipes.createdDate}</p>
 				</div>
 
-				{/* {
+				{
+					recipes?.categories &&
 					<>
-						recipe && */}
-				{/* <h2>{recipes.title}</h2> */}
+						<div className="categories">
+							<p>course: {recipes.categories.course}</p>
+							<p>dishtype {recipes.categories.dishtype}</p>
+							<p>cuisine: {recipes.categories.cuisine}</p>
+							<p>dietary-concerns: {recipes.categories.dietaryconcerns}</p>
+							<p>technique: {recipes.categories.technique}</p>
+						</div>
+					</>
 
+				}
 				{/* comment this bottom line when ready */}
-				<img alt="cookie" src="https://images-gmi-pmc.edge-generalmills.com/087d17eb-500e-4b26-abd1-4f9ffa96a2c6.jpg" />
+
+				<img alt="recipeImage" src="https://images-gmi-pmc.edge-generalmills.com/087d17eb-500e-4b26-abd1-4f9ffa96a2c6.jpg" />
 
 
-				<div className="idc">
-					<div className="ingredients">
-						<h3>Ingredients</h3>
-						<ul>
-							<li>List</li>
-						</ul>
-					</div>
+				{ }
+				<div className="ingdir">
+
+					{
+						recipes?.ingredients &&
+						<>
+							<div className="ingredients">
+								<h3>Ingredients</h3>
+
+								{recipes.ingredients.map(ingredient => {
+									return <p>{getIngredients(ingredient)}</p>
+								})}
+
+							</div>
+						</>
+					}
+
+
+
+
 
 					<div className="directions">
-						<h3>Directions</h3>
+						<h3>Instructions</h3>
 
-						<ol>
+						{/* <ol>
 							<li>List</li>
-						</ol>
+						</ol> */}
+						<p>{recipes.instructions}</p>
 					</div>
 
-					<div className="categories">
-						<p>course: {recipes.categories.course}</p>
-						<p>dishtype {recipes.categories.dishtype}</p>
-						<p>cuisine: {recipes.categories.cuisine}</p>
-						<p>dietary-concerns: {recipes.categories.dietaryconcerns}</p>
-						<p>technique: {recipes.categories.technique}</p>
-					</div>
+
 				</div>
-				{/* </>
-				} */}
+
 
 
 			</StyledRecipes>
@@ -84,6 +109,10 @@ export default RecipeViewPageContainer;
 
 
 const StyledRecipes = styled.div`
+	/* *{
+		border: 1px solid black;
+	} */
+
 	display: flex;
 	flex-direction: column;	
 	justify-content: center;
@@ -92,7 +121,7 @@ const StyledRecipes = styled.div`
 	font-size: 2rem;
 	font-weight: 600;
 	text-align: center;
-	margin-top: 10px;
+	margin-top: 50px;
 	margin: 50px;
 
 	/* border-left: 1px  solid red;
@@ -106,6 +135,7 @@ const StyledRecipes = styled.div`
 		font-size: 4rem;
 		font-weight: 500;
 		text-align: center;
+		margin-top: -10px;
 	}
 
 	h2 {
@@ -127,22 +157,37 @@ const StyledRecipes = styled.div`
 		text-align: center;
 	}
 	img{
-		width: 40%;
+		width: 45%;
 		height:20%;
-		margin-top: 1%;
+		margin-bottom: 2.5%;
 		
 	}
 
-	.idc{
+	.ingdir{
 		border: 1px solid black;
-		padding-left: 150px;
-		padding-right: 150px;
+		width: 75%;
+		/* padding-left: 150px;
+		padding-right: 150px; */
+		background-color: #a53636;
+		border-radius: 10px;
 
 	}
 
 	.directions {
 		border-top: 3px solid gray;
 	}
+	.categories{
+		font-size: 1.4rem;
+		font-weight: 550;
+		display: flex;
+		justify-content: space-between;
+	}
+
+	.recipe-date{
+		font-size: 1.3rem;
+		font-weight: 400px;
+	}
+	
 
 
 
