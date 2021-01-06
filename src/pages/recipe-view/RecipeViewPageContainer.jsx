@@ -8,7 +8,7 @@ import userEvent from "@testing-library/user-event";
 
 const RecipeViewPageContainer = (props) => {
 	// const { recipeId } = props
-	const recipeId = 1
+	const recipeId = 24
 	const [recipes, setRecipes] = useState("")
 
 
@@ -49,18 +49,22 @@ const RecipeViewPageContainer = (props) => {
 					recipes?.categories &&
 					<>
 						<div className="categories">
-							<p>course: {recipes.categories.course}</p>
-							<p>dishtype {recipes.categories.dishtype}</p>
-							<p>cuisine: {recipes.categories.cuisine}</p>
-							<p>dietary-concerns: {recipes.categories.dietaryconcerns}</p>
-							<p>technique: {recipes.categories.technique}</p>
+							<p>course: {recipes.categories.course} </p>
+							<p>dishtype: {recipes.categories.dishtype} </p>
+							<p>cuisine: {recipes.categories.cuisine} </p>
+							<p>dietary-concerns: {recipes.categories.dietaryconcerns} </p>
+							<p>technique: {recipes.categories.technique} </p>
 						</div>
 					</>
 
 				}
 				{/* comment this bottom line when ready */}
 
-				<img alt="recipeImage" src="https://images-gmi-pmc.edge-generalmills.com/087d17eb-500e-4b26-abd1-4f9ffa96a2c6.jpg" />
+				{/* <img alt="recipeImage" src="https://images-gmi-pmc.edge-generalmills.com/087d17eb-500e-4b26-abd1-4f9ffa96a2c6.jpg" /> */}
+
+				<img alt="" src={recipes.pictureurl} />
+
+
 
 
 				{ }
@@ -157,8 +161,8 @@ const StyledRecipes = styled.div`
 		text-align: center;
 	}
 	img{
-		width: 45%;
-		height:20%;
+		width: 25%;
+		height:15%;
 		margin-bottom: 2.5%;
 		
 	}
@@ -177,6 +181,7 @@ const StyledRecipes = styled.div`
 		border-top: 3px solid gray;
 	}
 	.categories{
+		border: 1px solid red;
 		font-size: 1.4rem;
 		font-weight: 550;
 		display: flex;
