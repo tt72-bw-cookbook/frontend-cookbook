@@ -9,7 +9,7 @@ import RecipeViewPageContainer from "./recipe-view/RecipeViewPageContainer";
 const HOMEPAGE_PATH = "/";
 const LOGIN_PATH = "/login";
 const SIGNUP_PATH = "/signup";
-const RECIPE_VIEW_PATH = "/browse/recipe";
+const RECIPE_VIEW_PATH = "/recipe";
 const BROWSE_PATH = "/browse";
 const PROFILE_PATH = "/profile";
 
