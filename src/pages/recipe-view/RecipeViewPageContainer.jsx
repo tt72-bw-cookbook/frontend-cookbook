@@ -6,21 +6,26 @@ import axios from "axios";
 import * as yup from "yup";
 
 const RecipeViewPageContainer = (props) => {
-	const { recipeId } = props
-	const [recipes, setRecipes] = useState(null)
+	// const { recipeId } = props
+	const recipeId = 1
+	const [recipes, setRecipes] = useState("")
+
+
 	const BASE_URL = 'https://tt72-cookbook.herokuapp.com'
 	// const number = Math.floor
 
 	useEffect(() => {
+		console.log(recipeId)
 		axios
 			.get(`${BASE_URL}/recipes/id/${recipeId}`)
 			.then((res) => {
 				setRecipes(res.data);
+				console.log(res);
 			})
 			.catch((err) => {
 				console.log(err);
 			});
-	}, [recipeId]);
+	}, []);
 
 	return (
 		<>
@@ -28,43 +33,44 @@ const RecipeViewPageContainer = (props) => {
 			<StyledRecipes>
 				<div className="red-line">
 					<h1>Recipe View</h1>
+					<p> Date created</p>
 				</div>
 
-				{
+				{/* {
 					<>
-						{/* recipe && */}
-						<h2>{recipes.title}</h2>
+						recipe && */}
+				{/* <h2>{recipes.title}</h2> */}
 
-						{/* comment this bottom line when ready */}
-						<img alt="cookie" src="https://images-gmi-pmc.edge-generalmills.com/087d17eb-500e-4b26-abd1-4f9ffa96a2c6.jpg" />
+				{/* comment this bottom line when ready */}
+				<img alt="cookie" src="https://images-gmi-pmc.edge-generalmills.com/087d17eb-500e-4b26-abd1-4f9ffa96a2c6.jpg" />
 
 
-						<div className="idc">
-							<div className="ingredients">
-								<h3>Ingredients</h3>
-								<ul>
-									<li>List</li>
-								</ul>
-							</div>
+				<div className="idc">
+					<div className="ingredients">
+						<h3>Ingredients</h3>
+						<ul>
+							<li>List</li>
+						</ul>
+					</div>
 
-							<div className="directions">
-								<h3>Directions</h3>
+					<div className="directions">
+						<h3>Directions</h3>
 
-								<ol>
-									<li>List</li>
-								</ol>
-							</div>
+						<ol>
+							<li>List</li>
+						</ol>
+					</div>
 
-							<div className="categories">
-								<p>course</p>
-								<p>dishtype</p>
-								<p>cuisine</p>
-								<p>dietaryconcerns</p>
-								<p>technique</p>
-							</div>
-						</div>
-					</>
-				}
+					<div className="categories">
+						<p>course: {recipes.categories.course}</p>
+						<p>dishtype {recipes.categories.dishtype}</p>
+						<p>cuisine: {recipes.categories.cuisine}</p>
+						<p>dietary-concerns: {recipes.categories.dietaryconcerns}</p>
+						<p>technique: {recipes.categories.technique}</p>
+					</div>
+				</div>
+				{/* </>
+				} */}
 
 
 			</StyledRecipes>
@@ -93,7 +99,7 @@ const StyledRecipes = styled.div`
 	border-right: 1px  solid red; */
 
 	.red-line{
-		border: 2px solid red;
+		border: 2px solid gray;
 	}
 	h1 {
 		margin: 5rem;
@@ -123,6 +129,7 @@ const StyledRecipes = styled.div`
 	img{
 		width: 40%;
 		height:20%;
+		margin-top: 1%;
 		
 	}
 
