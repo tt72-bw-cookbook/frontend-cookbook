@@ -72,7 +72,9 @@ const RecipeViewPageContainer = (props) => {
 							<div className="ingredients">
 								<h3>Ingredients</h3>
 
-								{/* <p>{recipes.map(getIngredients)}</p> */}
+								{recipes.ingredients.map(ingredient => {
+									return <p>{getIngredients(ingredient)}</p>
+								})}
 
 							</div>
 						</>
