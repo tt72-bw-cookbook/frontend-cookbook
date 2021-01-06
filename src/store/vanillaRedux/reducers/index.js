@@ -19,7 +19,9 @@ import {
 	DELETE_RECIPE_BY_ID_FAILURE,
 	PUT_RECIPE_BY_ID_START,
 	PUT_RECIPE_BY_ID_SUCCESS,
-	PUT_RECIPE_BY_ID_FAILURE
+  PUT_RECIPE_BY_ID_FAILURE,
+  REJECT_LOGGED_IN,
+  CONFIRM_LOGGED_IN
 } from '../actions/index'
 
 const initialState = {
@@ -193,7 +195,19 @@ export const vanillaReducer = (state = initialState, action) => {
 				...state,
 				isLoading: false,
 				error: action.payload
-			}
+      }
+      
+    case CONFIRM_LOGGED_IN:
+      return {
+        ...state,
+        isLoggedIn: action.payload
+      }
+
+    case REJECT_LOGGED_IN:
+      return {
+        ...state,
+        isLoggedIn: action.payload
+      }
 
 		default:
 			return state;

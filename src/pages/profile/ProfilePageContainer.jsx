@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import { Header } from "../../common/components";
-import React from "react";
+import React, { useEffect } from "react";
 import ProfilePageRecipes from './ProfilePageRecipes';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchUserLogout, fetchCurrentUser } from '../../store/vanillaRedux/actions/index';
@@ -10,11 +10,19 @@ const ProfilePageContainer = props => {
 
 	const dispatch = useDispatch();
 
-	const user = useSelector(state => state.user.userData)
+	const user = useSelector(state => state.user.userData);
+	// const { userData, isLoading } = userState
+	// const user = userData
+	let willLoad = true
 
-		if (!user) {
+	useEffect(()=> {
+		if (willLoad) {
 			dispatch(fetchCurrentUser());
 		}
+		willLoad = false
+		// console.log(user);
+	}, [willLoad])
+
 
 	const date = user?.createdDate?.split(' ');
 

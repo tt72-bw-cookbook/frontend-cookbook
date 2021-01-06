@@ -32,7 +32,8 @@ export const PUT_RECIPE_BY_ID_START = 'PUT_RECIPE_BY_ID_START';
 export const PUT_RECIPE_BY_ID_SUCCESS = 'PUT_RECIPE_BY_ID_SUCCESS';
 export const PUT_RECIPE_BY_ID_FAILURE = 'PUT_RECIPE_BY_ID_FAILURE';
 
-
+export const CONFIRM_LOGGED_IN = 'CONFIRM_LOGGED_IN';
+export const REJECT_LOGGED_IN = 'REJECT_LOGGED_IN';
 
 //action creators
 
@@ -101,6 +102,20 @@ export const postUserLogin = (username, password) => {
 				})
 			})
 	}
+}
+
+export const confirmUserLoggedIn = () => {
+  return({
+    type: CONFIRM_LOGGED_IN,
+    payload: true
+  })
+}
+
+export const rejectUserLoggedIn = () => {
+  return({
+    type: REJECT_LOGGED_IN,
+    payload: false
+  })
 }
 
 //implemented

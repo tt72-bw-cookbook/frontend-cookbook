@@ -4,8 +4,23 @@ import AppRoute from "./AppRoute";
 // import routes from "./routes/routes";
 import NotFound404 from "./pages/notfound/NotFound404";
 import views from "./pages"
+import { useEffect } from 'react';
+import axiosAuth from './utils/axiosAuth'
+import { useDispatch } from 'react-redux';
+import { confirmUserLoggedIn, rejectUserLoggedIn } from './store/vanillaRedux/actions';
 
 const App = () => {
+
+	const dispatch = useDispatch();
+	useEffect(() => {
+		axiosAuth().get("users/current")
+			.then(res => {
+				dispatch(confirmUserLoggedIn())
+			}).catch(err => {
+				dispatch(rejectUserLoggedIn())
+			})
+	}, [])
+
 	return (
 		<div className="App">
 			<Switch>

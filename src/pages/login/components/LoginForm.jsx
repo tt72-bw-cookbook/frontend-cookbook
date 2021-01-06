@@ -4,24 +4,27 @@ import { useFormError } from "../../../common/hooks/";
 import { Button, StyledForm } from "../../../common/components/";
 import Input from "../../../common/components/Input";
 import schema from "../schema";
-import { postUserLogin } from '../../../store/vanillaRedux/actions/index'
-import { useDispatch } from 'react-redux';
+import { postUserLogin } from '../../../store/vanillaRedux/actions/index';
+import { useDispatch, useSelector } from 'react-redux';
+import { useEffect } from 'react';
 
 const LoginForm = props => {
 	const dispatch = useDispatch();
 	const [input, errors, disabled, handleChanges, clearForm] = useFormError({ username: "", password: "", }, schema);
-	// const { push } = useHistory();
-
+	const { push } = useHistory();
+	const isLoggedIn = useSelector(state => state.user.isLoggedIn)
+	
+	useEffect(() => {
+		if (isLoggedIn) {
+			push('/profile')
+		}
+	}, [isLoggedIn, push])
+	
 	const handleSubmit = (evt) => {
 		evt.preventDefault();
-
 		dispatch(postUserLogin(input.username, input.password))
-
-		// push("/profile");
 		clearForm();
 	}
-
-	
 
 	return (
 		<StyledWrap>
