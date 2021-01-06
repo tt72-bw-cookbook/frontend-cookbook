@@ -5,18 +5,22 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import * as yup from "yup";
 
-const RecipeViewPageContainer = ({ details }) => {
+const RecipeViewPageContainer = (props) => {
+	const { recipeId } = props
+	const [recipes, setRecipes] = useState(null)
+	const BASE_URL = 'https://tt72-cookbook.herokuapp.com'
+	// const number = Math.floor
 
-	// useEffect(() => {
-	// 	axios
-	// 		.get(``)
-	// 		.then(() => {
-	// 			;
-	// 		})
-	// 		.catch((err) => {
-	// 			console.log(err);
-	// 		});
-	// }, []);
+	useEffect(() => {
+		axios
+			.get(`${BASE_URL}/recipes/id/${recipeId}`)
+			.then((res) => {
+				setRecipes(res.data);
+			})
+			.catch((err) => {
+				console.log(err);
+			});
+	}, [recipeId]);
 
 	return (
 		<>
@@ -25,36 +29,42 @@ const RecipeViewPageContainer = ({ details }) => {
 				<div className="red-line">
 					<h1>Recipe View</h1>
 				</div>
-				<h2>Title</h2>
 
-				{/* comment this bottom line when ready */}
-				<img alt="cookie" src="https://images-gmi-pmc.edge-generalmills.com/087d17eb-500e-4b26-abd1-4f9ffa96a2c6.jpg" />
+				{
+					<>
+						{/* recipe && */}
+						<h2>{recipes.title}</h2>
+
+						{/* comment this bottom line when ready */}
+						<img alt="cookie" src="https://images-gmi-pmc.edge-generalmills.com/087d17eb-500e-4b26-abd1-4f9ffa96a2c6.jpg" />
 
 
-				<div className="idc">
-					<div className="ingredients">
-						<h3>Ingredients</h3>
-						<ul>
-							<li>List</li>
-						</ul>
-					</div>
+						<div className="idc">
+							<div className="ingredients">
+								<h3>Ingredients</h3>
+								<ul>
+									<li>List</li>
+								</ul>
+							</div>
 
-					<div className="directions">
-						<h3>Directions</h3>
+							<div className="directions">
+								<h3>Directions</h3>
 
-						<ol>
-							<li>List</li>
-						</ol>
-					</div>
+								<ol>
+									<li>List</li>
+								</ol>
+							</div>
 
-					<div className="categories">
-						<p>course</p>
-						<p>dishtype</p>
-						<p>cuisine</p>
-						<p>dietaryconcerns</p>
-						<p>technique</p>
-					</div>
-				</div>
+							<div className="categories">
+								<p>course</p>
+								<p>dishtype</p>
+								<p>cuisine</p>
+								<p>dietaryconcerns</p>
+								<p>technique</p>
+							</div>
+						</div>
+					</>
+				}
 
 
 			</StyledRecipes>
