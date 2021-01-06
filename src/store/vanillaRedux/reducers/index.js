@@ -31,8 +31,10 @@ const initialState = {
   error:''
 }
 
-export const reducer = (state = initialState, action) => {
+export const vanillaReducer = (state = initialState, action) => {
   switch(action.type) {
+
+    //user recipes
     case FETCH_CURRENT_USER_RECIPES_START:
       return {
         ...state,
@@ -55,6 +57,7 @@ export const reducer = (state = initialState, action) => {
         error: action.payload
       }
 
+      //user info
       case FETCH_CURRENT_USER_START:
       return {
         ...state,
@@ -77,6 +80,7 @@ export const reducer = (state = initialState, action) => {
         error: action.payload
       }
 
+      //login
     case POST_USER_LOGIN_START:
       return {
         ...state,
@@ -85,7 +89,6 @@ export const reducer = (state = initialState, action) => {
       }
 
     case POST_USER_LOGIN_SUCCESS:
-      // window.localStorage.setItem('token', action.payload)
       return {
         ...state,
         isLoading: false,
@@ -100,6 +103,7 @@ export const reducer = (state = initialState, action) => {
         error: action.payload
       }
 
+      //logout
     case FETCH_USER_LOGOUT_START:
       return {
         ...state,
@@ -108,7 +112,6 @@ export const reducer = (state = initialState, action) => {
       }
 
     case FETCH_USER_LOGOUT_SUCCESS:
-      // window.localStorage.removeItem('token')
       return {
         ...state,
         isLoading: false,
@@ -124,6 +127,7 @@ export const reducer = (state = initialState, action) => {
         error: action.payload
       }
 
+      //new recipe
     case POST_USER_RECIPE_START:
       return {
         ...state,
@@ -146,6 +150,7 @@ export const reducer = (state = initialState, action) => {
         error: action.payload
       }
 
+      //delete recipe
     case DELETE_RECIPE_BY_ID_START:
       return {
         ...state,
@@ -167,6 +172,7 @@ export const reducer = (state = initialState, action) => {
         error: action.payload
       }
 
+      //update recipe
     case PUT_RECIPE_BY_ID_START:
       return {
         ...state,

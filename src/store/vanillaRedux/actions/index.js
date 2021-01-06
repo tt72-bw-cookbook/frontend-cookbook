@@ -78,6 +78,7 @@ export const postUserLogin = (username, password) => {
 
     axiosLogin(username, password)
       .then((res) => {
+        console.log(res.data.access_token);
         window.localStorage.setItem('token', res.data.access_token)
         dispatch({
           type: POST_USER_LOGIN_SUCCESS,
@@ -85,6 +86,7 @@ export const postUserLogin = (username, password) => {
         })
       })
       .catch((err) => {
+        console.log(err);
         dispatch({
           type: POST_USER_LOGIN_FAILURE,
           payload: err.message
