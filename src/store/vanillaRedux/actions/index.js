@@ -1,4 +1,5 @@
 //imports
+import axios from 'axios';
 import axiosAuth from '../../../utils/axiosAuth';
 import { axiosLogin } from '../../../utils/axiosSecret';
 
@@ -7,35 +8,27 @@ import { axiosLogin } from '../../../utils/axiosSecret';
 export const FETCH_CURRENT_USER_START = 'FETCH_CURRENT_USER_START';
 export const FETCH_CURRENT_USER_SUCCESS = 'FETCH_CURRENT_USER_SUCCESS';
 export const FETCH_CURRENT_USER_FAILURE = 'FETCH_CURRENT_USER_FAILURE';
-
 export const FETCH_CURRENT_USER_RECIPES_START = 'FETCH_CURRENT_USER_RECIPES_START';
 export const FETCH_CURRENT_USER_RECIPES_SUCCESS = 'FETCH_CURRENT_USER_RECIPES_SUCCESS';
 export const FETCH_CURRENT_USER_RECIPES_FAILURE = 'FETCH_CURRENT_USER_RECIPES_FAILURE';
-
 export const POST_USER_LOGIN_START = 'POST_USER_LOGIN_START';
 export const POST_USER_LOGIN_SUCCESS = 'POST_USER_LOGIN_SUCCESS';
 export const POST_USER_LOGIN_FAILURE = 'POST_USER_LOGIN_FAILURE';
-
 export const FETCH_USER_LOGOUT_START = 'FETCH_USER_LOGOUT_START';
 export const FETCH_USER_LOGOUT_SUCCESS = 'FETCH_USER_LOGOUT_SUCCESS';
 export const FETCH_USER_LOGOUT_FAILURE = 'FETCH_USER_LOGOUT_FAILURE';
-
 export const POST_USER_RECIPE_START = 'POST_USER_RECIPE_START';
 export const POST_USER_RECIPE_SUCCESS = 'POST_USER_RECIPE_SUCCESS';
 export const POST_USER_RECIPE_FAILURE = 'POST_USER_RECIPE_FAILURE';
-
 export const DELETE_RECIPE_BY_ID_START = 'DELETE_RECIPE_BY_ID_START';
 export const DELETE_RECIPE_BY_ID_SUCCESS = 'DELETE_RECIPE_BY_ID_SUCCESS';
 export const DELETE_RECIPE_BY_ID_FAILURE = 'DELETE_RECIPE_BY_ID_FAILURE';
-
 export const PUT_RECIPE_BY_ID_START = 'PUT_RECIPE_BY_ID_START';
 export const PUT_RECIPE_BY_ID_SUCCESS = 'PUT_RECIPE_BY_ID_SUCCESS';
 export const PUT_RECIPE_BY_ID_FAILURE = 'PUT_RECIPE_BY_ID_FAILURE';
-
 export const POST_NEW_USER_START = 'POST_NEW_USER_START';
 export const POST_NEW_USER_SUCCESS = 'POST_NEW_USER_SUCCESS';
 export const POST_NEW_USER_FAILURE = 'POST_NEW_USER_FAILURE';
-
 export const CONFIRM_LOGGED_IN = 'CONFIRM_LOGGED_IN';
 export const REJECT_LOGGED_IN = 'REJECT_LOGGED_IN';
 
@@ -202,6 +195,28 @@ export const putRecipeById = (id, updateFields) => {
 				})
 			})
 	}
+}
+
+export const postNewUser = (newUser) => {
+  return (dispatch) => {
+    dispatch({ type: POST_NEW_USER_START });
+
+    axios.post('https://tt72-cookbook.herokuapp.com/createnewuser', newUser)
+      .then((res) => {
+        const stringifiedToken = JSON.stringify(res.data.access_token)
+				window.localStorage.setItem('token', stringifiedToken)
+        dispatch({
+          type: POST_NEW_USER_SUCCESS,
+          payload: res.data.access_token
+        })
+      })
+      .catch((err) => {
+        dispatch({
+          type: POST_NEW_USER_FAILURE,
+          payload: err.message
+        })
+      })
+  }
 }
 
 

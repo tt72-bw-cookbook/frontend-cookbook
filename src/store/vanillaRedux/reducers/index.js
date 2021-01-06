@@ -216,17 +216,25 @@ export const vanillaReducer = (state = initialState, action) => {
     //signup
     case POST_NEW_USER_START:
       return {
-
+        ...state,
+        isLoading: true,
+        error: ''
       }
 
     case POST_NEW_USER_SUCCESS:
       return {
-
+        ...state,
+        isLoading: false,
+        isLoggedIn: true,
+        error: ''
       }
 
     case POST_NEW_USER_FAILURE:
       return {
-        
+        ...state,
+        isLoading: false,
+        isLoggedIn: false,
+        error: action.payload
       }
 
 		default:

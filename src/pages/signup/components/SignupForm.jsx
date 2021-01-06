@@ -1,15 +1,18 @@
 import { useHistory, Link } from "react-router-dom";
-import axios from "axios";
 import styled from "styled-components";
-import { useLocalToken, useFormError } from "../../../common/hooks";
+import { useFormError } from "../../../common/hooks";
 import { Button, StyledForm } from "../../../common/components"
 import Input from "../../../common/components/Input";
 import schema from "../schema";
+import { useDispatch, useSelector } from 'react-redux';
+import { useEffect } from 'react';
+import { postNewUser } from '../../../store/vanillaRedux/actions/index'
 
 const SignupForm = props => {
+	
 	const { push } = useHistory();
-
-	const { setToken } = useLocalToken();
+	const dispatch = useDispatch();
+	const isLoggedIn = useSelector(state => state.user.isLoggedIn)
 
 	const [input, errors, disabled, handleChanges, clearForm] = useFormError({
 		username: "",
@@ -17,18 +20,15 @@ const SignupForm = props => {
 		email: ""
 	}, schema);
 
+	useEffect(() => {
+		if (isLoggedIn) {
+			push('/profile')
+		}
+	}, [isLoggedIn, push])
+
 	const handleSubmit = (evt) => {
 		evt.preventDefault();
-
-		axios.post("https://tt72-cookbook.herokuapp.com/createnewuser", input)
-			.then(res => {
-				setToken(res.data.access_token);
-				push("/profile");
-			})
-			.catch(err => {
-				console.error(err);
-			});
-
+		dispatch(postNewUser(input))
 		clearForm();
 	}
 
