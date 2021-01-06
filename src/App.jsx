@@ -19,7 +19,7 @@ const App = () => {
 			}).catch(err => {
 				dispatch(rejectUserLoggedIn())
 			})
-	}, [])
+	}, [dispatch])
 
 	return (
 		<div className="App">
@@ -27,9 +27,14 @@ const App = () => {
 				{views.map(route => {
 					return (<AppRoute key={route.path} path={route.path} component={route.component} isPrivate={route.isPrivate} />);
 				})}
+				{/* <Route exact path="/recipe">
+					<RecipeViewPageContainer />
+				</Route> */}
+
 				<Route exact path="/">
 					<HomePageContainer />
 				</Route>
+
 				<Route path="*">
 					<NotFound404 />
 				</Route>
