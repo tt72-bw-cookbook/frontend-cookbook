@@ -10,14 +10,14 @@ import { useDispatch } from 'react-redux';
 const LoginForm = props => {
 	const dispatch = useDispatch();
 	const [input, errors, disabled, handleChanges, clearForm] = useFormError({ username: "", password: "", }, schema);
-	const { push } = useHistory();
+	// const { push } = useHistory();
 
 	const handleSubmit = (evt) => {
 		evt.preventDefault();
 
 		dispatch(postUserLogin(input.username, input.password))
 
-		push("/profile");
+		// push("/profile");
 		clearForm();
 	}
 
