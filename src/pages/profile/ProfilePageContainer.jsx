@@ -1,15 +1,56 @@
 import styled from "styled-components";
 import { Header } from "../../common/components";
 import { axiosAuth } from "../../utils";
+import axios from 'axios';
 import React, { useState, useEffect } from "react";
+import { Route, Link, Switch } from 'react-router-dom';
 import ProfilePageRecipes from './ProfilePageRecipes';
+import AddRecipeForm from './components/AddRecipeForm';
 
 const userURL = 'https://tt72-cookbook.herokuapp.com/users/current';
+
+const initialFormValues = {
+	// gen Info
+		title: '',
+		source: '',
+	// private check
+		private: true,
+	// categories
+		categories: [{ 
+			course: '',
+			cuisine: '',
+			dietaryconcerns: '',
+			dishtype: '',
+			technique: '',
+			}],
+	// ingredients
+		ingredients: [{
+			ingredientname: '',
+			measurement: '',
+			quantity: 0, 
+			}],
+	// instructions
+		instructions: '',
+  }
+
+  const initialFormErrors = {
+	title: '',
+	source: '',
+	ingredientname: '',
+	measurement: '',
+	instructions: '',
+  }
+
+  const initialRecipes = [];
+
 
 
 const ProfilePageContainer = props => {
 
 	const [user, setUser] = useState(null)
+	const [recipes, setRecipes] = useState(initialRecipes)
+	const [formValues, setFormValues] = useState([initialFormValues])
+	const [formErrors, setFormErrors] = useState(initialFormErrors)
 
 	useEffect(() => {
 		if (!user) {
@@ -25,6 +66,85 @@ const ProfilePageContainer = props => {
 		}
 	}, [user])
 
+
+	const postNewRecipe = newRecipe => {
+		axios
+		.post('https://tt72-cookbook.herokuapp.com/recipes', newRecipe)
+		.then((res) => {
+		  setRecipes([res.data, ...recipes]);
+		  setFormValues(initialFormValues);
+		})
+		.catch((err) => {
+		  debugger;
+		})
+	  };
+
+	  const inputChange = (name, value, index, event) => {
+
+		// Yup
+		//   .reach(schema, name) //get to this part of the schema
+		//   .validate(value) //validate this value
+		//   .then(() => {
+		// 	setFormErrors({
+		// 	  ...formErrors,
+		// 	  [name]: '',
+		// 	})
+		//   })
+		//   .catch((err) => {
+		// 	setFormErrors({
+		// 	  ...formErrors,
+		// 	  [name]: err.errors[0],
+		// 	})
+		//   })
+	  
+
+		const values = [...formValues];
+		if (event.target.name === 'ingredientname') {
+			values[index].ingredientname = event.target.value;
+		}
+		else if (event.target.name === 'measurement') {
+			values[index].measurement = event.target.value;
+		}
+		setFormValues({
+		  ...formValues,
+		  [name]: value,
+		  values
+		})
+	  };
+
+	  const handleAddFields = () => {
+		const values = [...formValues];
+		values.push({ ingredientname: '', measurement: '' });
+		setFormValues(values);
+	  };
+	
+	  const handleRemoveFields = index => {
+		const values = [...formValues];
+		values.splice(index, 1);
+		setFormValues(values);
+	  };
+
+	  const formSubmit = () => {
+		const newRecipe = {
+		  title: formValues.title.trim(),
+		  source: formValues.size.trim(),
+		  course: formValues.course.trim(),
+		  cuisine: formValues.cuisine.trim(),
+		  dietaryconcerns: formValues.dietaryconcerns.trim(),
+		  dishtype: formValues.dishtype.trim(),
+		  technique: formValues.technique.trim(),
+		  ingredientname: formValues.ingredientname.trim(),
+		  measurement: formValues.measurement.trim(),
+		  instructions: formValues.instructions.trim(),
+		  specialInstructions: formValues.specialInstructions.trim(),
+		}
+		postNewRecipe(newRecipe);
+	  }
+
+
+
+
+
 	const date = user?.createdDate?.split(' ');
 
 	console.log('date', date ? date[0] : "undefined");
@@ -34,30 +154,49 @@ const ProfilePageContainer = props => {
 		return <h1>No user found</h1>
 	}
 
+	//need a <router> on this page? 
+	//need ./pizza/add  or /add
+
 	return (
 		<>
 			<Header />
-			<ProfileBody>
-				<ProfileH2>Your Profile</ProfileH2>
-				<UserInfo>
-					<h1>{user.username}</h1>
-					<UserImg src={user ? user.profilepicture : "none"} />
-					<h3> Email: {user.email ?? "unknown"} </h3>
-					<h3> Since: {date ? date[0] : "unknown"}</h3>
-				</UserInfo>
-				<NewRecipeButton disabled={!user}> Add New Recipe </NewRecipeButton>
-				<ProfileH2>Your Recipes</ProfileH2>
-				<UserRecipes>
-					{
-						user?.recipes && user.recipes.map(userRecipes => {
-							return <ProfilePageRecipes key={userRecipes.userRecipeid} userRecipes={userRecipes} />;
-						})
-					}
-				</UserRecipes>
-				<div>
+				<ProfileBody>
+					<ProfileH2>Your Profile</ProfileH2>
+					<UserInfo>
+						<h1>{user.username}</h1>
+						<UserImg src={user ? user.profilepicture : "none"} />
+						<h3> Email: {user.email ?? "unknown"} </h3>
+						<h3> Since: {date ? date[0] : "unknown"}</h3>
+					</UserInfo>
+					<NewRecipeButton disabled={!user}> 
+						<Link to='./profile/add'>Add New Recipe</Link>
+					</NewRecipeButton>
+					<div>
+						<Switch>
+							<Route path='/profile/add'>
+								<AddRecipeForm
+									formValues={formValues}
+									change={inputChange}
+									errors={formErrors}
+									submit={formSubmit}
+									addField={handleAddFields}
+									remField={handleRemoveFields}
+								/>
+							</Route>
+						</Switch>
+					</div>
+					<ProfileH2>Your Recipes</ProfileH2>
+					<UserRecipes>
+						{
+							user?.recipes && user.recipes.map(userRecipes => {
+								return <ProfilePageRecipes key={userRecipes.userRecipeid} userRecipes={userRecipes} />;
+							})
+						}
+					</UserRecipes>
+					<div>
 
-				</div>
-			</ProfileBody>
+					</div>
+				</ProfileBody>
 		</>
 	)
 }
