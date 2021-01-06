@@ -1,41 +1,20 @@
 import styled from "styled-components";
 import { Header } from "../../common/components";
-import { axiosAuth } from "../../utils";
-import React, { useState, useEffect } from "react";
+import React from "react";
 import ProfilePageRecipes from './ProfilePageRecipes';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchUserLogout, fetchCurrentUser } from '../../store/vanillaRedux/actions/index';
-
-const userURL = 'https://tt72-cookbook.herokuapp.com/users/current';
 
 
 const ProfilePageContainer = props => {
 
 	const dispatch = useDispatch();
-	
-	// const user = useSelector(state => state.userData)
 
-	// useEffect(() => {
-	// 	if (!user) {
-	// 		dispatch(fetchCurrentUser())
-	// 	}
-	// }, [])
+	const user = useSelector(state => state.user.userData)
 
-	const [user, setUser] = useState(null)
-
-	useEffect(() => {
 		if (!user) {
-			axiosAuth()
-				.get(userURL)
-				.then((res) => {
-					console.log(res.data)
-					setUser(res.data)
-				})
-				.catch((err) => {
-					console.log(err)
-				})
+			dispatch(fetchCurrentUser());
 		}
-	}, [user])
 
 	const date = user?.createdDate?.split(' ');
 
