@@ -1,6 +1,7 @@
-// import axios from 'axios';
+//imports
 import axiosAuth from '../../../utils/axiosAuth';
 import { axiosLogin } from '../../../utils/axiosSecret';
+
 
 //action types
 export const FETCH_CURRENT_USER_START = 'FETCH_CURRENT_USER_START';
@@ -31,7 +32,12 @@ export const PUT_RECIPE_BY_ID_START = 'PUT_RECIPE_BY_ID_START';
 export const PUT_RECIPE_BY_ID_SUCCESS = 'PUT_RECIPE_BY_ID_SUCCESS';
 export const PUT_RECIPE_BY_ID_FAILURE = 'PUT_RECIPE_BY_ID_FAILURE';
 
+export const CONFIRM_LOGGED_IN = 'CONFIRM_LOGGED_IN';
+export const REJECT_LOGGED_IN = 'REJECT_LOGGED_IN';
+
 //action creators
+
+//implemented
 export const fetchCurrentUser = () => {
 	return (dispatch) => {
 		dispatch({ type: FETCH_CURRENT_USER_START });
@@ -52,6 +58,7 @@ export const fetchCurrentUser = () => {
 	}
 }
 
+//obsolete at the moment
 export const fetchCurrentUserRecipes = () => {
 	return (dispatch) => {
 		dispatch({ type: FETCH_CURRENT_USER_RECIPES_START });
@@ -72,17 +79,23 @@ export const fetchCurrentUserRecipes = () => {
 	}
 }
 
+//implemented
 export const postUserLogin = (username, password) => {
 	return (dispatch) => {
 		dispatch({ type: POST_USER_LOGIN_START });
+
 		axiosLogin(username, password)
 			.then((res) => {
+				console.log(res.data.access_token);
+				const stringifiedToken = JSON.stringify(res.data.access_token)
+				window.localStorage.setItem('token', stringifiedToken)
 				dispatch({
 					type: POST_USER_LOGIN_SUCCESS,
 					payload: res.data.access_token
 				})
 			})
 			.catch((err) => {
+				console.log(err);
 				dispatch({
 					type: POST_USER_LOGIN_FAILURE,
 					payload: err.message
@@ -91,11 +104,28 @@ export const postUserLogin = (username, password) => {
 	}
 }
 
+export const confirmUserLoggedIn = () => {
+  return({
+    type: CONFIRM_LOGGED_IN,
+    payload: true
+  })
+}
+
+export const rejectUserLoggedIn = () => {
+  return({
+    type: REJECT_LOGGED_IN,
+    payload: false
+  })
+}
+
+//implemented
 export const fetchUserLogout = () => {
 	return (dispatch) => {
 		dispatch({ type: FETCH_USER_LOGOUT_START })
+
 		axiosAuth().get('/logout')
 			.then((res) => {
+				window.localStorage.removeItem('token')
 				dispatch({
 					type: FETCH_USER_LOGOUT_SUCCESS,
 					payload: res.data

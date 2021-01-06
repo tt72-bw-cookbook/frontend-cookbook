@@ -1,25 +1,28 @@
 import styled from "styled-components";
 import { Link, useHistory } from "react-router-dom";
-import { useFormError, useLocalToken } from "../../../common/hooks/";
+import { useFormError } from "../../../common/hooks/";
 import { Button, StyledForm } from "../../../common/components/";
 import Input from "../../../common/components/Input";
-import { axiosLogin } from "../../../utils";
 import schema from "../schema";
+import { postUserLogin } from '../../../store/vanillaRedux/actions/index';
+import { useDispatch, useSelector } from 'react-redux';
+import { useEffect } from 'react';
 
 const LoginForm = props => {
+	const dispatch = useDispatch();
 	const [input, errors, disabled, handleChanges, clearForm] = useFormError({ username: "", password: "", }, schema);
-	const { setToken } = useLocalToken();
 	const { push } = useHistory();
-
+	const isLoggedIn = useSelector(state => state.user.isLoggedIn)
+	
+	useEffect(() => {
+		if (isLoggedIn) {
+			push('/profile')
+		}
+	}, [isLoggedIn, push])
+	
 	const handleSubmit = (evt) => {
 		evt.preventDefault();
-
-		axiosLogin(input.username, input.password)
-			.then(res => {
-				setToken(res.data.access_token);
-				push("/profile");
-			})
-			.catch(err => console.error(err));
+		dispatch(postUserLogin(input.username, input.password))
 		clearForm();
 	}
 
