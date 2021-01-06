@@ -1,4 +1,5 @@
 // import axios from 'axios';
+import { string } from 'yup/lib/locale';
 import axiosAuth from '../../../utils/axiosAuth';
 import { axiosLogin } from '../../../utils/axiosSecret';
 
@@ -73,47 +74,48 @@ export const fetchCurrentUserRecipes = () => {
 }
 
 export const postUserLogin = (username, password) => {
-  return (dispatch) => {
-    dispatch({ type: POST_USER_LOGIN_START });
+	return (dispatch) => {
+		dispatch({ type: POST_USER_LOGIN_START });
 
-    axiosLogin(username, password)
-      .then((res) => {
-        console.log(res.data.access_token);
-        window.localStorage.setItem('token', res.data.access_token)
-        dispatch({
-          type: POST_USER_LOGIN_SUCCESS,
-          payload: res.data.access_token
-        })
-      })
-      .catch((err) => {
-        console.log(err);
-        dispatch({
-          type: POST_USER_LOGIN_FAILURE,
-          payload: err.message
-        })
-      })
-  }
+		axiosLogin(username, password)
+			.then((res) => {
+				console.log(res.data.access_token);
+				const stringifiedToken = JSON.stringify(res.data.access_token)
+				window.localStorage.setItem('token', stringifiedToken)
+				dispatch({
+					type: POST_USER_LOGIN_SUCCESS,
+					payload: res.data.access_token
+				})
+			})
+			.catch((err) => {
+				console.log(err);
+				dispatch({
+					type: POST_USER_LOGIN_FAILURE,
+					payload: err.message
+				})
+			})
+	}
 }
 
 export const fetchUserLogout = () => {
-  return (dispatch) => {
-    dispatch({ type: FETCH_USER_LOGOUT_START })
+	return (dispatch) => {
+		dispatch({ type: FETCH_USER_LOGOUT_START })
 
-    axiosAuth().get('/logout')
-      .then((res) => {
-        window.localStorage.removeItem('token')
-        dispatch({
-          type: FETCH_USER_LOGOUT_SUCCESS,
-          payload: res.data
-        })
-      })
-      .catch((err) => {
-        dispatch({
-          type: FETCH_USER_LOGOUT_FAILURE,
-          payload: err.message
-        })
-      })
-  }
+		axiosAuth().get('/logout')
+			.then((res) => {
+				window.localStorage.removeItem('token')
+				dispatch({
+					type: FETCH_USER_LOGOUT_SUCCESS,
+					payload: res.data
+				})
+			})
+			.catch((err) => {
+				dispatch({
+					type: FETCH_USER_LOGOUT_FAILURE,
+					payload: err.message
+				})
+			})
+	}
 }
 
 export const postUserRecipe = (newRecipe) => {

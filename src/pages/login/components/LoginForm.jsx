@@ -17,9 +17,11 @@ const LoginForm = props => {
 
 		dispatch(postUserLogin(input.username, input.password))
 
-		push("/profile");
+		// push("/profile");
 		clearForm();
 	}
+
+	
 
 	return (
 		<StyledWrap>
