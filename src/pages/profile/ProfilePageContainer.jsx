@@ -1,29 +1,28 @@
 import styled from "styled-components";
 import { Header } from "../../common/components";
-import { axiosAuth } from "../../utils";
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import ProfilePageRecipes from './ProfilePageRecipes';
-
-const userURL = 'https://tt72-cookbook.herokuapp.com/users/current';
+import { useDispatch, useSelector } from 'react-redux';
+import { fetchUserLogout, fetchCurrentUser } from '../../store/vanillaRedux/actions/index';
 
 
 const ProfilePageContainer = props => {
 
-	const [user, setUser] = useState(null)
+	const dispatch = useDispatch();
 
-	useEffect(() => {
-		if (!user) {
-			axiosAuth()
-				.get(userURL)
-				.then((res) => {
-					console.log(res.data)
-					setUser(res.data)
-				})
-				.catch((err) => {
-					console.log(err)
-				})
+	const user = useSelector(state => state.user.userData);
+	// const { userData, isLoading } = userState
+	// const user = userData
+	let willLoad = true
+
+	useEffect(()=> {
+		if (willLoad) {
+			dispatch(fetchCurrentUser());
 		}
-	}, [user])
+		willLoad = false
+		// console.log(user);
+	}, [willLoad])
+
 
 	const date = user?.createdDate?.split(' ');
 
@@ -32,6 +31,10 @@ const ProfilePageContainer = props => {
 
 	if (!user) {
 		return <h1>No user found</h1>
+	}
+
+	const handleLogout = () => {
+		dispatch(fetchUserLogout());
 	}
 
 	return (
@@ -46,6 +49,7 @@ const ProfilePageContainer = props => {
 					<h3> Since: {date ? date[0] : "unknown"}</h3>
 				</UserInfo>
 				<NewRecipeButton disabled={!user}> Add New Recipe </NewRecipeButton>
+				<button onClick={handleLogout}> Logout </button>
 				<ProfileH2>Your Recipes</ProfileH2>
 				<UserRecipes>
 					{
