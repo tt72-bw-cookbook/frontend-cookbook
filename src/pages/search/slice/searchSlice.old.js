@@ -19,16 +19,6 @@ const searchSlice = createSlice({
 	name: "search",
 	initialState: initialState,
 	reducers: {
-		addCategory: (state, action) => {
-			const { category, option } = action.payload;
-			state.search.categories[category] = option;
-			if (state.search.term.includes(`${category}`)) {
-				const idx = state.search.term.indexOf(`${category}`);
-				console.log(idx);
-			} else {
-				state.search.term += (`${category}=${option}`)
-			}
-		},
 		addFilter: (state, action) => {
 			const [category, option] = action.payload.split(",");
 			if (!state.facets[category][option]) {
@@ -70,6 +60,6 @@ const searchSlice = createSlice({
 	extraReducers: {}
 });
 
-export const { addFilter, removeFilter, addCategory } = searchSlice.actions;
+export const { addFilter, removeFilter } = searchSlice.actions;
 
 export default searchSlice.reducer;
