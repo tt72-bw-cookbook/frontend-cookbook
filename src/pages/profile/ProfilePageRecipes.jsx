@@ -4,44 +4,44 @@ import styled from "styled-components";
 
 const ProfilePageRecipes = props => {
 
-    const { userRecipes } = props
+	const { userRecipes } = props
 
 	return (
 		<>
-    <UserRecipeDiv>
-        <RecipeGenInfo>
-            <RecipeImg src = {userRecipes.pictureurl} />
-            <RecipeTitle> {userRecipes.title} </RecipeTitle>
-            {
-                userRecipes.categories && 
-            <CatDiv>
-                <h4> Source: {userRecipes.source} </h4>
-                <h4> Course: {userRecipes.categories.course} </h4>
-                <h4> Cuisine: {userRecipes.categories.cuisine} </h4>
-                <h4> Diet: {userRecipes.categories.dietaryconcerns} </h4>
-                <h4> Type: {userRecipes.categories.dishtype} </h4>
-                <h4> Technique: {userRecipes.categories.technique} </h4>
-            </CatDiv>
-            }
-            <RecInstruct> {userRecipes.instructions} </RecInstruct>
-        </RecipeGenInfo>
-       <IngDiv>
-           <IngH3>Ingredients:</IngH3>
-            {
-                userRecipes.ingredients.map(ing => {
-                    return <EachIngDiv>
-                        <ul>
-                            <li>{ing.ingredientname}: {ing.quantity} {ing.measurement}</li>
-                        </ul>
-                    </EachIngDiv>;
-                })
-            }
-       </IngDiv>
-       
-    </UserRecipeDiv>
+			<UserRecipeDiv>
+				<RecipeGenInfo>
+					<RecipeImg src={userRecipes.pictureurl} />
+					<RecipeTitle> {userRecipes.title} </RecipeTitle>
+					{
+						userRecipes.categories &&
+						<CatDiv>
+							<h4> Source: {userRecipes.source} </h4>
+							<h4> Course: {userRecipes.categories.course} </h4>
+							<h4> Cuisine: {userRecipes.categories.cuisine} </h4>
+							<h4> Diet: {userRecipes.categories.dietaryconcerns} </h4>
+							<h4> Type: {userRecipes.categories.dishtype} </h4>
+							<h4> Technique: {userRecipes.categories.technique} </h4>
+						</CatDiv>
+					}
+					<RecInstruct> {userRecipes.instructions} </RecInstruct>
+				</RecipeGenInfo>
+				<IngDiv>
+					<IngH3>Ingredients:</IngH3>
+					{
+						userRecipes.ingredients.map(ing => {
+							return (<EachIngDiv key={ing.ingredientname}>
+								<ul>
+									<li>{ing.ingredientname}: {ing.quantity} {ing.measurement}</li>
+								</ul>
+							</EachIngDiv>);
+						})
+					}
+				</IngDiv>
+
+			</UserRecipeDiv>
 		</>
-    );
-    
+	);
+
 };
 
 const UserRecipeDiv = styled.div`

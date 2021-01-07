@@ -1,10 +1,7 @@
 import { Header } from "../../common/components";
 import styled from "styled-components";
 import React, { useState, useEffect } from "react";
-
 import axios from "axios";
-import * as yup from "yup";
-import userEvent from "@testing-library/user-event";
 
 const RecipeViewPageContainer = (props) => {
 	// const { recipeId } = props
@@ -16,24 +13,20 @@ const RecipeViewPageContainer = (props) => {
 	// const number = Math.floor
 
 	useEffect(() => {
-		console.log(recipeId)
 		axios
 			.get(`${BASE_URL}/recipes/id/${recipeId}`)
 			.then((res) => {
 				setRecipes(res.data);
-				console.log(res);
 			})
 			.catch((err) => {
-				console.log(err);
+				console.error(err);
 			});
 	}, []);
 
 	function getIngredients(item) {
 		let ingredient = [item.quantity, item.measurement, item.ingredientname].join(" ");
 		return ingredient
-	};
-
-
+	}
 
 	return (
 		<>
@@ -73,7 +66,7 @@ const RecipeViewPageContainer = (props) => {
 								<h3>Ingredients</h3>
 
 								{recipes.ingredients.map(ingredient => {
-									return <p>{getIngredients(ingredient)}</p>
+									return (<p key={ingredient.ingredientname}>{getIngredients(ingredient)}</p>);
 								})}
 
 							</div>
