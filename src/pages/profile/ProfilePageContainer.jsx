@@ -4,7 +4,7 @@ import React, { useEffect } from "react";
 import ProfilePageRecipes from './ProfilePageRecipes';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchUserLogout, fetchCurrentUser } from '../../store/vanillaRedux/actions/index';
-import { Link, Button } from "../../common/components/";
+import { Link, Button, Heading } from "../../common/components/";
 
 const ProfilePageContainer = props => {
 	const dispatch = useDispatch();
@@ -35,14 +35,17 @@ const ProfilePageContainer = props => {
 					<h3> Email: {user.email ?? "unknown"} </h3>
 					<h3> Since: {date ? date[0] : "unknown"}</h3>
 				</UserInfo>
-				<Link secondary to='/add'>Add New Recipe</Link>
+				<Link secondary="true" to='/add'>Add New Recipe</Link>
 				<Button onClick={handleLogout}> Logout </Button>
 				<ProfileH2>Your Recipes</ProfileH2>
 				<UserRecipes>
 					{
-						user?.recipes && user.recipes.map(recipe => {
-							return <ProfilePageRecipes key={recipe.recipeid} userRecipes={recipe} />;
-						})
+						user?.recipes &&
+							user.recipes.length > 0
+							? user.recipes.map(recipe => {
+								return <ProfilePageRecipes key={recipe.recipeid} userRecipes={recipe} />;
+							})
+							: <Heading h4>Nothing to see here!</Heading>
 					}
 				</UserRecipes>
 			</ProfileBody>
@@ -62,14 +65,6 @@ const ProfileBody = styled.div`
 		text-align: center;
 		text-transform: uppercase;
 	}
-`;
-const Info = styled.div`
-	border-top: 1px solid black;
-	border-bottom: 1px solid black;
-	width: 100vw;
-	display: flex:
-	flex-direction: column:
-	align-items: center;
 `;
 
 const ProfileH2 = styled.h2`
@@ -95,7 +90,7 @@ h3{
 div{
 	display: flex;
 	flex-direction: column;
-	justify-content: space-between:
+	justify-content: space-between;
 }
 `;
 
@@ -108,27 +103,6 @@ margin: 0 auto;
 display: block;
 border: 1px solid #a53636;
 border-radius: 25px;
-`;
-
-// const NewRecipeButton = styled.button`
-//   background-color: skyblue;
-//   color: white;
-//   padding: 12px 30px;
-//   margin: 2%;
-//   text-align: center;
-//   font-size: 14px;
-// `;
-
-// const AddRecDiv = styled.div`
-// 	display: flex;
-// 	justify-content: center;
-// 	align-items: center;
-// 	padding: 2%;
-// 	width: 100%;
-// `;
-
-const AddRecDiv = styled.div`
-	
 `;
 
 const UserRecipes = styled.div`

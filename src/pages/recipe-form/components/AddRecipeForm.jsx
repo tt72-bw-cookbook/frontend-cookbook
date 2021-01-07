@@ -106,7 +106,6 @@ const AddRecipeForm = props => {
 				<form onSubmit={onSubmit}>
 					<GenInfoDiv>
 						<label>Recipe Name:
-				{/* handleCategoryChange */}
 							<input
 								onChange={onChange}
 								value={formValues.title}
