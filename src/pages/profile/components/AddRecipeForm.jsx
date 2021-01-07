@@ -1,19 +1,9 @@
 import styled from "styled-components";
 
 const AddIngredientFrag = ({ formValue, index, addField, remField, ingredientChange }) => {
-	// const  = props;
-
-	// const [ingValues, setIngValues] = useState({ name: "", measurement: "", quantity: -1 })
-
-	// useEffect(() => {
-	// 	console.log(formValue)
-	// }, [])
-
-
 	const onChange = (evt) => {
 		const { name, value } = evt.target;
 		ingredientChange(name, value, index)
-		// setIngValues({ ...ingValues, [name]: value });
 	}
 
 	return (
@@ -144,7 +134,7 @@ const AddRecipeForm = props => {
 					</GenInfoDiv>
 					<CatDiv>
 						<select id="course" name="course" onChange={IngChange}>
-							<option selected value="null">--pick a course--</option>
+							<option defaultValue value="null">--pick a course--</option>
 							<option value="appetizer">Appetizer</option>
 							<option value="breakfast">Breakfast</option>
 							<option value="brunch">Brunch</option>
@@ -156,7 +146,7 @@ const AddRecipeForm = props => {
 							<option value="side">Side</option>
 						</select>
 						<select id="cuisine" name="cuisine" onChange={IngChange}>
-							<option selected value="null">--pick a cuisine--</option>
+							<option defaultValue value="null">--pick a cuisine--</option>
 							<option value="italian">Italian</option>
 							<option value="mexican">Mexican</option>
 							<option value="moroccan">Moroccan</option>
@@ -168,7 +158,7 @@ const AddRecipeForm = props => {
 							<option value="american">American</option>
 						</select>
 						<select id="dietaryconcerns" name="dietaryconcerns" onChange={IngChange}>
-							<option selected value="null">--Any dietary concern--</option>
+							<option defaultValue value="null">--Any dietary concern--</option>
 							<option value="healthy">Healthy</option>
 							<option value="highfiber">Highfiber</option>
 							<option value="kidfriendly">Fid Friendly</option>
@@ -185,7 +175,7 @@ const AddRecipeForm = props => {
 
 						</select>
 						<select id="technique" name="technique" onChange={IngChange}>
-							<option selected value="null">--cooking technique--</option>
+							<option defaultValue value="null">--cooking technique--</option>
 							<option value="bbq">BBQ</option>
 							<option value="bake">Bake</option>
 							<option value="roast">Roast</option>
@@ -207,46 +197,6 @@ const AddRecipeForm = props => {
 								remField={remField}
 								addField={addField}
 							/>
-							// <Fragment key={`${formValue}~${index}`}>
-							// 	<div>
-							// 		<label htmlFor="ingredientname">Ingredient Name</label>
-							// 		<input
-							// 			onChange={onChange}
-							// 			type="text"
-							// 			className="form-control"
-							// 			id="ingredientname"
-							// 			name="ingredientname"
-							// 			value={formValue.ingredientname}
-							// 		/>
-							// 	</div>
-							// 	<div>
-							// 		<label htmlFor="measurement">Measurement</label>
-							// 		<input
-							// 			onChange={onChange}
-							// 			type="text"
-							// 			className="form-control"
-							// 			id="measurement"
-							// 			name="measurement"
-							// 			value={formValue.measurement}
-							// 		/>
-							// 	</div>
-							// 	<div>
-							// 		<button
-							// 			className="btn btn-link"
-							// 			type="button"
-							// 			onClick={() => remField(index)}
-							// 		>
-							// 			-
-							// </button>
-							// 		<button
-							// 			className="btn btn-link"
-							// 			type="button"
-							// 			onClick={() => addField()}
-							// 		>
-							// 			+
-							// </button>
-							// 	</div>
-							// </Fragment>
 						))}
 					</IngDiv>
 					<div>
