@@ -112,13 +112,21 @@ const AddRecipeForm = props => {
 			<CreateRecDiv>
 				<h1>Add Your Recipe</h1>
 				<form onSubmit={onSubmit}>
-					<div>
+					<GenInfoDiv>
 						<label>Recipe Name:
 				{/* handleCategoryChange */}
 							<input
 								onChange={onChange}
 								value={formValues.title}
 								name='title'
+								type='text'
+							/>
+						</label>
+						<label>Recipe Image URL:
+						<input
+								onChange={onChange}
+								value={formValues.image}
+								name='image'
 								type='text'
 							/>
 						</label>
@@ -133,7 +141,7 @@ const AddRecipeForm = props => {
 						<label>Private?
                     <input type='checkbox' name='private' checked={formValues.private} onChange={onChange} />
 						</label>
-					</div>
+					</GenInfoDiv>
 					<CatDiv>
 						<select id="course" name="course" onChange={IngChange}>
 							<option selected value="null">--pick a course--</option>
@@ -243,7 +251,7 @@ const AddRecipeForm = props => {
 					</IngDiv>
 					<div>
 						<label> Instructions:
-						<input
+						<InstructionsInput
 								onChange={onChange}
 								value={formValues.instructions}
 								name='instructions'
@@ -269,20 +277,30 @@ const CreateRecDiv = styled.div`
 	width: 60%;
 `;
 
+const GenInfoDiv = styled.div`
+	display: flex;
+	flex-direction: column;
+	align-items: left;
+	padding: 2%;
+`;
+
 const CatDiv = styled.div`
 	display: flex;
-	justify-content: cs;
 	align-items: center;
 	padding: 2%;
 `;
 
 const IngDiv = styled.div`
-	display: flex;
-	flex-wrap: wrap;
+	display: table;
 	justify-content: space-evenly;
 	align-items: center;
 	padding: 2%;
 	width: 100%;
+`;
+
+const InstructionsInput = styled.input`
+	width: 94%;
+	height: 200px;
 `;
 
 
