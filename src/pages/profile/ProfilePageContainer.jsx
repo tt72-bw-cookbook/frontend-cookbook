@@ -1,50 +1,50 @@
 import styled from "styled-components";
 import { Header } from "../../common/components";
-import React, { useState, useEffect } from "react";
-import { Route, Switch } from 'react-router-dom';
+import React, { useEffect } from "react";
+// import { Route, Switch } from 'react-router-dom';
 import ProfilePageRecipes from './ProfilePageRecipes';
-import AddRecipeForm from './components/AddRecipeForm';
+// import AddRecipeForm from '../recipe-form/components/AddRecipeForm';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchUserLogout, fetchCurrentUser, postUserRecipe } from '../../store/vanillaRedux/actions/index';
-import { Link } from "../../common/components/";
+import { Link, Button } from "../../common/components/";
 
 
 // const userURL = 'https://tt72-cookbook.herokuapp.com/users/current';
 
-const initialFormValues = {
-	// gen Info
-	title: '',
-	image: '',
-	source: '',
-	// private check
-	private: true,
-	// categories
-	categories: {
-		course: '',
-		cuisine: '',
-		dietaryconcerns: '',
-		dishtype: '',
-		technique: '',
-	},
-	// ingredients
-	ingredients: [{
-		ingredientname: '',
-		measurement: '',
-		quantity: 0,
-	}],
-	// instructions
-	instructions: '',
-}
-
-// const initialFormErrors = {
+// const initialFormValues = {
+// 	// gen Info
 // 	title: '',
+// 	image: '',
 // 	source: '',
-// 	ingredientname: '',
-// 	measurement: '',
+// 	// private check
+// 	private: true,
+// 	// categories
+// 	categories: {
+// 		course: '',
+// 		cuisine: '',
+// 		dietaryconcerns: '',
+// 		dishtype: '',
+// 		technique: '',
+// 	},
+// 	// ingredients
+// 	ingredients: [{
+// 		ingredientname: '',
+// 		measurement: '',
+// 		quantity: 0,
+// 	}],
+// 	// instructions
 // 	instructions: '',
 // }
 
-const initialRecipes = [];
+// // const initialFormErrors = {
+// // 	title: '',
+// // 	source: '',
+// // 	ingredientname: '',
+// // 	measurement: '',
+// // 	instructions: '',
+// // }
+
+// const initialRecipes = [];
 
 
 
@@ -62,14 +62,14 @@ const ProfilePageContainer = props => {
 	}, [dispatch])
 
 	// const [user, setUser] = useState(null)
-	const [recipes, setRecipes] = useState(initialRecipes)
-	const [formValues, setFormValues] = useState(initialFormValues)
+	// const [recipes, setRecipes] = useState(initialRecipes)
+	// const [formValues, setFormValues] = useState(initialFormValues)
 
-	const postNewRecipe = newRecipe => {
-		dispatch(postUserRecipe(newRecipe));
-		setRecipes([newRecipe, ...recipes]);
-		setFormValues(initialFormValues);
-	};
+	// const postNewRecipe = newRecipe => {
+	// 	dispatch(postUserRecipe(newRecipe));
+	// 	setRecipes([newRecipe, ...recipes]);
+	// 	setFormValues(initialFormValues);
+	// };
 
 	// const postNewRecipe = newRecipe => {
 	// 	axiosAuth()
@@ -86,54 +86,54 @@ const ProfilePageContainer = props => {
 	// 		})
 	// };
 
-	const inputChange = (name, value, event) => {
-		setFormValues({
-			...formValues,
-			[name]: value,
-		})
+	// const inputChange = (name, value, event) => {
+	// 	setFormValues({
+	// 		...formValues,
+	// 		[name]: value,
+	// 	})
 
-	};
+	// };
 
-	const ingredientChange = (name, value, index) => {
-		const values = { ...formValues }
-		values.ingredients[index][name] = value;
-		setFormValues(values);
-	}
+	// const ingredientChange = (name, value, index) => {
+	// 	const values = { ...formValues }
+	// 	values.ingredients[index][name] = value;
+	// 	setFormValues(values);
+	// }
 
-	const catChange = (name, value) => {
-		const values = { ...formValues }
-		values.categories[name] = value;
-		setFormValues(values);
-	}
+	// const catChange = (name, value) => {
+	// 	const values = { ...formValues }
+	// 	values.categories[name] = value;
+	// 	setFormValues(values);
+	// }
 
-	const handleAddFields = () => {
-		// const values = [...formValues];
-		const values = { ...formValues };
-		values.ingredients.push({ ingredientname: '', measurement: '' });
-		setFormValues(values);
-	};
+	// const handleAddFields = () => {
+	// 	// const values = [...formValues];
+	// 	const values = { ...formValues };
+	// 	values.ingredients.push({ ingredientname: '', measurement: '' });
+	// 	setFormValues(values);
+	// };
 
-	const handleRemoveFields = index => {
-		// const values = [...formValues];
-		const values = { ...formValues };
-		values.ingredients.splice(index, 1);
-		setFormValues(values);
-	};
+	// const handleRemoveFields = index => {
+	// 	// const values = [...formValues];
+	// 	const values = { ...formValues };
+	// 	values.ingredients.splice(index, 1);
+	// 	setFormValues(values);
+	// };
 
-	const formSubmit = () => {
-		const newRecipe = {
-			title: formValues.title.trim(),
-			image: formValues.image.trim(),
-			source: formValues.source.trim(),
-			ingredients: formValues.ingredients,
-			categories: formValues.categories,
-			instructions: formValues.instructions.trim(),
-		}
+	// const formSubmit = () => {
+	// 	const newRecipe = {
+	// 		title: formValues.title.trim(),
+	// 		image: formValues.image.trim(),
+	// 		source: formValues.source.trim(),
+	// 		ingredients: formValues.ingredients,
+	// 		categories: formValues.categories,
+	// 		instructions: formValues.instructions.trim(),
+	// 	}
 
-		console.log(newRecipe);
+	// 	console.log(newRecipe);
 
-		postNewRecipe(newRecipe);
-	}
+	// 	postNewRecipe(newRecipe);
+	// }
 
 
 
@@ -166,11 +166,12 @@ const ProfilePageContainer = props => {
 				</UserInfo>
 				{/* <NewRecipeButton disabled={!user}>
 				</NewRecipeButton> */}
-				<Link
-					// disabled={!user}
-					to='/profile/add'>Add New Recipe</Link>
+				{/* <Link to='/profile/add'>Add New Recipe</Link> */}
+				<Link secondary to='/add'>Add New Recipe</Link>
+				<Button onClick={handleLogout}> Logout </Button>
+
 				{/* <NewRecipeButton disabled={!user}> Add New Recipe </NewRecipeButton> */}
-				<AddRecDiv>
+				{/* <AddRecDiv>
 					<Switch>
 						<Route path='/profile/add'>
 							<AddRecipeForm
@@ -185,8 +186,7 @@ const ProfilePageContainer = props => {
 							/>
 						</Route>
 					</Switch>
-				</AddRecDiv>
-				<StyledBtn onClick={handleLogout}> Logout </StyledBtn>
+				</AddRecDiv> */}
 				<ProfileH2>Your Recipes</ProfileH2>
 				<UserRecipes>
 					{
@@ -243,13 +243,13 @@ width: 300px;
 //   font-size: 14px;
 // `;
 
-const AddRecDiv = styled.div`
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	padding: 2%;
-	width: 100%;
-`;
+// const AddRecDiv = styled.div`
+// 	display: flex;
+// 	justify-content: center;
+// 	align-items: center;
+// 	padding: 2%;
+// 	width: 100%;
+// `;
 
 const UserRecipes = styled.div`
 width: 90%;
@@ -257,7 +257,7 @@ width: 90%;
 
 const StyledBtn = styled.button`
 font-size: 1.5rem;
-margin-top: -4%;
+/* margin-top: -4%; */
 padding: 1%;
 background-color: #605e5c;
 width: 8%;

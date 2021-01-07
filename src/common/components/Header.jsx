@@ -4,10 +4,20 @@ import { PATHS } from "../../pages/";
 import ThemeToggler from "./ThemeToggler";
 import MenuBurger from "./MenuBurger";
 import Heading from "./Heading";
+import { Link as RouterLink } from "react-router-dom";
 import Link from "./Link";
+import Button from "./Button";
+import { useSelector, useDispatch } from "react-redux";
+import { fetchUserLogout } from "../../store/vanillaRedux/actions";
 
 const Header = props => {
+	const dispatch = useDispatch();
+	const isLoggedIn = useSelector(state => state.user.isLoggedIn)
 	const [navOpen, setNavOpen] = useState(false);
+
+	const handleLogout = (evt) => {
+		dispatch(fetchUserLogout())
+	}
 
 	const toggleNav = () => {
 		setNavOpen(!navOpen);
@@ -18,7 +28,9 @@ const Header = props => {
 			<StyledHeader>
 				<div className="container">
 					<div>
-						<Heading h1 noMargin>Recipe Cookbook</Heading>
+						<RouterLink to="/">
+							<Heading h1 noMargin>Recipe Cookbook</Heading>
+						</RouterLink>
 					</div>
 					<div>
 						<MenuBurger onClick={toggleNav} />
@@ -29,12 +41,23 @@ const Header = props => {
 
 			<NavContainer show={navOpen}>
 				<nav>
-					<Link to={PATHS.HOMEPAGE_PATH}>Home</Link>
-					<Link to={PATHS.LOGIN_PATH}>Login</Link>
-					<Link to={PATHS.SIGNUP_PATH}>Signup</Link>
+					<Link secondary to={PATHS.HOMEPAGE_PATH}>Home</Link>
+					{
+						isLoggedIn
+							?
+							<>
+								<Link secondary to={"add"}>Add Recipe</Link>
+								<Link secondary to={PATHS.PROFILE_PATH}>Profile</Link>
+								<Button onClick={handleLogout}>Logout</Button>
+							</>
+							: <>
+								<Link secondary to={PATHS.LOGIN_PATH}>Login</Link>
+								<Link secondary to={PATHS.SIGNUP_PATH}>Signup</Link>
+							</>
+					}
 					{/* <Link to={PATHS.BROWSE_PATH}>Browse</Link> */}
-					<Link to={PATHS.PROFILE_PATH}>Profile</Link>
-					<Link to={PATHS.RECIPE_VIEW_PATH}>View Recipe</Link>
+					{/* <Link to={PATHS.RECIPE_VIEW_PATH}>View Recipe</Link> */}
+
 				</nav>
 			</NavContainer>
 		</>

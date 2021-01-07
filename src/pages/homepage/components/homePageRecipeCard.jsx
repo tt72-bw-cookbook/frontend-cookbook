@@ -1,22 +1,21 @@
 import React from "react";
 import styled from "styled-components";
+import { Link } from "react-router-dom"
 
-
-const HomePageRecipeCard= props => {
-
-    const { recipes } = props
-
+const HomePageRecipeCard = props => {
+	const { recipe } = props
+	const id = recipe.recipeid
 
 	return (
-		<>
-        <RecipeCard>
-            <Recipeimg src = {recipes.pictureurl} />
-            <RecipeH2>{recipes.title} </RecipeH2>
-            <RecipeDes> {recipes.instructions} </RecipeDes>
-        </RecipeCard>
-		</>
-    );
-    
+		<RecipeCard>
+			<Link to={`/recipe/${id}`}>
+				<Recipeimg src={recipe.pictureurl} />
+				<RecipeH2>{recipe.title} </RecipeH2>
+				<RecipeDes> {recipe.instructions} </RecipeDes>
+			</Link>
+		</RecipeCard >
+	);
+
 };
 
 const RecipeCard = styled.div`

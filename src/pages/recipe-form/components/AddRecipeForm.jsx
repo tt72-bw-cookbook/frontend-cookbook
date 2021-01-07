@@ -1,6 +1,8 @@
 import styled from "styled-components";
 
-const AddIngredientFrag = ({ formValue, index, addField, remField, ingredientChange }) => {
+const AddIngredientFrag = ({ formValue, index, addField, remField, ingredientChange, ...rest }) => {
+
+
 	const onChange = (evt) => {
 		const { name, value } = evt.target;
 		ingredientChange(name, value, index)
@@ -115,8 +117,8 @@ const AddRecipeForm = props => {
 						<label>Recipe Image URL:
 						<input
 								onChange={onChange}
-								value={formValues.image}
-								name='image'
+								value={formValues.pictureurl}
+								name='pictureurl'
 								type='text'
 							/>
 						</label>
