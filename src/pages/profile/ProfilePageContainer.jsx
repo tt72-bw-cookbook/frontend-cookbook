@@ -1,13 +1,13 @@
 import styled from "styled-components";
 import { Header } from "../../common/components";
 import { axiosAuth } from "../../utils";
-import axios from 'axios';
 import React, { useState, useEffect } from "react";
-import { Route, Link, Switch } from 'react-router-dom';
+import { Route, Switch } from 'react-router-dom';
 import ProfilePageRecipes from './ProfilePageRecipes';
 import AddRecipeForm from './components/AddRecipeForm';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchUserLogout, fetchCurrentUser } from '../../store/vanillaRedux/actions/index';
+import { Link } from "../../common/components/";
 
 
 const userURL = 'https://tt72-cookbook.herokuapp.com/users/current';
@@ -25,7 +25,7 @@ const initialFormValues = {
 		dietaryconcerns: '',
 		dishtype: '',
 		technique: '',
-		},
+	},
 	// ingredients
 	ingredients: [{
 		ingredientname: '',
@@ -57,7 +57,7 @@ const ProfilePageContainer = props => {
 	// const user = userData
 	let willLoad = true
 
-	useEffect(()=> {
+	useEffect(() => {
 		if (willLoad) {
 			dispatch(fetchCurrentUser());
 		}
@@ -75,48 +75,23 @@ const ProfilePageContainer = props => {
 		axiosAuth()
 			.post('https://tt72-cookbook.herokuapp.com/recipes/', newRecipe)
 			.then((res) => {
-				console.log('post data', res.data);
+				// console.log('post data', res.data);
 				setRecipes([res.data, ...recipes]);
 				setFormValues(initialFormValues);
+				console.log(res);
 			})
 			.catch((err) => {
 				// debugger;
+				console.error(err);
 			})
 	};
 
 	const inputChange = (name, value, event) => {
-
-		// Yup
-		//   .reach(schema, name) //get to this part of the schema
-		//   .validate(value) //validate this value
-		//   .then(() => {
-		// 	setFormErrors({
-		// 	  ...formErrors,
-		// 	  [name]: '',
-		// 	})
-		//   })
-		//   .catch((err) => {
-		// 	setFormErrors({
-		// 	  ...formErrors,
-		// 	  [name]: err.errors[0],
-		// 	})
-		//   })
-
-
-		// const values = [...formValues];
-		// if (event.target.name === 'ingredientname') {
-		// 	values[index].ingredientname = event.target.value;
-		// }
-		// else if (event.target.name === 'measurement') {
-		// 	values[index].measurement = event.target.value;
-		// }
-		// values
-		
 		setFormValues({
 			...formValues,
 			[name]: value,
 		})
-	
+
 	};
 
 	const ingredientChange = (name, value, index) => {
@@ -149,12 +124,13 @@ const ProfilePageContainer = props => {
 		const newRecipe = {
 			title: formValues.title.trim(),
 			source: formValues.source.trim(),
-			course: formValues.categories.course.trim(),
-			cuisine: formValues.categories.cuisine.trim(),
-			dietaryconcerns: formValues.categories.dietaryconcerns.trim(),
-			technique: formValues.categories.technique.trim(),
+			ingredients: formValues.ingredients,
+			categories: formValues.categories,
 			instructions: formValues.instructions.trim(),
 		}
+
+		console.log(newRecipe);
+
 		postNewRecipe(newRecipe);
 	}
 
@@ -164,7 +140,6 @@ const ProfilePageContainer = props => {
 
 	const date = user?.createdDate?.split(' ');
 
-	console.log('date', date ? date[0] : "undefined");
 
 
 	if (!user) {
@@ -188,9 +163,12 @@ const ProfilePageContainer = props => {
 					<h3> Email: {user.email ?? "unknown"} </h3>
 					<h3> Since: {date ? date[0] : "unknown"}</h3>
 				</UserInfo>
-				<NewRecipeButton disabled={!user}>
-					<Link to='./profile/add'>Add New Recipe</Link>
-				</NewRecipeButton>
+				{/* <NewRecipeButton disabled={!user}>
+				</NewRecipeButton> */}
+				<Link
+					// disabled={!user}
+					to='/profile/add'>Add New Recipe</Link>
+				{/* <NewRecipeButton disabled={!user}> Add New Recipe </NewRecipeButton> */}
 				<AddRecDiv>
 					<Switch>
 						<Route path='/profile/add'>
@@ -207,7 +185,6 @@ const ProfilePageContainer = props => {
 						</Route>
 					</Switch>
 				</AddRecDiv>
-				<NewRecipeButton disabled={!user}> Add New Recipe </NewRecipeButton>
 				<button onClick={handleLogout}> Logout </button>
 				<ProfileH2>Your Recipes</ProfileH2>
 				<UserRecipes>
