@@ -70,7 +70,7 @@ const AddIngredientFrag = ({ formValue, index, addField, remField, ingredientCha
 				>
 					+
 							</button>
-				
+
 			</div>
 		</>
 	)
@@ -101,9 +101,9 @@ const AddRecipeForm = props => {
 		submit()
 	}
 
-	
 
-	  const IngChange = (evt) => {
+
+	const IngChange = (evt) => {
 		const { name, value } = evt.target;
 		catChange(name, value)
 	}
@@ -116,7 +116,8 @@ const AddRecipeForm = props => {
 				<form onSubmit={onSubmit}>
 					<div>
 						<label>Recipe Name:
-				handleCategoryChange
+				{/* handleCategoryChange */}
+							<input
 								onChange={onChange}
 								value={formValues.title}
 								name='title'
