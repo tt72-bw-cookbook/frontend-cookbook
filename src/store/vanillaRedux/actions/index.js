@@ -161,7 +161,7 @@ export const deleteRecipeById = (id) => {
 	return (dispatch) => {
 		dispatch({ type: DELETE_RECIPE_BY_ID_START });
 
-		axiosAuth().delete(`recipe/${id}`)
+		axiosAuth().delete(`recipes/${id}`)
 			.then((res) => {
 				dispatch({
 					type: DELETE_RECIPE_BY_ID_SUCCESS,

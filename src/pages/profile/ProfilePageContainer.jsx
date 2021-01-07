@@ -6,7 +6,7 @@ import { Route, Switch } from 'react-router-dom';
 import ProfilePageRecipes from './ProfilePageRecipes';
 import AddRecipeForm from './components/AddRecipeForm';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchUserLogout, fetchCurrentUser } from '../../store/vanillaRedux/actions/index';
+import { fetchUserLogout, fetchCurrentUser, postUserRecipe } from '../../store/vanillaRedux/actions/index';
 import { Link } from "../../common/components/";
 
 
@@ -67,19 +67,25 @@ const ProfilePageContainer = props => {
 	const [formValues, setFormValues] = useState(initialFormValues)
 
 	const postNewRecipe = newRecipe => {
-		axiosAuth()
-			.post('https://tt72-cookbook.herokuapp.com/recipes/', newRecipe)
-			.then((res) => {
-				// console.log('post data', res.data);
-				setRecipes([res.data, ...recipes]);
-				setFormValues(initialFormValues);
-				console.log(res);
-			})
-			.catch((err) => {
-				// debugger;
-				console.error(err);
-			})
+		dispatch(postUserRecipe(newRecipe));
+		setRecipes([newRecipe, ...recipes]);
+		setFormValues(initialFormValues);
 	};
+
+	// const postNewRecipe = newRecipe => {
+	// 	axiosAuth()
+	// 		.post('https://tt72-cookbook.herokuapp.com/recipes/', newRecipe)
+	// 		.then((res) => {
+	// 			// console.log('post data', res.data);
+	// 			setRecipes([res.data, ...recipes]);
+	// 			setFormValues(initialFormValues);
+	// 			console.log(res);
+	// 		})
+	// 		.catch((err) => {
+	// 			// debugger;
+	// 			console.error(err);
+	// 		})
+	// };
 
 	const inputChange = (name, value, event) => {
 		setFormValues({
@@ -181,7 +187,7 @@ const ProfilePageContainer = props => {
 						</Route>
 					</Switch>
 				</AddRecDiv>
-				<button onClick={handleLogout}> Logout </button>
+				<StyledBtn onClick={handleLogout}> Logout </StyledBtn>
 				<ProfileH2>Your Recipes</ProfileH2>
 				<UserRecipes>
 					{
@@ -249,6 +255,20 @@ const AddRecDiv = styled.div`
 const UserRecipes = styled.div`
 width: 90%;
 `;
+
+const StyledBtn = styled.button`
+font-size: 1.5rem;
+margin-top: -4%;
+padding: 1%;
+background-color: #605e5c;
+width: 8%;
+border-radius: 10px;
+border: 0px solid black;
+color: white;
+&:hover {
+    background-color: #323130;
+}
+`
 
 
 export default ProfilePageContainer;
