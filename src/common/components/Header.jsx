@@ -58,6 +58,7 @@ const StyledHeader = styled.header`
 		flex-flow: row nowrap;
 		align-items: center;
 	}
+	font-family: 'Alegreya', serif;
 `;
 
 

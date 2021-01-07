@@ -38,7 +38,7 @@ const CheckboxGroup = props => {
 					// for each [key, value] pair in `search.facets`, return the following
 					Object.entries(facets).map(([categoryKey, categoryValue]) => {
 						return (
-							<div
+							<FilterDiv
 								// for example: categoryKey=course, categoryValue={object_corresponding_to_category_key}
 								key={`${categoryKey},${categoryValue}`}
 								onClick={() => handleOptionClick(categoryKey)}
@@ -59,7 +59,7 @@ const CheckboxGroup = props => {
 											})
 									}
 								</select>
-							</div>
+							</FilterDiv>
 						)
 					})
 				}
@@ -185,6 +185,23 @@ const OptionsContainer = styled.div`
 		padding: 5px 0;
 		position: relative;
 	}
+`;
+
+const FilterDiv = styled.div`
+	position: relative;
+	
+
+	select{
+		background-color: #da3c33;
+		color: #F3F6FA;
+		border: 2px solid #F3F6FA;
+		border-style: ridge;
+		height: 35px;
+		width: 15vw;
+		font-size: 2.2rem;
+		font-family: 'Alegreya', serif;
+	}
+
 `;
 
 export default CheckboxGroup;

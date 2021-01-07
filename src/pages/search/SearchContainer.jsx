@@ -33,13 +33,16 @@ const SearchHeader = styled.header`
 	/* background-color: var(--tBase); */
 	position: sticky;
 	top: 0px;
+	border-radius: 0 0 25px 25px;
 
 `;
 
 const HomeH1 = styled.h1`
-	font-size: 5rem;
+	font-size: 8rem;
 	padding-top: 1%;
 	font-family: 'Italianno', cursive;
+	font-style: bold;
+	color: #F3F6FA;
 `;
 
 
