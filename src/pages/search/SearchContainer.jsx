@@ -1,6 +1,5 @@
-import React from "react";
 import styled from "styled-components";
-import { CheckboxGroup } from "./components";
+import { CheckboxGroup, SearchBar } from "./components";
 
 const SearchContainer = props => {
 	return (
@@ -10,14 +9,7 @@ const SearchContainer = props => {
 				<HomeH1> Find a Family Recipe </HomeH1>
 			</ParentWrap>
 			<SearchHeader>
-				<Search>
-					<SearchInput
-						key='random1'
-						value={''}
-						placeholder={'Type in recipes, ingredients, or types of food'}
-						onChange={(e) => e.target.value}
-					/>
-				</Search>
+				<SearchBar />
 				<CheckboxGroup />
 			</SearchHeader>
 		</>
@@ -50,15 +42,7 @@ const HomeH1 = styled.h1`
 	font-family: 'Italianno', cursive;
 `;
 
-const Search = styled.div`
-	width: 60%;
-	text-align: center;
-	padding: 1%;
-`;
-const SearchInput = styled.input`
-	width: 100%;
-	height: 40px;
-`;
+
 
 
 

@@ -1,6 +1,6 @@
 import axios from "axios";
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import { initialState } from "./initState";
+import { initialState } from "../pages/search/slice/initState";
 
 export const fireSearch = createAsyncThunk(
 	"search/status",
