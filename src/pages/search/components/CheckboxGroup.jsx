@@ -34,31 +34,30 @@ const CheckboxGroup = props => {
 		<>
 			<OptionsContainer>
 				{
+					// for each [key, value] pair in `search.facets`, return the following
 					Object.entries(search.facets).map(([categoryKey, categoryValue]) => {
 						return (
 							<div
+								// for example: categoryKey=course, categoryValue={object_corresponding_to_category_key}
 								key={`${categoryKey},${categoryValue}`}
 								onClick={() => handleOptionClick(categoryKey)}
 							>
 								<select name={categoryKey} onChange={handleSelect}>
+
 									<option defaultValue value={""}>{categoryValue["_name"] ?? categoryKey}</option>
 									{
+										// if categoryValue is truthy, continue
 										categoryValue &&
+										// map each [key, value] pair in categoryValue
 										Object.entries(categoryValue)
 											.map(([optionKey, optionValue]) => {
-												if (optionKey !== "_name") {
-													return (
-														<option key={optionKey} value={optionKey}>{optionValue.name ?? optionKey}</option>
-													)
-												} else {
-													return null;
-												}
+												// for each [key, value] pair in categoryValue, return an (<option />) element if key is not "_name", else return null (i.e., do not render anything)
+												return (optionKey !== "_name")
+													? <option key={optionKey} value={optionKey}>{optionValue.name ?? optionKey}</option>
+													: null;
 											})
-
 									}
 								</select>
-
-
 							</div>
 						)
 					})
@@ -66,7 +65,8 @@ const CheckboxGroup = props => {
 
 				{
 					/**
-					 * this will be used if the updated backend is implemented. otherwise, use above
+					 * this code will only be implemented if the updated backend is implemented. otherwise, use the code above
+					 * remove `false &&` on the line **following** the next if you'd like to render the following code. (i.e. if this line is 70 remove line 72)
 					 */
 					false &&
 					Object.entries(search.facets).map(([categoryKey, categoryValue]) => {
