@@ -4,30 +4,62 @@ import { initialState } from "./initState";
 
 export const fireSearch = createAsyncThunk(
 	"search/status",
-	async (filters, search = "") => {
-		let res;
-		if (search === "") {
-			res = await axios.get(`https://tt72-cookbook.herokuapp.com/recipes${filters}`);
-		} else {
-			res = await axios.get(`https://tt72-cookbook.herokuapp.com/recipes/${search}${filters}`);
+	async (search) => {
+
+		const { queryCategory, querySearch, categories } = search;
+
+		let finalQuery = "";
+		let categoryString = "";
+
+		Object.entries(categories).forEach(([ctg, opt]) => {
+			console.log(ctg, opt);
+			if (opt !== "") {
+				categoryString += `${ctg}=${opt}`;
+			}
+		})
+
+		if (querySearch !== "") {
+			finalQuery += `/${querySearch}`
 		}
-		return res;
+		if (categoryString !== "") {
+			finalQuery += `?${categoryString}`
+		}
+
+		let res = await axios.get(`https://tt72-cookbook.herokuapp.com/recipes${finalQuery}`);;
+		// if (finalQuery === "") {
+		// 	res = await axios.get(`https://tt72-cookbook.herokuapp.com/recipes/`);
+		// } else {
+		// 	res = await axios.get(`https://tt72-cookbook.herokuapp.com/recipes/${finalQuery}`);
+		// }
+		return res.data;
 	}
 )
+
+const replaceAt = (str, index, replacement) => {
+	return str.substr(0, index) + replacement + str.substr(index + replacement.length);
+}
+
 
 const searchSlice = createSlice({
 	name: "search",
 	initialState: initialState,
 	reducers: {
+		updateSearch: (state, action) => {
+			const value = action.payload;
+			// state.search.querySearch = value.concat(state.search.querySearch);
+			state.search.querySearch = value;
+		},
 		addCategory: (state, action) => {
 			const { category, option } = action.payload;
 			state.search.categories[category] = option;
-			if (state.search.term.includes(`${category}`)) {
-				const idx = state.search.term.indexOf(`${category}`);
-				console.log(idx);
-			} else {
-				state.search.term += (`${category}=${option}`)
-			}
+			// if (state.search.queryCategory.includes(`${category}`)) {
+			// 	let idx = state.search.queryCategory.indexOf(`${category}`);
+			// 	idx += category.length + 1;
+			// 	state.search.queryCategory = replaceAt(state.search.queryCategory, idx, option)
+			// 	console.log(idx);
+			// } else {
+			// 	state.search.queryCategory += (`${category}=${option}`)
+			// }
 		},
 		addFilter: (state, action) => {
 			const [category, option] = action.payload.split(",");
@@ -67,9 +99,26 @@ const searchSlice = createSlice({
 			}
 		},
 	},
-	extraReducers: {}
+	extraReducers: {
+		[fireSearch.pending]: (state, action) => {
+			state.status = "pending";
+			// console.log(action.payload)
+		},
+		[fireSearch.fulfilled]: (state, action) => {
+			state.status = "fulfilled"
+			// console.log(action.payload)
+			state.searchData = action.payload;
+		},
+		[fireSearch.rejected]: (state, action) => {
+			state.status = "rejected"
+			console.log(action.payload)
+		},
+		[fireSearch.resolved]: (state, action) => {
+			state.status = "idle"
+		}
+	}
 });
 
-export const { addFilter, removeFilter, addCategory } = searchSlice.actions;
+export const { addFilter, removeFilter, addCategory, updateSearch } = searchSlice.actions;
 
 export default searchSlice.reducer;

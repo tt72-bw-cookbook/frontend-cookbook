@@ -5,6 +5,7 @@ import { addCategory, addFilter, removeFilter } from "../slice/searchSlice";
 
 const CheckboxGroup = props => {
 	const search = useSelector(state => state.search);
+	const { facets } = search.static;
 	const dispatch = useDispatch();
 	const [filter, setFilter] = useState("");
 
@@ -35,7 +36,7 @@ const CheckboxGroup = props => {
 			<OptionsContainer>
 				{
 					// for each [key, value] pair in `search.facets`, return the following
-					Object.entries(search.facets).map(([categoryKey, categoryValue]) => {
+					Object.entries(facets).map(([categoryKey, categoryValue]) => {
 						return (
 							<div
 								// for example: categoryKey=course, categoryValue={object_corresponding_to_category_key}
@@ -65,50 +66,51 @@ const CheckboxGroup = props => {
 
 				{
 					/**
+					 * ? note on the following block of code
 					 * this code will only be implemented if the updated backend is implemented. otherwise, use the code above
 					 * remove `false &&` on the line **following** the next if you'd like to render the following code. (i.e. if this line is 70 remove line 72)
 					 */
-					false &&
-					Object.entries(search.facets).map(([categoryKey, categoryValue]) => {
-						return (
-							<div
-								key={`${categoryKey},${categoryValue}`}
-								className="filter-group"
-								onClick={() => handleOptionClick(categoryKey)}
-							>
-								<h3>{categoryValue["_name"] ?? categoryKey}</h3>
-								{
-									categoryValue
-										? <SCheckContainer shown={filter === categoryKey}>
-											{
-												Object.entries(categoryValue).map(([optionKey, optionValue]) => {
-													if (optionKey !== "_name") {
-														return (
-															<CheckPair key={`${categoryKey},${optionKey}`}>
-																<label htmlFor={optionKey}>
-																	<input
-																		type="checkbox"
-																		checked={search.activeFacets.some(e => e.id === optionKey)}
-																		onChange={handleCheck}
-																		key={optionKey}
-																		name={`${categoryKey},${optionKey}`}
-																		id={optionKey}
-																	/>
-																	{optionValue.name ?? optionKey}
-																</label>
-															</CheckPair>
-														)
-													} else {
-														return null;
-													}
-												})
-											}
-										</SCheckContainer>
-										: null
-								}
-							</div>
-						)
-					})
+					// false &&
+					// Object.entries(facets).map(([categoryKey, categoryValue]) => {
+					// 	return (
+					// 		<div
+					// 			key={`${categoryKey},${categoryValue}`}
+					// 			className="filter-group"
+					// 			onClick={() => handleOptionClick(categoryKey)}
+					// 		>
+					// 			<h3>{categoryValue["_name"] ?? categoryKey}</h3>
+					// 			{
+					// 				categoryValue
+					// 					? <SCheckContainer shown={filter === categoryKey}>
+					// 						{
+					// 							Object.entries(categoryValue).map(([optionKey, optionValue]) => {
+					// 								if (optionKey !== "_name") {
+					// 									return (
+					// 										<CheckPair key={`${categoryKey},${optionKey}`}>
+					// 											<label htmlFor={optionKey}>
+					// 												<input
+					// 													type="checkbox"
+					// 													checked={search.activeFacets.some(e => e.id === optionKey)}
+					// 													onChange={handleCheck}
+					// 													key={optionKey}
+					// 													name={`${categoryKey},${optionKey}`}
+					// 													id={optionKey}
+					// 												/>
+					// 												{optionValue.name ?? optionKey}
+					// 											</label>
+					// 										</CheckPair>
+					// 									)
+					// 								} else {
+					// 									return null;
+					// 								}
+					// 							})
+					// 						}
+					// 					</SCheckContainer>
+					// 					: null
+					// 			}
+					// 		</div>
+					// 	)
+					// })
 				}
 			</OptionsContainer>
 		</>
