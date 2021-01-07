@@ -15,6 +15,7 @@ import { Link } from "../../common/components/";
 const initialFormValues = {
 	// gen Info
 	title: '',
+	image: '',
 	source: '',
 	// private check
 	private: true,
@@ -123,6 +124,7 @@ const ProfilePageContainer = props => {
 	const formSubmit = () => {
 		const newRecipe = {
 			title: formValues.title.trim(),
+			image: formValues.image.trim(),
 			source: formValues.source.trim(),
 			ingredients: formValues.ingredients,
 			categories: formValues.categories,
