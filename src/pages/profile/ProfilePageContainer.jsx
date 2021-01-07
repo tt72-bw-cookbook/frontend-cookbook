@@ -6,11 +6,11 @@ import React, { useState, useEffect } from "react";
 import { Route, Link, Switch } from 'react-router-dom';
 import ProfilePageRecipes from './ProfilePageRecipes';
 import AddRecipeForm from './components/AddRecipeForm';
-
-const userURL = 'https://tt72-cookbook.herokuapp.com/users/current';
-import ProfilePageRecipes from './ProfilePageRecipes';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchUserLogout, fetchCurrentUser } from '../../store/vanillaRedux/actions/index';
+
+
+const userURL = 'https://tt72-cookbook.herokuapp.com/users/current';
 
 const initialFormValues = {
 	// gen Info
@@ -65,7 +65,7 @@ const ProfilePageContainer = props => {
 		// console.log(user);
 	}, [willLoad])
 
-	const [user, setUser] = useState(null)
+	// const [user, setUser] = useState(null)
 	const [recipes, setRecipes] = useState(initialRecipes)
 	const [formValues, setFormValues] = useState(initialFormValues)
 	const [formErrors, setFormErrors] = useState(initialFormErrors)
