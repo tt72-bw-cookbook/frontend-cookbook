@@ -1,6 +1,5 @@
 import styled from "styled-components";
 import { Header } from "../../common/components";
-<<<<<<< HEAD
 import { axiosAuth } from "../../utils";
 import axios from 'axios';
 import React, { useState, useEffect } from "react";
@@ -9,12 +8,9 @@ import ProfilePageRecipes from './ProfilePageRecipes';
 import AddRecipeForm from './components/AddRecipeForm';
 
 const userURL = 'https://tt72-cookbook.herokuapp.com/users/current';
-=======
-import React, { useEffect } from "react";
 import ProfilePageRecipes from './ProfilePageRecipes';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchUserLogout, fetchCurrentUser } from '../../store/vanillaRedux/actions/index';
->>>>>>> 96c4fb0bfaac3720275cba07da9263b042864ae6
 
 const initialFormValues = {
 	// gen Info
@@ -54,24 +50,6 @@ const initialRecipes = [];
 
 const ProfilePageContainer = props => {
 
-<<<<<<< HEAD
-	const [user, setUser] = useState(null)
-	const [recipes, setRecipes] = useState(initialRecipes)
-	const [formValues, setFormValues] = useState(initialFormValues)
-	const [formErrors, setFormErrors] = useState(initialFormErrors)
-
-	useEffect(() => {
-		if (!user) {
-			axiosAuth()
-				.get(userURL)
-				.then((res) => {
-					console.log(res.data)
-					setUser(res.data)
-				})
-				.catch((err) => {
-					console.log(err)
-				})
-=======
 	const dispatch = useDispatch();
 
 	const user = useSelector(state => state.user.userData);
@@ -82,12 +60,15 @@ const ProfilePageContainer = props => {
 	useEffect(()=> {
 		if (willLoad) {
 			dispatch(fetchCurrentUser());
->>>>>>> 96c4fb0bfaac3720275cba07da9263b042864ae6
 		}
 		willLoad = false
 		// console.log(user);
 	}, [willLoad])
 
+	const [user, setUser] = useState(null)
+	const [recipes, setRecipes] = useState(initialRecipes)
+	const [formValues, setFormValues] = useState(initialFormValues)
+	const [formErrors, setFormErrors] = useState(initialFormErrors)
 
 
 	const postNewRecipe = newRecipe => {
@@ -190,14 +171,11 @@ const ProfilePageContainer = props => {
 		return <h1>No user found</h1>
 	}
 
-<<<<<<< HEAD
 	//need a <router> on this page? 
 	//need ./pizza/add  or /add
-=======
 	const handleLogout = () => {
 		dispatch(fetchUserLogout());
 	}
->>>>>>> 96c4fb0bfaac3720275cba07da9263b042864ae6
 
 	return (
 		<>
@@ -210,7 +188,6 @@ const ProfilePageContainer = props => {
 					<h3> Email: {user.email ?? "unknown"} </h3>
 					<h3> Since: {date ? date[0] : "unknown"}</h3>
 				</UserInfo>
-<<<<<<< HEAD
 				<NewRecipeButton disabled={!user}>
 					<Link to='./profile/add'>Add New Recipe</Link>
 				</NewRecipeButton>
@@ -230,10 +207,8 @@ const ProfilePageContainer = props => {
 						</Route>
 					</Switch>
 				</AddRecDiv>
-=======
 				<NewRecipeButton disabled={!user}> Add New Recipe </NewRecipeButton>
 				<button onClick={handleLogout}> Logout </button>
->>>>>>> 96c4fb0bfaac3720275cba07da9263b042864ae6
 				<ProfileH2>Your Recipes</ProfileH2>
 				<UserRecipes>
 					{
