@@ -6,7 +6,7 @@ import { Route, Switch } from 'react-router-dom';
 import ProfilePageRecipes from './ProfilePageRecipes';
 import AddRecipeForm from './components/AddRecipeForm';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchUserLogout, fetchCurrentUser } from '../../store/vanillaRedux/actions/index';
+import { fetchUserLogout, fetchCurrentUser, postUserRecipe } from '../../store/vanillaRedux/actions/index';
 import { Link } from "../../common/components/";
 
 
@@ -66,19 +66,25 @@ const ProfilePageContainer = props => {
 	const [formValues, setFormValues] = useState(initialFormValues)
 
 	const postNewRecipe = newRecipe => {
-		axiosAuth()
-			.post('https://tt72-cookbook.herokuapp.com/recipes/', newRecipe)
-			.then((res) => {
-				// console.log('post data', res.data);
-				setRecipes([res.data, ...recipes]);
-				setFormValues(initialFormValues);
-				console.log(res);
-			})
-			.catch((err) => {
-				// debugger;
-				console.error(err);
-			})
+		dispatch(postUserRecipe(newRecipe));
+		setRecipes([newRecipe, ...recipes]);
+		setFormValues(initialFormValues);
 	};
+
+	// const postNewRecipe = newRecipe => {
+	// 	axiosAuth()
+	// 		.post('https://tt72-cookbook.herokuapp.com/recipes/', newRecipe)
+	// 		.then((res) => {
+	// 			// console.log('post data', res.data);
+	// 			setRecipes([res.data, ...recipes]);
+	// 			setFormValues(initialFormValues);
+	// 			console.log(res);
+	// 		})
+	// 		.catch((err) => {
+	// 			// debugger;
+	// 			console.error(err);
+	// 		})
+	// };
 
 	const inputChange = (name, value, event) => {
 		setFormValues({
