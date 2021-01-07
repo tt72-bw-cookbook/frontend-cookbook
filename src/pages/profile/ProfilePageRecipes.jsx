@@ -5,14 +5,12 @@ import { deleteRecipeById } from '../../store/vanillaRedux/actions/index';
 import { useDispatch } from 'react-redux';
 
 const ProfilePageRecipes = props => {
-
-	const { userRecipes } = props
+	const { userRecipes } = props;
 	const dispatch = useDispatch();
 
 	const handleDelete = () => {
 		dispatch(deleteRecipeById(userRecipes.recipeid))
 		console.log(userRecipes.recipeid)
-		// window.location.reload();
 	}
 
 	return (
@@ -129,19 +127,5 @@ display: flex;
 padding: .3%;
 padding-left: 4%;
 `;
-
-const StyledBtn = styled.button`
-padding: 1%;
-background-color: #605e5c;
-width: 9%;
-border-radius: 10px;
-border: 0px solid black;
-color: white;
-&:hover {
-    background-color: #323130;
-}
-`
-
-
 
 export default ProfilePageRecipes;

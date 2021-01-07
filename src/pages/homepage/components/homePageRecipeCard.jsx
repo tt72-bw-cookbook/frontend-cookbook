@@ -8,30 +8,30 @@ const HomePageRecipeCard = props => {
 
 	return (
 		<>
-        
-        <RecipeH2>{recipe.title} </RecipeH2>
-        <RecipeCard>
-            <Link to={`/recipe/${id}`}>
-                <Recipeimg src = {recipe.pictureurl} />
-                {/* <RecipeH2>{recipes.title} </RecipeH2> */}
-                <CategDiv>
-                    <div>
-                        <h4> <CSpan> Course: </CSpan> {recipe.categories.course}</h4>
-                        <h4> <CSpan> Cuisine:  </CSpan> {recipe.categories.cuisine}</h4>
-                    </div>
-                    <div>
-                        <h4> <CSpan> Dietary: </CSpan> {recipe.categories.dietaryconcerns}</h4>
-                        <h4> <CSpan> Technique: </CSpan> {recipe.categories.technique}</h4>
-                    </div>
-                </CategDiv>
-                <hr></hr>
-                <RecipeDes> {recipe.instructions} </RecipeDes>
-            </Link>
-        </RecipeCard>
+
+			<RecipeH2>{recipe.title} </RecipeH2>
+			<RecipeCard>
+				<Link to={`/recipe/${id}`}>
+					<Recipeimg src={recipe.pictureurl} />
+					{/* <RecipeH2>{recipes.title} </RecipeH2> */}
+					<CategDiv>
+						<div>
+							<h4> <CSpan> Course: </CSpan> {recipe.categories.course}</h4>
+							<h4> <CSpan> Cuisine:  </CSpan> {recipe.categories.cuisine}</h4>
+						</div>
+						<div>
+							<h4> <CSpan> Dietary: </CSpan> {recipe.categories.dietaryconcerns}</h4>
+							<h4> <CSpan> Technique: </CSpan> {recipe.categories.technique}</h4>
+						</div>
+					</CategDiv>
+					<hr></hr>
+					<RecipeDes> {recipe.instructions} </RecipeDes>
+				</Link>
+			</RecipeCard>
 		</>
-    );
-    
-	
+	);
+
+
 
 };
 
