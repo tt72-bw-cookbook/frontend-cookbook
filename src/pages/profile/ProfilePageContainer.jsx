@@ -1,6 +1,5 @@
 import styled from "styled-components";
 import { Header } from "../../common/components";
-import { axiosAuth } from "../../utils";
 import React, { useState, useEffect } from "react";
 import { Route, Switch } from 'react-router-dom';
 import ProfilePageRecipes from './ProfilePageRecipes';

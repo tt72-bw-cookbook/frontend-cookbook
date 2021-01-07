@@ -1,29 +1,21 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
 import styled from "styled-components";
-import { Header } from "../../common/components/";
-import axios from 'axios';
+import { Header, Heading } from "../../common/components/";
 import { HomePageRecipes } from './components';
 import SearchContainer from "../search/SearchContainer";
-
-// GET Recipes data 
-const recipesURL = 'https://tt72-cookbook.herokuapp.com/recipes';
+import { fireSearch } from "../search/slice/searchSlice";
 
 const HomePageContainer = props => {
-	const [recipes, setRecipes] = useState([]);
+	const dispatch = useDispatch();
+	const searchState = useSelector(state => state.search)
+	const { search, recipeData } = searchState;
+
+	const recipes = recipeData.elements;
 
 	useEffect(() => {
-		axios
-			.get(recipesURL)
-			.then((res) => {
-				// console.log(res.data.elements)
-				setRecipes(res.data.elements)
-			})
-			.catch((err) => {
-				console.log(err)
-			})
-	}, [])
-
-
+		dispatch(fireSearch(search));
+	}, [dispatch, search])
 
 	return (
 		<>
@@ -32,9 +24,11 @@ const HomePageContainer = props => {
 			<HomeBody>
 				<RecipesContainer>
 					{
-						recipes.slice(0, 18).map(recipe => {
-							return <HomePageRecipes key={recipe.recipeid} recipes={recipe} />;
-						})
+						recipes.length > 0 ?
+							recipes.slice(0, 18).map(recipe => {
+								return <HomePageRecipes key={recipe.recipeid} recipes={recipe} />;
+							})
+							: <Heading h3>No recipes match that search!</Heading>
 					}
 				</RecipesContainer>
 			</HomeBody>
