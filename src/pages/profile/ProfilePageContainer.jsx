@@ -16,13 +16,13 @@ const initialFormValues = {
 	// private check
 	private: true,
 	// categories
-	categories: [{
+	categories: {
 		course: '',
 		cuisine: '',
 		dietaryconcerns: '',
 		dishtype: '',
 		technique: '',
-	}],
+		},
 	// ingredients
 	ingredients: [{
 		ingredientname: '',
@@ -68,18 +68,19 @@ const ProfilePageContainer = props => {
 
 
 	const postNewRecipe = newRecipe => {
-		axios
-			.post('https://tt72-cookbook.herokuapp.com/recipes', newRecipe)
+		axiosAuth()
+			.post('https://tt72-cookbook.herokuapp.com/recipes/', newRecipe)
 			.then((res) => {
+				console.log('post data', res.data);
 				setRecipes([res.data, ...recipes]);
 				setFormValues(initialFormValues);
 			})
 			.catch((err) => {
-				debugger;
+				// debugger;
 			})
 	};
 
-	const inputChange = (name, value) => {
+	const inputChange = (name, value, event) => {
 
 		// Yup
 		//   .reach(schema, name) //get to this part of the schema
@@ -106,15 +107,23 @@ const ProfilePageContainer = props => {
 		// 	values[index].measurement = event.target.value;
 		// }
 		// values
+		
 		setFormValues({
 			...formValues,
 			[name]: value,
 		})
+	
 	};
 
 	const ingredientChange = (name, value, index) => {
 		const values = { ...formValues }
 		values.ingredients[index][name] = value;
+		setFormValues(values);
+	}
+
+	const catChange = (name, value) => {
+		const values = { ...formValues }
+		values.categories[name] = value;
 		setFormValues(values);
 	}
 
@@ -135,16 +144,12 @@ const ProfilePageContainer = props => {
 	const formSubmit = () => {
 		const newRecipe = {
 			title: formValues.title.trim(),
-			source: formValues.size.trim(),
-			course: formValues.course.trim(),
-			cuisine: formValues.cuisine.trim(),
-			dietaryconcerns: formValues.dietaryconcerns.trim(),
-			dishtype: formValues.dishtype.trim(),
-			technique: formValues.technique.trim(),
-			ingredientname: formValues.ingredientname.trim(),
-			measurement: formValues.measurement.trim(),
+			source: formValues.source.trim(),
+			course: formValues.categories.course.trim(),
+			cuisine: formValues.categories.cuisine.trim(),
+			dietaryconcerns: formValues.categories.dietaryconcerns.trim(),
+			technique: formValues.categories.technique.trim(),
 			instructions: formValues.instructions.trim(),
-			specialInstructions: formValues.specialInstructions.trim(),
 		}
 		postNewRecipe(newRecipe);
 	}
@@ -179,7 +184,7 @@ const ProfilePageContainer = props => {
 				<NewRecipeButton disabled={!user}>
 					<Link to='./profile/add'>Add New Recipe</Link>
 				</NewRecipeButton>
-				<div>
+				<AddRecDiv>
 					<Switch>
 						<Route path='/profile/add'>
 							<AddRecipeForm
@@ -188,12 +193,13 @@ const ProfilePageContainer = props => {
 								errors={formErrors}
 								submit={formSubmit}
 								ingredientChange={ingredientChange}
+								catChange={catChange}
 								addField={handleAddFields}
 								remField={handleRemoveFields}
 							/>
 						</Route>
 					</Switch>
-				</div>
+				</AddRecDiv>
 				<ProfileH2>Your Recipes</ProfileH2>
 				<UserRecipes>
 					{
@@ -248,6 +254,14 @@ const NewRecipeButton = styled.button`
   margin: 2%;
   text-align: center;
   font-size: 14px;
+`;
+
+const AddRecDiv = styled.div`
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	padding: 2%;
+	width: 100%;
 `;
 
 const UserRecipes = styled.div`
