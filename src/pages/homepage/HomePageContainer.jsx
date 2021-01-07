@@ -23,6 +23,8 @@ const HomePageContainer = props => {
 			})
 	}, [])
 
+
+
 	return (
 		<>
 			<Header />
