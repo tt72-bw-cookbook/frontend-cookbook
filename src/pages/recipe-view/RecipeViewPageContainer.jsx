@@ -50,11 +50,11 @@ const RecipeViewPageContainer = (props) => {
 					recipes?.categories &&
 					<>
 						<div className="categories">
-							<p className="each-cat">course: {recipes.categories.course} </p>
-							<p className="each-cat">dishtype: {recipes.categories.dishtype} </p>
-							<p className="each-cat">cuisine: {recipes.categories.cuisine} </p>
-							<p className="each-cat">dietary-concerns: {recipes.categories.dietaryconcerns} </p>
-							<p className="each-cat">technique: {recipes.categories.technique} </p>
+							<p className="each-cat">Course: {recipes.categories.course} </p>
+							<p className="each-cat">Dishtype: {recipes.categories.dishtype} </p>
+							<p className="each-cat">Cuisine: {recipes.categories.cuisine} </p>
+							<p className="each-cat">Dietary-concerns: {recipes.categories.dietaryconcerns} </p>
+							<p className="each-cat">Technique: {recipes.categories.technique} </p>
 						</div>
 					</>
 				}
@@ -114,17 +114,18 @@ const StyledRecipes = styled.div`
 	}
 
 	.categories{
-		border: 1px solid red;
-		font-size: 1.4rem;
+		border: 5px solid #a09797;
+		font-size: 1.5rem;
 		font-weight: 550;
+		width: 55%;
 		display: flex;
-		flex-direction: row-row-reverse;
+		flex-direction: row;
 		justify-content: space-around;
 		/* word-spacing: 10px; */
 	}
-	 .each-cat{
+	 /* .each-cat{
 		text-indent: 5%;
-	}
+	} */
 	/* .each-cat{
 		justify-content: space-around;
 	} */
