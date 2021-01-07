@@ -1,14 +1,14 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import styled from "styled-components";
 import { Header, Heading } from "../../common/components/";
-import axios from 'axios';
+// import axios from 'axios';
 import { HomePageRecipes } from './components';
 import SearchContainer from "../search/SearchContainer";
 import { fireSearch } from "../search/slice/searchSlice";
 
 // GET Recipes data 
-const recipesURL = 'https://tt72-cookbook.herokuapp.com/recipes';
+// const recipesURL = 'https://tt72-cookbook.herokuapp.com/recipes';
 
 const HomePageContainer = props => {
 	const dispatch = useDispatch();
