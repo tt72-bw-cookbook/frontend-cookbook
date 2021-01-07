@@ -1,10 +1,19 @@
 import React from "react";
 import styled from "styled-components";
-
+import { Link } from "../../common/components/";
+import { deleteRecipeById } from '../../store/vanillaRedux/actions/index';
+import { useDispatch } from 'react-redux';
 
 const ProfilePageRecipes = props => {
 
-	const { userRecipes } = props
+    const { userRecipes } = props
+    const dispatch = useDispatch();
+
+    const handleDelete = () => {
+        dispatch(deleteRecipeById(userRecipes.recipeid))
+        console.log(userRecipes.recipeid)
+        window.location.reload();
+    }
 
 	return (
 		<>
@@ -37,7 +46,8 @@ const ProfilePageRecipes = props => {
 						})
 					}
 				</IngDiv>
-
+                <Link to='/profile/add'> Edit </Link>
+                <StyledBtn onClick={handleDelete}> Delete </StyledBtn>
 			</UserRecipeDiv>
 		</>
 	);
@@ -96,6 +106,18 @@ display: flex;
 padding: .3%;
 padding-left: 4%;
 `;
+
+const StyledBtn = styled.button`
+padding: 1%;
+background-color: #605e5c;
+width: 9%;
+border-radius: 10px;
+border: 0px solid black;
+color: white;
+&:hover {
+    background-color: #323130;
+}
+`
 
 
 
