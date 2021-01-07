@@ -1,4 +1,14 @@
 export const initialState = {
+	search: {
+		term: "",
+		categories: {},
+		sort: ""
+	},
+	searchData: {
+		searchTerm: "",
+		searchFacets: "",
+		sort: "",
+	},
 	activeFacets: [],
 	facets: {
 		course: {

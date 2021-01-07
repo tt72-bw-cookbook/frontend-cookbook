@@ -15,13 +15,15 @@ const HomePageContainer = props => {
 		axios
 			.get(recipesURL)
 			.then((res) => {
-				console.log(res.data.elements)
+				// console.log(res.data.elements)
 				setRecipes(res.data.elements)
 			})
 			.catch((err) => {
 				console.log(err)
 			})
 	}, [])
+
+
 
 	return (
 		<>
@@ -45,6 +47,13 @@ const HomeBody = styled.div`
 	flex-flow: column wrap;
 	justify-content: center;
 	align-items: center;
+	
+	h1 {
+		margin: 20rem;
+		font-size: 5rem;
+		font-weight: 800;
+		text-align: center;
+	}
 `;
 
 const RecipesContainer = styled.div`
