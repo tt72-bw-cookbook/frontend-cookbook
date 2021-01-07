@@ -23,7 +23,7 @@ const RecipeContain = styled.div`
     justify-content: space-evenly;
     width: 32.5%;
     background-color: white;
-    margin: .2%;
+    margin: .4%;
 `;
 
 export default HomePageRecipes;
