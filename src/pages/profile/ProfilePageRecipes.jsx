@@ -47,7 +47,7 @@ const ProfilePageRecipes = props => {
 					}
 				</IngDiv>
                 <Link to='/profile/add'> Edit </Link>
-                <button onClick={handleDelete}> Delete </button>
+                <StyledBtn onClick={handleDelete}> Delete </StyledBtn>
 			</UserRecipeDiv>
 		</>
 	);
@@ -106,6 +106,18 @@ display: flex;
 padding: .3%;
 padding-left: 4%;
 `;
+
+const StyledBtn = styled.button`
+padding: 1%;
+background-color: #605e5c;
+width: 9%;
+border-radius: 10px;
+border: 0px solid black;
+color: white;
+&:hover {
+    background-color: #323130;
+}
+`
 
 
 

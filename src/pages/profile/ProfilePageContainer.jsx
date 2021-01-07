@@ -185,7 +185,7 @@ const ProfilePageContainer = props => {
 						</Route>
 					</Switch>
 				</AddRecDiv>
-				<button onClick={handleLogout}> Logout </button>
+				<StyledBtn onClick={handleLogout}> Logout </StyledBtn>
 				<ProfileH2>Your Recipes</ProfileH2>
 				<UserRecipes>
 					{
@@ -253,6 +253,20 @@ const AddRecDiv = styled.div`
 const UserRecipes = styled.div`
 width: 90%;
 `;
+
+const StyledBtn = styled.button`
+font-size: 1.5rem;
+margin-top: -4%;
+padding: 1%;
+background-color: #605e5c;
+width: 8%;
+border-radius: 10px;
+border: 0px solid black;
+color: white;
+&:hover {
+    background-color: #323130;
+}
+`
 
 
 export default ProfilePageContainer;
