@@ -5,14 +5,12 @@ import { deleteRecipeById } from '../../store/vanillaRedux/actions/index';
 import { useDispatch } from 'react-redux';
 
 const ProfilePageRecipes = props => {
-
-	const { userRecipes } = props
+	const { userRecipes } = props;
 	const dispatch = useDispatch();
-
+	
 	const handleDelete = () => {
 		dispatch(deleteRecipeById(userRecipes.recipeid))
 		console.log(userRecipes.recipeid)
-		// window.location.reload();
 	}
 
 	return (

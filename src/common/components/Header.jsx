@@ -44,8 +44,7 @@ const Header = props => {
 					<Link secondary to={PATHS.HOMEPAGE_PATH}>Home</Link>
 					{
 						isLoggedIn
-							?
-							<>
+							? <>
 								<Link secondary to={"add"}>Add Recipe</Link>
 								<Link secondary to={PATHS.PROFILE_PATH}>Profile</Link>
 								<Button onClick={handleLogout}>Logout</Button>
@@ -55,9 +54,6 @@ const Header = props => {
 								<Link secondary to={PATHS.SIGNUP_PATH}>Signup</Link>
 							</>
 					}
-					{/* <Link to={PATHS.BROWSE_PATH}>Browse</Link> */}
-					{/* <Link to={PATHS.RECIPE_VIEW_PATH}>View Recipe</Link> */}
-
 				</nav>
 			</NavContainer>
 		</>
