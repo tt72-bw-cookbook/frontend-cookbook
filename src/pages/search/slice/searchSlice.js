@@ -5,32 +5,22 @@ import { initialState } from "./initState";
 export const fireSearch = createAsyncThunk(
 	"search/status",
 	async (search) => {
-
 		const { queryCategory, querySearch, categories } = search;
-
 		let finalQuery = "";
 		let categoryString = "";
-
 		Object.entries(categories).forEach(([ctg, opt]) => {
 			console.log(ctg, opt);
 			if (opt !== "") {
 				categoryString += `${ctg}=${opt}`;
 			}
 		})
-
 		if (querySearch !== "") {
 			finalQuery += `/${querySearch}`
 		}
 		if (categoryString !== "") {
 			finalQuery += `?${categoryString}`
 		}
-
-		let res = await axios.get(`https://tt72-cookbook.herokuapp.com/recipes${finalQuery}`);;
-		// if (finalQuery === "") {
-		// 	res = await axios.get(`https://tt72-cookbook.herokuapp.com/recipes/`);
-		// } else {
-		// 	res = await axios.get(`https://tt72-cookbook.herokuapp.com/recipes/${finalQuery}`);
-		// }
+		let res = await axios.get(`https://tt72-cookbook.herokuapp.com/recipes${finalQuery}`);
 		return res.data;
 	}
 )
@@ -107,14 +97,11 @@ const searchSlice = createSlice({
 		[fireSearch.fulfilled]: (state, action) => {
 			state.status = "fulfilled"
 			// console.log(action.payload)
-			state.searchData = action.payload;
+			state.recipeData = action.payload;
 		},
 		[fireSearch.rejected]: (state, action) => {
 			state.status = "rejected"
 			console.log(action.payload)
-		},
-		[fireSearch.resolved]: (state, action) => {
-			state.status = "idle"
 		}
 	}
 });

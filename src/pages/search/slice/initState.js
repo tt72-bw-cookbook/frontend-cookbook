@@ -1,6 +1,8 @@
 export const initialState = {
 
-	recipeData: {},
+	recipeData: {
+		elements: []
+	},
 	search: {
 		queryCategory: "",
 		querySearch: "",
