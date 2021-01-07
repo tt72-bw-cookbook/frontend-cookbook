@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import styled, { css } from "styled-components";
-import { addCategory, addFilter, removeFilter } from "../slice/searchSlice";
+import styled from "styled-components";
+import { addCategory } from "../slice/searchSlice";
 
 const CheckboxGroup = props => {
 	const search = useSelector(state => state.search);
@@ -17,14 +17,14 @@ const CheckboxGroup = props => {
 		}
 	}
 
-	const handleCheck = (evt) => {
-		const { name, checked } = evt.target;
-		if (checked) {
-			dispatch(addFilter(name))
-		} else {
-			dispatch(removeFilter(name))
-		}
-	}
+	// const handleCheck = (evt) => {
+	// 	const { name, checked } = evt.target;
+	// 	if (checked) {
+	// 		dispatch(addFilter(name))
+	// 	} else {
+	// 		dispatch(removeFilter(name))
+	// 	}
+	// }
 	const handleSelect = (evt) => {
 		const { name, value } = evt.target;
 		console.log({ name, value })
@@ -117,47 +117,47 @@ const CheckboxGroup = props => {
 	)
 }
 
-const CheckPair = styled.div`
-	display: flex;
-	flex-flow: row nowrap;
-	justify-content: flex-start;
-	align-items: flex-start;
-	border: 2px solid black;
-	padding: 1rem;
-	font-size: 1.8rem;
-	font-weight: 700;
-	input, label {
-		font-size: 2rem;
-	}
-`;
+// const CheckPair = styled.div`
+// 	display: flex;
+// 	flex-flow: row nowrap;
+// 	justify-content: flex-start;
+// 	align-items: flex-start;
+// 	border: 2px solid black;
+// 	padding: 1rem;
+// 	font-size: 1.8rem;
+// 	font-weight: 700;
+// 	input, label {
+// 		font-size: 2rem;
+// 	}
+// `;
 
-const SCheckContainer = styled.div`
-	${props => {
-		if (props.shown) {
-			return css`
-				display: flex;
-				opacity: 1;
-		`;
-		} else {
-			return css`
-				display: none;
-				max-height: 0;
-				opacity: 0;
-			`;
-		}
-	}};
-	transition: max-height 0s, opacity 0.25s ease-in;
-	flex-flow: column nowrap;
-	justify-content: center;
-	align-items: stretch;
-	overflow: hidden;
-	position: absolute;
-	background-color: #FFF;
-	color: black;
-	z-index: 9999;
-	width: 100%;
+// const SCheckContainer = styled.div`
+// 	${props => {
+// 		if (props.shown) {
+// 			return css`
+// 				display: flex;
+// 				opacity: 1;
+// 		`;
+// 		} else {
+// 			return css`
+// 				display: none;
+// 				max-height: 0;
+// 				opacity: 0;
+// 			`;
+// 		}
+// 	}};
+// 	transition: max-height 0s, opacity 0.25s ease-in;
+// 	flex-flow: column nowrap;
+// 	justify-content: center;
+// 	align-items: stretch;
+// 	overflow: hidden;
+// 	position: absolute;
+// 	background-color: #FFF;
+// 	color: black;
+// 	z-index: 9999;
+// 	width: 100%;
 
-`;
+// `;
 
 const OptionsContainer = styled.div`
 	display: flex;
