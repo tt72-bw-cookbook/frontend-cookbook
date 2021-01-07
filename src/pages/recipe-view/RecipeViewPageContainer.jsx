@@ -4,14 +4,11 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 
 const RecipeViewPageContainer = (props) => {
-	// const { recipeId } = props
-	const recipeId = 24
+
+
+	const recipeId = props?.match?.params?.id || 24;
 	const [recipes, setRecipes] = useState("")
-
-
 	const BASE_URL = 'https://tt72-cookbook.herokuapp.com'
-	// const number = Math.floor
-
 	useEffect(() => {
 		axios
 			.get(`${BASE_URL}/recipes/id/${recipeId}`)
@@ -37,7 +34,6 @@ const RecipeViewPageContainer = (props) => {
 					<h2>{recipes.title}</h2>
 					<p className="recipe-date"> Date created: {recipes.createdDate}</p>
 				</div>
-
 				{
 					recipes?.categories &&
 					<>
@@ -49,55 +45,27 @@ const RecipeViewPageContainer = (props) => {
 							<p>technique: {recipes.categories.technique} </p>
 						</div>
 					</>
-
 				}
-				{/* comment this bottom line when ready */}
-
-				{/* <img alt="recipeImage" src="https://images-gmi-pmc.edge-generalmills.com/087d17eb-500e-4b26-abd1-4f9ffa96a2c6.jpg" /> */}
-
 				<img alt="" src={recipes.pictureurl} />
-
-
-
-
-				{ }
 				<div className="ingdir">
-
 					{
 						recipes?.ingredients &&
 						<>
 							<div className="ingredients">
 								<h3>Ingredients</h3>
-
 								{recipes.ingredients.map(ingredient => {
 									return (<p key={ingredient.ingredientname}>{getIngredients(ingredient)}</p>);
 								})}
-
 							</div>
 						</>
 					}
-
-
-
-
-
 					<div className="directions">
 						<h3>Instructions</h3>
-
-						{/* <ol>
-							<li>List</li>
-						</ol> */}
 						<p>{recipes.instructions}</p>
 					</div>
-
-
 				</div>
-
-
-
 			</StyledRecipes>
 		</>
-
 	);
 }
 
@@ -106,10 +74,6 @@ export default RecipeViewPageContainer;
 
 
 const StyledRecipes = styled.div`
-	/* *{
-		border: 1px solid black;
-	} */
-
 	display: flex;
 	flex-direction: column;	
 	justify-content: center;
@@ -120,10 +84,6 @@ const StyledRecipes = styled.div`
 	text-align: center;
 	margin-top: 50px;
 	margin: 50px;
-
-	/* border-left: 1px  solid red;
-	border-right: 1px  solid red; */
-
 	.red-line{
 		border: 2px solid gray;
 	}
@@ -134,7 +94,6 @@ const StyledRecipes = styled.div`
 		text-align: center;
 		margin-top: -10px;
 	}
-
 	h2 {
 		margin: 5rem;
 		font-size: 5rem;
@@ -159,7 +118,6 @@ const StyledRecipes = styled.div`
 		margin-bottom: 2.5%;
 		
 	}
-
 	.ingdir{
 		border: 1px solid black;
 		width: 75%;
@@ -169,7 +127,6 @@ const StyledRecipes = styled.div`
 		border-radius: 10px;
 
 	}
-
 	.directions {
 		border-top: 3px solid gray;
 	}
@@ -180,13 +137,8 @@ const StyledRecipes = styled.div`
 		display: flex;
 		justify-content: space-between;
 	}
-
 	.recipe-date{
 		font-size: 1.3rem;
 		font-weight: 400px;
 	}
-	
-
-
-
-`;
+	`;

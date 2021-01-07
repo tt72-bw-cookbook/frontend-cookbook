@@ -13,6 +13,8 @@ const HomePageContainer = props => {
 
 	const recipes = recipeData.elements;
 
+
+
 	useEffect(() => {
 		dispatch(fireSearch(search));
 	}, [dispatch, search])
@@ -25,8 +27,9 @@ const HomePageContainer = props => {
 				<RecipesContainer>
 					{
 						recipes.length > 0 ?
-							recipes.slice(0, 18).map(recipe => {
-								return <HomePageRecipes key={recipe.recipeid} recipes={recipe} />;
+							// recipes.slice(0, 18)
+							recipes.map(recipe => {
+								return (<HomePageRecipes key={recipe.recipeid} recipe={recipe} />);
 							})
 							: <Heading h3>No recipes match that search!</Heading>
 					}

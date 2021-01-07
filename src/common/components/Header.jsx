@@ -35,6 +35,7 @@ const Header = props => {
 					{/* <Link to={PATHS.BROWSE_PATH}>Browse</Link> */}
 					<Link to={PATHS.PROFILE_PATH}>Profile</Link>
 					<Link to={PATHS.RECIPE_VIEW_PATH}>View Recipe</Link>
+					
 				</nav>
 			</NavContainer>
 		</>
