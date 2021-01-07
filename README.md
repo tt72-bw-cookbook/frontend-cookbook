@@ -18,7 +18,7 @@
 - Wait for a review; once your changes are reviewed, the reviewer will MERGE and DELETE your branch.
 - boom, done
 
-test change #4 — changed CI=false in Env.Variables Vercel Settings
+test change #5 — looks like I'm not retiring
 
 ## Auto-Generated README
 
