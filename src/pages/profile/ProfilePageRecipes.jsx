@@ -12,6 +12,8 @@ const ProfilePageRecipes = props => {
         <RecipeGenInfo>
             <RecipeImg src = {userRecipes.pictureurl} />
             <RecipeTitle> {userRecipes.title} </RecipeTitle>
+            {
+                userRecipes.categories && 
             <CatDiv>
                 <h4> Source: {userRecipes.source} </h4>
                 <h4> Course: {userRecipes.categories.course} </h4>
@@ -20,6 +22,7 @@ const ProfilePageRecipes = props => {
                 <h4> Type: {userRecipes.categories.dishtype} </h4>
                 <h4> Technique: {userRecipes.categories.technique} </h4>
             </CatDiv>
+            }
             <RecInstruct> {userRecipes.instructions} </RecInstruct>
         </RecipeGenInfo>
        <IngDiv>
