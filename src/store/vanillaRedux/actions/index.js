@@ -102,17 +102,17 @@ export const postUserLogin = (username, password) => {
 }
 
 export const confirmUserLoggedIn = () => {
-  return({
-    type: CONFIRM_LOGGED_IN,
-    payload: true
-  })
+	return ({
+		type: CONFIRM_LOGGED_IN,
+		payload: true
+	})
 }
 
 export const rejectUserLoggedIn = () => {
-  return({
-    type: REJECT_LOGGED_IN,
-    payload: false
-  })
+	return ({
+		type: REJECT_LOGGED_IN,
+		payload: false
+	})
 }
 
 //implemented
@@ -167,6 +167,23 @@ export const deleteRecipeById = (id) => {
 					type: DELETE_RECIPE_BY_ID_SUCCESS,
 					payload: res.data
 				})
+				// dispatch({ type: FETCH_CURRENT_USER_RECIPES_START });
+
+				// axiosAuth().get('recipes/currentuser')
+				// 	.then((res) => {
+				// 		dispatch({
+				// 			type: FETCH_CURRENT_USER_RECIPES_SUCCESS,
+				// 			payload: res.data
+				// 		})
+				// 	})
+				// 	.catch((err) => {
+				// 		dispatch({
+				// 			type: FETCH_CURRENT_USER_RECIPES_FAILURE,
+				// 			payload: err.message
+				// 		})
+				// 	})
+
+				window.location.reload();
 			})
 			.catch((err) => {
 				dispatch({
@@ -198,25 +215,25 @@ export const putRecipeById = (id, updateFields) => {
 }
 
 export const postNewUser = (newUser) => {
-  return (dispatch) => {
-    dispatch({ type: POST_NEW_USER_START });
+	return (dispatch) => {
+		dispatch({ type: POST_NEW_USER_START });
 
-    axios.post('https://tt72-cookbook.herokuapp.com/createnewuser', newUser)
-      .then((res) => {
-        const stringifiedToken = JSON.stringify(res.data.access_token)
+		axios.post('https://tt72-cookbook.herokuapp.com/createnewuser', newUser)
+			.then((res) => {
+				const stringifiedToken = JSON.stringify(res.data.access_token)
 				window.localStorage.setItem('token', stringifiedToken)
-        dispatch({
-          type: POST_NEW_USER_SUCCESS,
-          payload: res.data.access_token
-        })
-      })
-      .catch((err) => {
-        dispatch({
-          type: POST_NEW_USER_FAILURE,
-          payload: err.message
-        })
-      })
-  }
+				dispatch({
+					type: POST_NEW_USER_SUCCESS,
+					payload: res.data.access_token
+				})
+			})
+			.catch((err) => {
+				dispatch({
+					type: POST_NEW_USER_FAILURE,
+					payload: err.message
+				})
+			})
+	}
 }
 
 

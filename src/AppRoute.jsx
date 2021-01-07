@@ -7,9 +7,9 @@ const AppRoute = ({ component: Component, path, isPrivate = false, ...rest }) =>
 	const isLoggedIn = useSelector(state => state.user.isLoggedIn)
 	return (
 		<Route path={path}
-			render={() => isPrivate && !isLoggedIn ?
-				<Redirect to="/" />
-				: <Component {...rest} />
+			render={(props) => isPrivate && !isLoggedIn
+				? <Redirect to="/" />
+				: <Component {...props} />
 			}
 			{...rest}
 		/>

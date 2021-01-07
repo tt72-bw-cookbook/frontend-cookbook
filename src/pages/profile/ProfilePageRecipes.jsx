@@ -1,19 +1,19 @@
 import React from "react";
 import styled from "styled-components";
-import { Link } from "../../common/components/";
+import { Link, Button } from "../../common/components/";
 import { deleteRecipeById } from '../../store/vanillaRedux/actions/index';
 import { useDispatch } from 'react-redux';
 
 const ProfilePageRecipes = props => {
 
-    const { userRecipes } = props
-    const dispatch = useDispatch();
+	const { userRecipes } = props
+	const dispatch = useDispatch();
 
-    const handleDelete = () => {
-        dispatch(deleteRecipeById(userRecipes.recipeid))
-        console.log(userRecipes.recipeid)
-        window.location.reload();
-    }
+	const handleDelete = () => {
+		dispatch(deleteRecipeById(userRecipes.recipeid))
+		console.log(userRecipes.recipeid)
+		// window.location.reload();
+	}
 
 	return (
 		<>
@@ -45,8 +45,8 @@ const ProfilePageRecipes = props => {
 						})
 					}
 				</IngDiv>
-                <Link to='/profile/add'> Edit </Link>
-                <StyledBtn onClick={handleDelete}> Delete </StyledBtn>
+				<Link secondary to={`/form/${userRecipes.recipeid}`}> Edit </Link>
+				<Button onClick={handleDelete}> Delete </Button>
 			</UserRecipeDiv>
 		</>
 	);

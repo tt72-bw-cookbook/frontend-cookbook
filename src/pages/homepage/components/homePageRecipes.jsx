@@ -1,20 +1,19 @@
 import React from "react";
+// import { Link } from "react-router-dom";
 import styled from "styled-components";
 import HomePageRecipeCard from './homePageRecipeCard';
 
 
-const HomePageRecipes= props => {
+const HomePageRecipes = props => {
 
-    const { recipes } = props
+	const { recipe } = props
 
 	return (
-		<>
-    <RecipeContain>
-        <HomePageRecipeCard recipes={recipes} />
-    </RecipeContain>
-		</>
-    );
-    
+		<RecipeContain>
+			<HomePageRecipeCard recipe={recipe} />
+		</RecipeContain>
+	);
+
 };
 
 const RecipeContain = styled.div`
