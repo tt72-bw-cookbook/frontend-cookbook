@@ -57,7 +57,7 @@ const RecipesContainer = styled.div`
 	display: flex;
 	flex-flow: wrap;
 	justify-content: space-evenly;
-	width: 90%;
+	width: 96%;
 	padding-top: 1%;
 `;
 

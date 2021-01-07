@@ -63,22 +63,72 @@ const ProfileBody = styled.div`
 		text-transform: uppercase;
 	}
 `;
-
-const ProfileH2 = styled.h2`
-	font-size: 2.5rem;
-	text-align: center;
-	padding: 1%;
-`;
-
-const UserInfo = styled.div`
-	display: flex;
-	flex-direction: column;
+const Info = styled.div`
+	border-top: 1px solid black;
+	border-bottom: 1px solid black;
+	width: 100vw;
+	display: flex:
+	flex-direction: column:
 	align-items: center;
 `;
 
+const ProfileH2 = styled.h2`
+font-size: 3rem;
+text-align: center;
+Padding: 1%;
+font-family: 'Alegreya', serif;
+`;
+
+const UserInfo = styled.div`
+display: flex;
+flex-direction: column;
+align-items: center;
+width: 100%;
+h1{
+	font-family: 'Alegreya', serif;
+	font-size: 5rem;
+}
+h3{
+	font-size: 2rem;
+	font-family: 'Alegreya', serif;
+}
+div{
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between:
+}
+`;
+
 const UserImg = styled.img`
-	height: 200px;
-	width: 300px;
+min-height: 100%;
+max-height: 100%;
+width: auto;
+max-width: 100%;
+margin: 0 auto;
+display: block;
+border: 1px solid #a53636;
+border-radius: 25px;
+`;
+
+// const NewRecipeButton = styled.button`
+//   background-color: skyblue;
+//   color: white;
+//   padding: 12px 30px;
+//   margin: 2%;
+//   text-align: center;
+//   font-size: 14px;
+// `;
+
+// const AddRecDiv = styled.div`
+// 	display: flex;
+// 	justify-content: center;
+// 	align-items: center;
+// 	padding: 2%;
+// 	width: 100%;
+// `;
+
+const AddRecDiv = styled.div`
+	
 `;
 
 const UserRecipes = styled.div`
