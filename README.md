@@ -1,13 +1,14 @@
 # frontend-cookbook
 
 ## Team Git flow
+
 - `git checkout main`
 - `git pull origin main — everything up to date on your local repo`
-- `git checkout -b feature/whatever-youre-working-on`
+- `git checkout -b feature/whatever-you-are-working-on`
 - Make one test change
 - `git add .`
 - `git commit -m "initial commit"`
-- `git push origin feature/whatever-youre-working-on`
+- `git push origin feature/whatever-you-are-working-on`
 - Make a draft Pull Request
 - Do a lot of work
 - `git add .` and `git commit -m "helpful comment"` throughout
@@ -18,7 +19,10 @@
 - Wait for a review; once your changes are reviewed, the reviewer will MERGE and DELETE your branch.
 - boom, done
 
+test change #5 — looks like I'm not retiring
+
 ## Auto-Generated README
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app), using the [Redux](https://redux.js.org/) and [Redux Toolkit](https://redux-toolkit.js.org/) template.
 
 ## Available Scripts
@@ -27,23 +31,26 @@ In the project directory, you can run:
 
 ### `yarn start`
 
-Runs the app in the development mode.<br />
+Runs the app in the development mode.
 Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
-The page will reload if you make edits.<br />
+The page will reload if you make edits.
 You will also see any lint errors in the console.
 
 ### `yarn test`
 
-Launches the test runner in the interactive watch mode.<br />
+Launches the test runner in the interactive watch mode.
+
 See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
 
 ### `yarn build`
 
-Builds the app for production to the `build` folder.<br />
+Builds the app for production to the `build` folder.
+
 It correctly bundles React in production mode and optimizes the build for the best performance.
 
-The build is minified and the filenames include the hashes.<br />
+The build is minified and the filenames include the hashes.
+
 Your app is ready to be deployed!
 
 See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
@@ -66,26 +73,26 @@ To learn React, check out the [React documentation](https://reactjs.org/).
 
 ### Code Splitting
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
+This section has moved here: [LINK TO CODE SPLITTING](https://facebook.github.io/create-react-app/docs/code-splitting)
 
 ### Analyzing the Bundle Size
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
+This section has moved here: [LINK TO ANALYZING THE BUNDLE SIZE](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
 
 ### Making a Progressive Web App
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
+This section has moved here: [LINK TO MAKING A PROGRESSIVE WEB APP](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
 
 ### Advanced Configuration
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
+This section has moved here: [LINK TO ADVANCED CONFIG](https://facebook.github.io/create-react-app/docs/advanced-configuration)
 
 ### Deployment
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
+This section has moved here: [LINK TO DEPLOYMENT](https://facebook.github.io/create-react-app/docs/deployment)
 
 ### `yarn build` fails to minify
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+This section has moved here: [LINK TO `YARN BUILD` FAILS TO MINIFY](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
 
 mike test test test

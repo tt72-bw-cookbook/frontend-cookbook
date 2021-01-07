@@ -10,7 +10,7 @@ import { fetchUserLogout, fetchCurrentUser } from '../../store/vanillaRedux/acti
 import { Link } from "../../common/components/";
 
 
-const userURL = 'https://tt72-cookbook.herokuapp.com/users/current';
+// const userURL = 'https://tt72-cookbook.herokuapp.com/users/current';
 
 const initialFormValues = {
 	// gen Info
@@ -36,13 +36,13 @@ const initialFormValues = {
 	instructions: '',
 }
 
-const initialFormErrors = {
-	title: '',
-	source: '',
-	ingredientname: '',
-	measurement: '',
-	instructions: '',
-}
+// const initialFormErrors = {
+// 	title: '',
+// 	source: '',
+// 	ingredientname: '',
+// 	measurement: '',
+// 	instructions: '',
+// }
 
 const initialRecipes = [];
 
@@ -55,21 +55,15 @@ const ProfilePageContainer = props => {
 	const user = useSelector(state => state.user.userData);
 	// const { userData, isLoading } = userState
 	// const user = userData
-	let willLoad = true
+
 
 	useEffect(() => {
-		if (willLoad) {
-			dispatch(fetchCurrentUser());
-		}
-		willLoad = false
-		// console.log(user);
-	}, [willLoad])
+		dispatch(fetchCurrentUser());
+	}, [dispatch])
 
 	// const [user, setUser] = useState(null)
 	const [recipes, setRecipes] = useState(initialRecipes)
 	const [formValues, setFormValues] = useState(initialFormValues)
-	const [formErrors, setFormErrors] = useState(initialFormErrors)
-
 
 	const postNewRecipe = newRecipe => {
 		axiosAuth()
@@ -175,7 +169,7 @@ const ProfilePageContainer = props => {
 							<AddRecipeForm
 								formValues={formValues}
 								change={inputChange}
-								errors={formErrors}
+
 								submit={formSubmit}
 								ingredientChange={ingredientChange}
 								catChange={catChange}
@@ -189,8 +183,8 @@ const ProfilePageContainer = props => {
 				<ProfileH2>Your Recipes</ProfileH2>
 				<UserRecipes>
 					{
-						user?.recipes && user.recipes.map(userRecipes => {
-							return <ProfilePageRecipes key={userRecipes.userRecipeid} userRecipes={userRecipes} />;
+						user?.recipes && user.recipes.map(recipe => {
+							return <ProfilePageRecipes key={recipe.recipeid} userRecipes={recipe} />;
 						})
 					}
 				</UserRecipes>
@@ -233,14 +227,14 @@ height: 200px;
 width: 300px;
 `;
 
-const NewRecipeButton = styled.button`
-  background-color: skyblue;
-  color: white;
-  padding: 12px 30px;
-  margin: 2%;
-  text-align: center;
-  font-size: 14px;
-`;
+// const NewRecipeButton = styled.button`
+//   background-color: skyblue;
+//   color: white;
+//   padding: 12px 30px;
+//   margin: 2%;
+//   text-align: center;
+//   font-size: 14px;
+// `;
 
 const AddRecDiv = styled.div`
 	display: flex;

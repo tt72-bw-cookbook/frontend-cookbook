@@ -1,14 +1,13 @@
-import React, { useState, useEffect, Fragment } from "react";
 import styled from "styled-components";
 
 const AddIngredientFrag = ({ formValue, index, addField, remField, ingredientChange }) => {
 	// const  = props;
 
-	const [ingValues, setIngValues] = useState({ name: "", measurement: "", quantity: -1 })
+	// const [ingValues, setIngValues] = useState({ name: "", measurement: "", quantity: -1 })
 
-	useEffect(() => {
-		console.log(formValue)
-	}, [])
+	// useEffect(() => {
+	// 	console.log(formValue)
+	// }, [])
 
 
 	const onChange = (evt) => {
@@ -82,7 +81,6 @@ const AddRecipeForm = props => {
 	const {
 		formValues,
 		change,
-		errors,
 		submit,
 		addField,
 		remField,
