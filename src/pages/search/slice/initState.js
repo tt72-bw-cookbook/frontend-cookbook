@@ -4,9 +4,7 @@ export const initialState = {
 		elements: []
 	},
 	search: {
-		// queryCategory: "",
 		querySearch: "",
-		// queryString: "",
 		categories: {},
 		sort: "",
 	},

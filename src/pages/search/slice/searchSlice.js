@@ -36,20 +36,11 @@ const searchSlice = createSlice({
 	reducers: {
 		updateSearch: (state, action) => {
 			const value = action.payload;
-			// state.search.querySearch = value.concat(state.search.querySearch);
 			state.search.querySearch = value;
 		},
 		addCategory: (state, action) => {
 			const { category, option } = action.payload;
 			state.search.categories[category] = option;
-			// if (state.search.queryCategory.includes(`${category}`)) {
-			// 	let idx = state.search.queryCategory.indexOf(`${category}`);
-			// 	idx += category.length + 1;
-			// 	state.search.queryCategory = replaceAt(state.search.queryCategory, idx, option)
-			// 	console.log(idx);
-			// } else {
-			// 	state.search.queryCategory += (`${category}=${option}`)
-			// }
 		},
 		addFilter: (state, action) => {
 			const [category, option] = action.payload.split(",");
@@ -92,11 +83,9 @@ const searchSlice = createSlice({
 	extraReducers: {
 		[fireSearch.pending]: (state, action) => {
 			state.status = "pending";
-			// console.log(action.payload)
 		},
 		[fireSearch.fulfilled]: (state, action) => {
 			state.status = "fulfilled"
-			// console.log(action.payload)
 			state.recipeData = action.payload;
 		},
 		[fireSearch.rejected]: (state, action) => {

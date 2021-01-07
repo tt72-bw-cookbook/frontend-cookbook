@@ -1,10 +1,8 @@
 import { useDispatch, useSelector } from "react-redux"
-import { useState } from "react"
-import { useForm } from "../../../common/hooks";
 import { updateSearch, fireSearch } from "../slice/searchSlice";
 import styled from "styled-components"
 
-const SearchBar = props => {
+const SearchBar = (props) => {
 	const searchTerm = useSelector(state => state.search.term);
 	const searchState = useSelector(state => state.search);
 	const dispatch = useDispatch();
@@ -12,19 +10,16 @@ const SearchBar = props => {
 	const handleChange = (evt) => {
 		const { value } = evt.target;
 		dispatch(updateSearch(value))
-
 	}
 	const onSubmit = (evt) => {
 		evt.preventDefault();
 		dispatch(fireSearch(searchState.search))
 	}
 
-
 	return (
 		<>
 			<Search>
 				<form onSubmit={onSubmit}>
-
 					<SearchInput
 						type="text"
 						name="searchWord"
