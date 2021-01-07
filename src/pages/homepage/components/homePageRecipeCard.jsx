@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import { Link } from "../../../common/components"
+import { Link } from "react-router-dom"
 
 const HomePageRecipeCard = props => {
 	const { recipe } = props
@@ -8,10 +8,11 @@ const HomePageRecipeCard = props => {
 
 	return (
 		<RecipeCard>
-			<Link to={`/recipe/${id}`}>Link to recipe {id}</Link>
-			<Recipeimg src={recipe.pictureurl} />
-			<RecipeH2>{recipe.title} </RecipeH2>
-			<RecipeDes> {recipe.instructions} </RecipeDes>
+			<Link to={`/recipe/${id}`}>
+				<Recipeimg src={recipe.pictureurl} />
+				<RecipeH2>{recipe.title} </RecipeH2>
+				<RecipeDes> {recipe.instructions} </RecipeDes>
+			</Link>
 		</RecipeCard >
 	);
 
