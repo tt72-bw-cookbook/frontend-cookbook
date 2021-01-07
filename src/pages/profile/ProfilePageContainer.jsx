@@ -1,9 +1,51 @@
 import styled from "styled-components";
 import { Header } from "../../common/components";
-import React, { useEffect } from "react";
+import { axiosAuth } from "../../utils";
+import axios from 'axios';
+import React, { useState, useEffect } from "react";
+import { Route, Link, Switch } from 'react-router-dom';
 import ProfilePageRecipes from './ProfilePageRecipes';
+import AddRecipeForm from './components/AddRecipeForm';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchUserLogout, fetchCurrentUser } from '../../store/vanillaRedux/actions/index';
+
+
+const userURL = 'https://tt72-cookbook.herokuapp.com/users/current';
+
+const initialFormValues = {
+	// gen Info
+	title: '',
+	source: '',
+	// private check
+	private: true,
+	// categories
+	categories: {
+		course: '',
+		cuisine: '',
+		dietaryconcerns: '',
+		dishtype: '',
+		technique: '',
+		},
+	// ingredients
+	ingredients: [{
+		ingredientname: '',
+		measurement: '',
+		quantity: 0,
+	}],
+	// instructions
+	instructions: '',
+}
+
+const initialFormErrors = {
+	title: '',
+	source: '',
+	ingredientname: '',
+	measurement: '',
+	instructions: '',
+}
+
+const initialRecipes = [];
+
 
 
 const ProfilePageContainer = props => {
@@ -23,6 +65,102 @@ const ProfilePageContainer = props => {
 		// console.log(user);
 	}, [willLoad])
 
+	// const [user, setUser] = useState(null)
+	const [recipes, setRecipes] = useState(initialRecipes)
+	const [formValues, setFormValues] = useState(initialFormValues)
+	const [formErrors, setFormErrors] = useState(initialFormErrors)
+
+
+	const postNewRecipe = newRecipe => {
+		axiosAuth()
+			.post('https://tt72-cookbook.herokuapp.com/recipes/', newRecipe)
+			.then((res) => {
+				console.log('post data', res.data);
+				setRecipes([res.data, ...recipes]);
+				setFormValues(initialFormValues);
+			})
+			.catch((err) => {
+				// debugger;
+			})
+	};
+
+	const inputChange = (name, value, event) => {
+
+		// Yup
+		//   .reach(schema, name) //get to this part of the schema
+		//   .validate(value) //validate this value
+		//   .then(() => {
+		// 	setFormErrors({
+		// 	  ...formErrors,
+		// 	  [name]: '',
+		// 	})
+		//   })
+		//   .catch((err) => {
+		// 	setFormErrors({
+		// 	  ...formErrors,
+		// 	  [name]: err.errors[0],
+		// 	})
+		//   })
+
+
+		// const values = [...formValues];
+		// if (event.target.name === 'ingredientname') {
+		// 	values[index].ingredientname = event.target.value;
+		// }
+		// else if (event.target.name === 'measurement') {
+		// 	values[index].measurement = event.target.value;
+		// }
+		// values
+		
+		setFormValues({
+			...formValues,
+			[name]: value,
+		})
+	
+	};
+
+	const ingredientChange = (name, value, index) => {
+		const values = { ...formValues }
+		values.ingredients[index][name] = value;
+		setFormValues(values);
+	}
+
+	const catChange = (name, value) => {
+		const values = { ...formValues }
+		values.categories[name] = value;
+		setFormValues(values);
+	}
+
+	const handleAddFields = () => {
+		// const values = [...formValues];
+		const values = { ...formValues };
+		values.ingredients.push({ ingredientname: '', measurement: '' });
+		setFormValues(values);
+	};
+
+	const handleRemoveFields = index => {
+		// const values = [...formValues];
+		const values = { ...formValues };
+		values.ingredients.splice(index, 1);
+		setFormValues(values);
+	};
+
+	const formSubmit = () => {
+		const newRecipe = {
+			title: formValues.title.trim(),
+			source: formValues.source.trim(),
+			course: formValues.categories.course.trim(),
+			cuisine: formValues.categories.cuisine.trim(),
+			dietaryconcerns: formValues.categories.dietaryconcerns.trim(),
+			technique: formValues.categories.technique.trim(),
+			instructions: formValues.instructions.trim(),
+		}
+		postNewRecipe(newRecipe);
+	}
+
+
+
+
 
 	const date = user?.createdDate?.split(' ');
 
@@ -33,6 +171,8 @@ const ProfilePageContainer = props => {
 		return <h1>No user found</h1>
 	}
 
+	//need a <router> on this page? 
+	//need ./pizza/add  or /add
 	const handleLogout = () => {
 		dispatch(fetchUserLogout());
 	}
@@ -48,6 +188,25 @@ const ProfilePageContainer = props => {
 					<h3> Email: {user.email ?? "unknown"} </h3>
 					<h3> Since: {date ? date[0] : "unknown"}</h3>
 				</UserInfo>
+				<NewRecipeButton disabled={!user}>
+					<Link to='./profile/add'>Add New Recipe</Link>
+				</NewRecipeButton>
+				<AddRecDiv>
+					<Switch>
+						<Route path='/profile/add'>
+							<AddRecipeForm
+								formValues={formValues}
+								change={inputChange}
+								errors={formErrors}
+								submit={formSubmit}
+								ingredientChange={ingredientChange}
+								catChange={catChange}
+								addField={handleAddFields}
+								remField={handleRemoveFields}
+							/>
+						</Route>
+					</Switch>
+				</AddRecDiv>
 				<NewRecipeButton disabled={!user}> Add New Recipe </NewRecipeButton>
 				<button onClick={handleLogout}> Logout </button>
 				<ProfileH2>Your Recipes</ProfileH2>
@@ -104,6 +263,14 @@ const NewRecipeButton = styled.button`
   margin: 2%;
   text-align: center;
   font-size: 14px;
+`;
+
+const AddRecDiv = styled.div`
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	padding: 2%;
+	width: 100%;
 `;
 
 const UserRecipes = styled.div`
