@@ -1,44 +1,57 @@
 import React from "react";
 import styled from "styled-components";
-
+import { Link } from "../../common/components/";
+import { deleteRecipeById } from '../../store/vanillaRedux/actions/index';
+import { useDispatch } from 'react-redux';
 
 const ProfilePageRecipes = props => {
 
     const { userRecipes } = props
+    const dispatch = useDispatch();
+
+    const handleDelete = () => {
+        dispatch(deleteRecipeById(userRecipes.recipeid))
+        console.log(userRecipes.recipeid)
+        window.location.reload();
+    }
 
 	return (
 		<>
-    <UserRecipeDiv>
-        <RecipeGenInfo>
-            <RecipeImg src = {userRecipes.pictureurl} />
-            <RecipeTitle> {userRecipes.title} </RecipeTitle>
-            <CatDiv>
-                <h4> Source: {userRecipes.source} </h4>
-                <h4> Course: {userRecipes.categories.course} </h4>
-                <h4> Cuisine: {userRecipes.categories.cuisine} </h4>
-                <h4> Diet: {userRecipes.categories.dietaryconcerns} </h4>
-                <h4> Type: {userRecipes.categories.dishtype} </h4>
-                <h4> Technique: {userRecipes.categories.technique} </h4>
-            </CatDiv>
-            <RecInstruct> {userRecipes.instructions} </RecInstruct>
-        </RecipeGenInfo>
-       <IngDiv>
-           <IngH3>Ingredients:</IngH3>
-            {
-                userRecipes.ingredients.map(ing => {
-                    return <EachIngDiv>
-                        <ul>
-                            <li>{ing.ingredientname}: {ing.quantity} {ing.measurement}</li>
-                        </ul>
-                    </EachIngDiv>;
-                })
-            }
-       </IngDiv>
-       
-    </UserRecipeDiv>
+			<UserRecipeDiv>
+				<RecipeGenInfo>
+					<RecipeImg src={userRecipes.pictureurl} />
+					<RecipeTitle> {userRecipes.title} </RecipeTitle>
+					{
+						userRecipes.categories &&
+						<CatDiv>
+							<h4> Source: {userRecipes.source} </h4>
+							<h4> Course: {userRecipes.categories.course} </h4>
+							<h4> Cuisine: {userRecipes.categories.cuisine} </h4>
+							<h4> Diet: {userRecipes.categories.dietaryconcerns} </h4>
+							<h4> Type: {userRecipes.categories.dishtype} </h4>
+							<h4> Technique: {userRecipes.categories.technique} </h4>
+						</CatDiv>
+					}
+					<RecInstruct> {userRecipes.instructions} </RecInstruct>
+				</RecipeGenInfo>
+				<IngDiv>
+					<IngH3>Ingredients:</IngH3>
+					{
+						userRecipes.ingredients.map(ing => {
+							return (<EachIngDiv key={ing.ingredientname}>
+								<ul>
+									<li>{ing.ingredientname}: {ing.quantity} {ing.measurement}</li>
+								</ul>
+							</EachIngDiv>);
+						})
+					}
+				</IngDiv>
+                <Link to='/profile/add'> Edit </Link>
+                <StyledBtn onClick={handleDelete}> Delete </StyledBtn>
+			</UserRecipeDiv>
 		</>
-    );
-    
+	);
+
 };
 
 const UserRecipeDiv = styled.div`
@@ -93,6 +106,18 @@ display: flex;
 padding: .3%;
 padding-left: 4%;
 `;
+
+const StyledBtn = styled.button`
+padding: 1%;
+background-color: #605e5c;
+width: 9%;
+border-radius: 10px;
+border: 0px solid black;
+color: white;
+&:hover {
+    background-color: #323130;
+}
+`
 
 
 

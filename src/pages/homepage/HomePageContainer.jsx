@@ -15,13 +15,15 @@ const HomePageContainer = props => {
 		axios
 			.get(recipesURL)
 			.then((res) => {
-				console.log(res.data.elements)
+				// console.log(res.data.elements)
 				setRecipes(res.data.elements)
 			})
 			.catch((err) => {
 				console.log(err)
 			})
 	}, [])
+
+
 
 	return (
 		<>

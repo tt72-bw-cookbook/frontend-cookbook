@@ -1,20 +1,11 @@
 import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import styled, { css } from "styled-components";
-import { addFilter, removeFilter } from "../slice/searchSlice";
-
-const useActiveFilters = () => {
-	const [active, setActive] = useState([]);
-	const setActiveFilters = (name) => {
-		setActive(active.includes(name) ? active.filter(x => x !== name) : [...active, name]);
-	}
-	return [active, setActiveFilters];
-}
+import { addCategory, addFilter, removeFilter } from "../slice/searchSlice";
 
 const CheckboxGroup = props => {
 	const search = useSelector(state => state.search);
 	const dispatch = useDispatch();
-	const [activeFilters, setActiveFilters] = useActiveFilters();
 	const [filter, setFilter] = useState("");
 
 	const handleOptionClick = (name) => {
@@ -25,62 +16,85 @@ const CheckboxGroup = props => {
 		}
 	}
 
-	// const handleMouseIn = (name) => {
-	// 	if (filter !== name) {
-	// 		setFilter(name);
-	// 	}
-	// }
-	// const handleMouseOut = (name) => {
-	// 	if (filter === name) {
-	// 		setFilter("");
-	// 	}
-	// }
 	const handleCheck = (evt) => {
-		const { name, value, checked } = evt.target;
+		const { name, checked } = evt.target;
 		if (checked) {
 			dispatch(addFilter(name))
+		} else {
+			dispatch(removeFilter(name))
 		}
-
-		setActiveFilters(name);
+	}
+	const handleSelect = (evt) => {
+		const { name, value } = evt.target;
+		console.log({ name, value })
+		dispatch(addCategory({ category: name, option: value }))
 	}
 
 	return (
 		<>
 			<OptionsContainer>
 				{
-					Object.entries(search.facets).map(([k, v]) => {
+					Object.entries(search.facets).map(([categoryKey, categoryValue]) => {
 						return (
 							<div
-								key={k}
-								className="filter-group"
-								onClick={() => handleOptionClick(k)}
-							// onMouseEnter={() => handleMouseIn(k)}
-							// onMouseLeave={() => handleMouseOut(k)}
+								key={`${categoryKey},${categoryValue}`}
+								onClick={() => handleOptionClick(categoryKey)}
 							>
-								<h3>{v["_name"] ? v["_name"] : k}</h3>
+								<select name={categoryKey} onChange={handleSelect}>
+									<option defaultValue value={""}>{categoryValue["_name"] ?? categoryKey}</option>
+									{
+										categoryValue &&
+										Object.entries(categoryValue)
+											.map(([optionKey, optionValue]) => {
+												if (optionKey !== "_name") {
+													return (
+														<option key={optionKey} value={optionKey}>{optionValue.name ?? optionKey}</option>
+													)
+												} else {
+													return null;
+												}
+											})
+
+									}
+								</select>
+
+
+							</div>
+						)
+					})
+				}
+
+				{
+					/**
+					 * this will be used if the updated backend is implemented. otherwise, use above
+					 */
+					false &&
+					Object.entries(search.facets).map(([categoryKey, categoryValue]) => {
+						return (
+							<div
+								key={`${categoryKey},${categoryValue}`}
+								className="filter-group"
+								onClick={() => handleOptionClick(categoryKey)}
+							>
+								<h3>{categoryValue["_name"] ?? categoryKey}</h3>
 								{
-									v
-										?
-										<SCheckContainer
-											shown={filter === k}
-										// onMouseLeave={() => handleMouseOut(k)}
-										>
+									categoryValue
+										? <SCheckContainer shown={filter === categoryKey}>
 											{
-												Object.entries(v).map(([k2, v2]) => {
-													if (k2 !== "_name") {
+												Object.entries(categoryValue).map(([optionKey, optionValue]) => {
+													if (optionKey !== "_name") {
 														return (
-															<CheckPair>
-																<label htmlFor={k2}>
+															<CheckPair key={`${categoryKey},${optionKey}`}>
+																<label htmlFor={optionKey}>
 																	<input
 																		type="checkbox"
-																		checked={activeFilters.includes(k2)}
-																		// value={search.facets[k][k2]}
+																		checked={search.activeFacets.some(e => e.id === optionKey)}
 																		onChange={handleCheck}
-																		key={k2}
-																		name={`${k},${k2}`}
-																		id={k2}
+																		key={optionKey}
+																		name={`${categoryKey},${optionKey}`}
+																		id={optionKey}
 																	/>
-																	{v2.name ?? k2}
+																	{optionValue.name ?? optionKey}
 																</label>
 															</CheckPair>
 														)
@@ -92,8 +106,6 @@ const CheckboxGroup = props => {
 										</SCheckContainer>
 										: null
 								}
-
-
 							</div>
 						)
 					})

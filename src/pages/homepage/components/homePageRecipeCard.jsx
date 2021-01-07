@@ -21,6 +21,7 @@ const HomePageRecipeCard= props => {
 
 const RecipeCard = styled.div`
    background-color: white;
+   padding: 3%;
    flex: 1;
 `
 

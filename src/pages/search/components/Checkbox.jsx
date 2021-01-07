@@ -3,10 +3,10 @@ import { useState } from "react";
 const Checkbox = ({ name, handleCheck }) => {
 	const [checked, setChecked] = useState(false);
 
-	const handleClick = (evt) => {
-		evt.stopPropagation();
-		setChecked(!checked);
-	}
+	// const handleClick = (evt) => {
+	// 	evt.stopPropagation();
+	// 	setChecked(!checked);
+	// }
 
 	return (
 		<div>
