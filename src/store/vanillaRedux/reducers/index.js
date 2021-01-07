@@ -21,7 +21,10 @@ import {
 	PUT_RECIPE_BY_ID_SUCCESS,
   PUT_RECIPE_BY_ID_FAILURE,
   REJECT_LOGGED_IN,
-  CONFIRM_LOGGED_IN
+  CONFIRM_LOGGED_IN,
+  POST_NEW_USER_START,
+  POST_NEW_USER_SUCCESS,
+  POST_NEW_USER_FAILURE
 } from '../actions/index'
 
 const initialState = {
@@ -197,6 +200,7 @@ export const vanillaReducer = (state = initialState, action) => {
 				error: action.payload
       }
       
+    //login authentication
     case CONFIRM_LOGGED_IN:
       return {
         ...state,
@@ -207,6 +211,30 @@ export const vanillaReducer = (state = initialState, action) => {
       return {
         ...state,
         isLoggedIn: action.payload
+      }
+
+    //signup
+    case POST_NEW_USER_START:
+      return {
+        ...state,
+        isLoading: true,
+        error: ''
+      }
+
+    case POST_NEW_USER_SUCCESS:
+      return {
+        ...state,
+        isLoading: false,
+        isLoggedIn: true,
+        error: ''
+      }
+
+    case POST_NEW_USER_FAILURE:
+      return {
+        ...state,
+        isLoading: false,
+        isLoggedIn: false,
+        error: action.payload
       }
 
 		default:
