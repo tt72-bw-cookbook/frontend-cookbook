@@ -1,5 +1,12 @@
 # frontend-cookbook
 
+## Deployed Site Links: 
+
+- https://frontend-cookbook.vercel.app/
+- https://frontend-cookbook-git-main.chazkiker2.vercel.app/
+- https://frontend-cookbook.chazkiker2.vercel.app/
+ 
+
 ## Team Git flow
 
 - `git checkout main`
