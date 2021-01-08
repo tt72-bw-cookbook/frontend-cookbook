@@ -95,18 +95,23 @@ div{
 `;
 
 const UserImg = styled.img`
-min-height: 100%;
-max-height: 100%;
 width: auto;
-max-width: 100%;
+max-width: 40%;
+height: auto;
 margin: 0 auto;
 display: block;
-border: 1px solid #a53636;
-border-radius: 25px;
+padding-bottom: 4%;
 `;
 
 const UserRecipes = styled.div`
 	width: 90%;
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: space-evenly;
+	@media (max-width: 800px) {
+		flex-direction: column;
+		align-items: center;
+	  }
 `;
 
 export default ProfilePageContainer;

@@ -17,8 +17,8 @@ const ProfilePageRecipes = props => {
 		<>
 			<UserRecipeDiv>
 				<RecipeGenInfo>
-					<RecipeImg src={userRecipes.pictureurl} />
 					<RecipeTitle> {userRecipes.title} </RecipeTitle>
+					<RecipeImg src={userRecipes.pictureurl} />
 					{
 						userRecipes.categories &&
 						<CatDiv>
@@ -56,6 +56,11 @@ border: 1px solid #a53636;
 border-radius: 25px;
 margin-bottom: 1%;
 background-color: #a53636;
+width: 48%;
+@media (max-width: 800px) {
+	width: 80%;
+	font-size: 0.8rem;
+  }
 `;
 
 const RecipeGenInfo = styled.div`
@@ -82,13 +87,14 @@ font-style: bold;
 
 const RecipeImg = styled.img`
     width: auto;
-    max-width: 60%;
+    max-width: 90%;
     min-height: 40%;
     max-height: 40%;
     margin: 0 auto;
     display: block;
     border: 1px solid #a53636;
-    border-radius: 25px;
+	border-radius: 25px;
+	padding-bottom: 2%;
 `;
 
 const RecInstruct = styled.p`
@@ -104,14 +110,21 @@ font-family: 'Alegreya', serif;
 const CatDiv = styled.div`
 display: flex;
 justify-content: space-evenly;
-border: 1px solid black;
-border-radius: 25px;
 width: 100%;
 padding: .5%;
+@media (max-width: 800px) {
+	width: 100%;
+	font-size: 0.8rem;
+  }
+  @media (max-width: 400px) {
+	width: 100%;
+	font-size: 0.8rem;
+	flex-direction: column;
+  }
 `;
 
 const IngDiv = styled.div`
-padding: 1%;
+padding: 4%;
 font-size: 2rem;
 font-family: 'Alegreya', serif;
 
