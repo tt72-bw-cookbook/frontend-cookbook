@@ -5,7 +5,7 @@ import { initialState } from "./initState";
 export const fireSearch = createAsyncThunk(
 	"search/status",
 	async (search) => {
-		const { queryCategory, querySearch, categories } = search;
+		const { querySearch, categories } = search;
 		let finalQuery = "";
 		let categoryString = "";
 		Object.entries(categories).forEach(([ctg, opt]) => {
@@ -24,11 +24,6 @@ export const fireSearch = createAsyncThunk(
 		return res.data;
 	}
 )
-
-const replaceAt = (str, index, replacement) => {
-	return str.substr(0, index) + replacement + str.substr(index + replacement.length);
-}
-
 
 const searchSlice = createSlice({
 	name: "search",
