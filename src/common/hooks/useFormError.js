@@ -19,11 +19,9 @@ export const useFormError = (initInput, schema) => {
 		yup.reach(schema, name)
 			.validate(value)
 			.then((res) => {
-				console.log({ res, value })
 				setErrors({ ...errors, [name]: "" });
 			})
 			.catch((err) => {
-				console.log({ err, value })
 				setErrors({ ...errors, [name]: err.errors[0] });
 			});
 

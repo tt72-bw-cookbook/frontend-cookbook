@@ -13,13 +13,13 @@ const LoginForm = props => {
 	const [input, errors, disabled, handleChanges, clearForm] = useFormError({ username: "", password: "", }, schema);
 	const { push } = useHistory();
 	const isLoggedIn = useSelector(state => state.user.isLoggedIn)
-	
+
 	useEffect(() => {
 		if (isLoggedIn) {
 			push('/profile')
 		}
 	}, [isLoggedIn, push])
-	
+
 	const handleSubmit = (evt) => {
 		evt.preventDefault();
 		dispatch(postUserLogin(input.username, input.password))
@@ -58,34 +58,24 @@ const LoginForm = props => {
 const StInput = styled(Input)`
 	font-size: 2rem;
 	text-align: center;
-	/* text-transform: uppercase; */
 	border: 1px solid ${props => (props.error !== "") ? "red" : "var(--pLighter)"};
 	color: ${props => (props.error !== "") ? "red" : "var(--pText)"};
 `;
 
-// const StError = styled.p`
-// 	font-size: 1.4rem;
-// 	background-color: rgba(255,255,255,0.5);
-// 	color: red;
-// 	/* padding: 0.5rem; */
-// `;
-
 const Prompt = styled.div`
-/* text-align: center; */
-/* background-color: var(--pDarker); */
-width: 25rem;
-display: flex;
-flex-flow: row nowrap;
-justify-content: space-between;
-align-items: center;
-padding: 2rem;
-p {
-	font-size: 1.3rem;
-}
-a, Link {
-	font-size: 1.3rem;
-	color: var(--pText);
-}
+	width: 25rem;
+	display: flex;
+	flex-flow: row nowrap;
+	justify-content: space-between;
+	align-items: center;
+	padding: 2rem;
+	p {
+		font-size: 1.3rem;
+	}
+	a, Link {
+		font-size: 1.3rem;
+		color: var(--pText);
+	}
 `;
 
 const StyledWrap = styled.div`
