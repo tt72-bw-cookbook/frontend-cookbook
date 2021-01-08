@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const axiosAuth = () => {
-	const token = window.localStorage.getItem("token");
+	const token = window.localStorage.getItem("token") ?? JSON.stringify("not-logged-in");
 
 	return axios.create({
 		headers: {
