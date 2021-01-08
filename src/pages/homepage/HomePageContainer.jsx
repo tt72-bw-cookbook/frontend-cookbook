@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import styled from "styled-components";
 import { Header, Heading } from "../../common/components/";
-import { HomePageRecipes } from './components';
+import { HomePageRecipeCard } from './components';
 import SearchContainer from "../search/SearchContainer";
 import { fireSearch } from "../search/slice/searchSlice";
 
@@ -29,7 +29,7 @@ const HomePageContainer = props => {
 						recipes.length > 0 ?
 							// recipes.slice(0, 18)
 							recipes.map(recipe => {
-								return (<HomePageRecipes key={recipe.recipeid} recipe={recipe} />);
+								return (<HomePageRecipeCard key={recipe.recipeid} recipe={recipe} />);
 							})
 							: <Heading h3>No recipes match that search!</Heading>
 					}

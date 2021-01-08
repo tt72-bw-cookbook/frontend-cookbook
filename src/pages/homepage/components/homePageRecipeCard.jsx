@@ -7,84 +7,85 @@ const HomePageRecipeCard = props => {
 	const id = recipe.recipeid
 
 	return (
-		<>
-
-			<RecipeH2>{recipe.title} </RecipeH2>
+		<RecipeContain to={`/recipe/${id}`}>
+			<h2>{recipe.title}</h2>
 			<RecipeCard>
-				<Link to={`/recipe/${id}`}>
-					<Recipeimg src={recipe.pictureurl} />
-					{/* <RecipeH2>{recipes.title} </RecipeH2> */}
-					<CategDiv>
-						<div>
-							<h4> <CSpan> Course: </CSpan> {recipe.categories.course}</h4>
-							<h4> <CSpan> Cuisine:  </CSpan> {recipe.categories.cuisine}</h4>
-						</div>
-						<div>
-							<h4> <CSpan> Dietary: </CSpan> {recipe.categories.dietaryconcerns}</h4>
-							<h4> <CSpan> Technique: </CSpan> {recipe.categories.technique}</h4>
-						</div>
-					</CategDiv>
-					<hr></hr>
-					<RecipeDes> {recipe.instructions} </RecipeDes>
-				</Link>
+				<img src={recipe.pictureurl} alt={recipe.title} />
+				<div className="category-container">
+					<div>
+						<h4><span>Course: </span>{recipe.categories.course}</h4>
+						<h4><span>Cuisine:  </span>{recipe.categories.cuisine}</h4>
+					</div>
+					<div>
+						<h4><span>Dietary: </span>{recipe.categories.dietaryconcerns}</h4>
+						<h4><span>Technique: </span>{recipe.categories.technique}</h4>
+					</div>
+				</div>
+				<hr></hr>
+				<p className="description"> {recipe.instructions} </p>
 			</RecipeCard>
-		</>
+		</RecipeContain>
 	);
 
 
 
 };
 
+const RecipeContain = styled(Link)`
+	text-decoration: none;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-evenly;
+	width: 32.5%;
+	border: 2px solid white;
+	border-radius: 25px;
+	margin: .4%;
+	background-color: white;
+	h2 {
+		font-size: 3rem;
+		color: #da3c33;
+		padding-bottom: 2%;
+		padding-top: 4%;
+		text-align: center;
+		font-weight: bold;
+		font-family: 'Alegreya', serif;
+	}
+`;
+
 const RecipeCard = styled.div`
-   background-color: white;
-   border: 2px solid white;
-   border-radius: 0 0 25px 25px;
-   border-top: 3px solid #F3F6FA;
-   padding: 3%;
-   flex: 1;
-   h4 {
-       color: black;
-   }
-`
-const CategDiv = styled.div`
-  display: flex;
-  justify-content: space-between;
-  padding: 1% 10% 4% 10%;
-  font-size: 1.3rem;
-  
-`
-
-
-const CSpan = styled.span`
-   font-weight: bold;
-`
-
-const RecipeH2 = styled.h2`
-    font-size: 3rem;
-    color: #da3c33;
-    padding-bottom: 2%;
-    padding-top: 4%;
-    text-align: center;
-    font-weight: bold;
-    font-family: 'Alegreya', serif;
-`
-
-const RecipeDes = styled.h2`
-    font-size: 1.8rem;
-    color: black;
-    padding-bottom: 1%;
-    font-family: 'Alegreya', serif;
-`
-
-const Recipeimg = styled.img`
-    width: auto;
-    max-width: 100%;
-    min-height: 50%;
-    max-height: 50%;
-    font-weight: bold;
-    margin: 0 auto;
-    display: block;
-    
-`
+	background-color: white;
+	border: 2px solid white;
+	border-radius: 0 0 25px 25px;
+	border-top: 3px solid #F3F6FA;
+	padding: 3%;
+	flex: 1;
+	h4 {
+		color: black;
+		span {
+			font-weight: bold;
+		}
+	}
+	img {
+		width: auto;
+		max-width: 100%;
+		min-height: 50%;
+		max-height: 50%;
+		font-weight: bold;
+		margin: 0 auto;
+		display: block;
+	}
+	div.category-container {
+		display: flex;
+		justify-content: space-between;
+		padding: 1% 10% 4% 10%;
+		font-size: 1.3rem;
+	}
+	p.description {
+		font-size: 1.8rem;
+		color: black;
+		padding-bottom: 1%;
+		font-family: 'Alegreya', serif;
+	}
+`;
 
 export default HomePageRecipeCard;
