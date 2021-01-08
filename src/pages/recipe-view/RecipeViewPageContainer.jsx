@@ -18,7 +18,7 @@ const RecipeViewPageContainer = (props) => {
 			.catch((err) => {
 				console.error(err);
 			});
-	}, []);
+	}, [recipeId]);
 
 	function getIngredients(item) {
 		let ingredient = [item.quantity, item.measurement, item.ingredientname].join(" ");
