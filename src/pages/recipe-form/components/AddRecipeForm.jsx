@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import Button from '../../../common/components/Button';
 
 const AddIngredientFrag = ({ formValue, index, addField, remField, ingredientChange, ...rest }) => {
 
@@ -10,9 +11,10 @@ const AddIngredientFrag = ({ formValue, index, addField, remField, ingredientCha
 
 	return (
 		<>
+		{/* <IngDiv> */}
 			<div>
 				<label htmlFor="ingredientname">Ingredient Name</label>
-				<input
+				<StyledIngInput
 					onChange={onChange}
 					type="text"
 					className="form-control"
@@ -24,7 +26,7 @@ const AddIngredientFrag = ({ formValue, index, addField, remField, ingredientCha
 			</div>
 			<div>
 				<label htmlFor="measurement">Measurement</label>
-				<input
+				<StyledIngInput
 					onChange={onChange}
 					type="text"
 					className="form-control"
@@ -36,7 +38,7 @@ const AddIngredientFrag = ({ formValue, index, addField, remField, ingredientCha
 			</div>
 			<div>
 				<label htmlFor="quantity">Quantity</label>
-				<input
+				<StyledIngInput
 					onChange={onChange}
 					type="number"
 					className="form-control"
@@ -46,23 +48,24 @@ const AddIngredientFrag = ({ formValue, index, addField, remField, ingredientCha
 				// value={ingValues.quantity}
 				/>
 			</div>
-			<div>
-				<button
+			<IngButtonDiv>
+				<StyledButton
 					className="btn btn-link"
 					type="button"
 					onClick={() => remField(index)}
 				>
 					-
-							</button>
-				<button
+							</StyledButton>
+				<StyledButton
 					className="btn btn-link"
 					type="button"
 					onClick={() => addField()}
 				>
 					+
-							</button>
+							</StyledButton>
 
-			</div>
+			</IngButtonDiv>
+			{/* </IngDiv> */}
 		</>
 	)
 }
@@ -106,7 +109,7 @@ const AddRecipeForm = props => {
 				<form onSubmit={onSubmit}>
 					<GenInfoDiv>
 						<label>Recipe Name:
-							<input
+							<StyledInput
 								onChange={onChange}
 								value={formValues.title}
 								name='title'
@@ -114,7 +117,7 @@ const AddRecipeForm = props => {
 							/>
 						</label>
 						<label>Recipe Image URL:
-						<input
+						<StyledInput
 								onChange={onChange}
 								value={formValues.pictureurl}
 								name='pictureurl'
@@ -122,7 +125,7 @@ const AddRecipeForm = props => {
 							/>
 						</label>
 						<label>Recipe Source:
-						<input
+						<StyledInput
 								onChange={onChange}
 								value={formValues.source}
 								name='source'
@@ -134,7 +137,7 @@ const AddRecipeForm = props => {
 						</label>
 					</GenInfoDiv>
 					<CatDiv>
-						<select id="course" name="course" onChange={IngChange}>
+						<StyledSelect id="course" name="course" onChange={IngChange}>
 							<option defaultValue value="null">--pick a course--</option>
 							<option value="appetizer">Appetizer</option>
 							<option value="breakfast">Breakfast</option>
@@ -145,8 +148,8 @@ const AddRecipeForm = props => {
 							<option value="snack">Snack</option>
 							<option value="dessert">Dessert</option>
 							<option value="side">Side</option>
-						</select>
-						<select id="cuisine" name="cuisine" onChange={IngChange}>
+						</StyledSelect>
+						<StyledSelect id="cuisine" name="cuisine" onChange={IngChange}>
 							<option defaultValue value="null">--pick a cuisine--</option>
 							<option value="italian">Italian</option>
 							<option value="mexican">Mexican</option>
@@ -157,8 +160,8 @@ const AddRecipeForm = props => {
 							<option value="thai">Thai</option>
 							<option value="vietnamese">Vietnamese</option>
 							<option value="american">American</option>
-						</select>
-						<select id="dietaryconcerns" name="dietaryconcerns" onChange={IngChange}>
+						</StyledSelect>
+						<StyledSelect id="dietaryconcerns" name="dietaryconcerns" onChange={IngChange}>
 							<option defaultValue value="null">--Any dietary concern--</option>
 							<option value="healthy">Healthy</option>
 							<option value="highfiber">Highfiber</option>
@@ -174,8 +177,8 @@ const AddRecipeForm = props => {
 							<option value="vegetarian">Vegetarian</option>
 							<option value="glutenfree">Gluten Free</option>
 
-						</select>
-						<select id="technique" name="technique" onChange={IngChange}>
+						</StyledSelect>
+						<StyledSelect id="technique" name="technique" onChange={IngChange}>
 							<option defaultValue value="null">--cooking technique--</option>
 							<option value="bbq">BBQ</option>
 							<option value="bake">Bake</option>
@@ -185,7 +188,7 @@ const AddRecipeForm = props => {
 							<option value="nocook">No Cook</option>
 							<option value="stirfry">Stir-fry</option>
 							<option value="panfry">Pan-fry</option>
-						</select>
+						</StyledSelect>
 					</CatDiv>
 
 					<IngDiv className="form-row">
@@ -210,7 +213,7 @@ const AddRecipeForm = props => {
 							/>
 						</label>
 					</div>
-					<button className='submitButton'>Submit New Recipe</button>
+					<Button className='submitButton'>Submit New Recipe</Button>
 				</form>
 			</CreateRecDiv>
 		</>
@@ -218,6 +221,7 @@ const AddRecipeForm = props => {
 };
 
 const CreateRecDiv = styled.div`
+	text-align: center;
 	display: flex;
 	flex-flow: column nowrap;
 	justify-content: center;
@@ -226,32 +230,96 @@ const CreateRecDiv = styled.div`
 	border-radius: 20px;
 	padding: 2%;
 	width: 60%;
+	margin: 3%;
 `;
 
 const GenInfoDiv = styled.div`
 	display: flex;
 	flex-direction: column;
-	align-items: left;
+	align-items: center;
 	padding: 2%;
+	margin: 1%;
 `;
 
 const CatDiv = styled.div`
 	display: flex;
 	align-items: center;
+	justify-content: center;
 	padding: 2%;
+	margin: 1%;
+	width: 100%;
 `;
 
 const IngDiv = styled.div`
-	display: table;
+	display: flex;
+	flex-flow: column-wrap;
 	justify-content: space-evenly;
 	align-items: center;
 	padding: 2%;
 	width: 100%;
+	margin: 1%;
+	// border: 1px solid white;
+`;
+
+const IngButtonDiv = styled.div`
+	display: flex;
+	flex-flow: row-wrap;
+	align-items: center;
+	justify-content: center;
 `;
 
 const InstructionsInput = styled.input`
+	text-align: top;
 	width: 94%;
-	height: 200px;
+	height: 5vh;
+	margin: 1%;
+	border-radius: 20px;
+	border: 0px solid black;
+	padding: 1%;
+	&:hover {
+		background: #edebe9;
+}
+`;
+
+const StyledIngInput = styled.input`
+margin: 1%;
+border-radius: 20px;
+border: 0px solid black;
+padding: 1%;
+&:hover {
+		background: #edebe9;
+}
+`;
+
+const StyledInput = styled.input`
+margin: 4%;
+border-radius: 20px;
+border: 0px solid black;
+padding: 2%;
+&:hover {
+		background: #edebe9;
+}
+`;
+
+const StyledSelect = styled.select`
+// border-radius: 20px;
+margin: 0.5%;
+border: 0px solid black;
+padding: 1%;
+&:hover {
+	background: #edebe9;
+}
+`;
+
+const StyledButton = styled(Button)`
+// margin: 10%;
+// border: 0px solid black;
+// display: flex;
+// flex-flow: row-wrap;
+// padding: 50%;
+// height: 2vh;
+	transform: scale(0.5);
+	font-size: 3rem;
 `;
 
 
