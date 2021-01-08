@@ -21,8 +21,10 @@ const RecipeContain = styled.div`
     flex-direction: column;
     justify-content: space-evenly;
     width: 32.5%;
-    background-color: white;
+    border: 2px solid white;
+    border-radius: 25px;
     margin: .4%;
+    background-color: white;
 `;
 
 export default HomePageRecipes;

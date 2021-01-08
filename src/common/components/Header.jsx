@@ -41,23 +41,19 @@ const Header = props => {
 
 			<NavContainer show={navOpen}>
 				<nav>
-					<Link secondary to={PATHS.HOMEPAGE_PATH}>Home</Link>
+					<Link secondary={"true"} to={PATHS.HOMEPAGE_PATH}>Home</Link>
 					{
 						isLoggedIn
-							?
-							<>
-								<Link secondary to={"add"}>Add Recipe</Link>
-								<Link secondary to={PATHS.PROFILE_PATH}>Profile</Link>
+							? <>
+								<Link secondary={"true"} to={"add"}>Add Recipe</Link>
+								<Link secondary={"true"} to={PATHS.PROFILE_PATH}>Profile</Link>
 								<Button onClick={handleLogout}>Logout</Button>
 							</>
 							: <>
-								<Link secondary to={PATHS.LOGIN_PATH}>Login</Link>
-								<Link secondary to={PATHS.SIGNUP_PATH}>Signup</Link>
+								<Link secondary={"true"} to={PATHS.LOGIN_PATH}>Login</Link>
+								<Link secondary={"true"} to={PATHS.SIGNUP_PATH}>Sign Up</Link>
 							</>
 					}
-					{/* <Link to={PATHS.BROWSE_PATH}>Browse</Link> */}
-					{/* <Link to={PATHS.RECIPE_VIEW_PATH}>View Recipe</Link> */}
-
 				</nav>
 			</NavContainer>
 		</>
@@ -81,6 +77,7 @@ const StyledHeader = styled.header`
 		flex-flow: row nowrap;
 		align-items: center;
 	}
+	font-family: 'Alegreya', serif;
 `;
 
 
