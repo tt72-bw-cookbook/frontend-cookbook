@@ -29,23 +29,23 @@ const RecipeViewPageContainer = (props) => {
 		<>
 			<Header />
 			<StyledRecipes>
-				<div>
+				<div >
 					{/* <h1>Recipe View</h1> */}
 
 					<h2>{recipes.title}</h2>
+					<div className="user-stuff">
+						{
+							recipes?.user &&
+							<>
+								<img className="user-img" alt="" src={recipes.user.profilepicture} />
 
-					{
-						recipes?.user &&
-						<>
-							<img className="user-img" alt="" src={recipes.user.profilepicture} />
+								<p className="username">By: {recipes.user.username}</p>
+							</>
+						}
 
-							<p>{recipes.user.username}</p>
-						</>
-					}
-
-					<p className="recipe-date"> Date created: {recipes.createdDate}</p>
+						<p className="recipe-date"> Date: {recipes.createdDate}</p>
+					</div>
 				</div>
-
 				{
 					recipes?.categories &&
 					<>
@@ -92,7 +92,7 @@ const StyledRecipes = styled.div`
 	flex-direction: column;	
 	align-items: center;
 	font-size: 2.1rem;
-	font-weight: 300;
+	font-weight: 330;
 	text-align: center;
 	
 	h1 {
@@ -100,24 +100,33 @@ const StyledRecipes = styled.div`
 		font-size: 4rem;
 		font-weight: 500;
 		text-align: center;
-		margin-top: -10px;
+		margin-top: -20px;
+	}
+
+	.user-stuff{
+		border: 1px dotted gray;
 	}
 	.user-img{
 		max-width: 15%;
 		max-height: 15%
+	}
+	.username{
+		font-size: 1.7rem;
 	}
 
 	.recipe-date{
 		font-size: 1.3rem;
 		font-weight: 400px;
 		word-spacing: 2px;
+		margin-bottom: 10px;
 	}
 
 	.categories{
-		border: 5px solid #a09797;
-		font-size: 1.5rem;
+		border: 4.5px solid #a09797;
+		border-radius: 5px;
+		font-size: 1.3rem;
 		font-weight: 550;
-		width: 55%;
+		width: 75%;
 		display: flex;
 		flex-direction: row;
 		justify-content: space-around;
