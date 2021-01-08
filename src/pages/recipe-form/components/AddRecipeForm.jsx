@@ -1,78 +1,8 @@
 import styled from "styled-components";
 import Button from '../../../common/components/Button';
-
-const AddIngredientFrag = ({ formValue, index, addField, remField, ingredientChange, ...rest }) => {
-
-
-	const onChange = (evt) => {
-		const { name, value } = evt.target;
-		ingredientChange(name, value, index)
-	}
-
-	return (
-		<>
-		{/* <IngDiv> */}
-			<div>
-				<label htmlFor="ingredientname">Ingredient Name</label>
-				<StyledIngInput
-					onChange={onChange}
-					type="text"
-					className="form-control"
-					id="ingredientname"
-					name="ingredientname"
-					value={formValue.ingredientname}
-				// value={ingValues.name}
-				/>
-			</div>
-			<div>
-				<label htmlFor="measurement">Measurement</label>
-				<StyledIngInput
-					onChange={onChange}
-					type="text"
-					className="form-control"
-					id="measurement"
-					name="measurement"
-					value={formValue.measurement}
-				// value={ingValues.measurement}
-				/>
-			</div>
-			<div>
-				<label htmlFor="quantity">Quantity</label>
-				<StyledIngInput
-					onChange={onChange}
-					type="number"
-					className="form-control"
-					id="quantity"
-					name="quantity"
-					value={formValue.quantity}
-				// value={ingValues.quantity}
-				/>
-			</div>
-			<IngButtonDiv>
-				<StyledButton
-					className="btn btn-link"
-					type="button"
-					onClick={() => remField(index)}
-				>
-					-
-							</StyledButton>
-				<StyledButton
-					className="btn btn-link"
-					type="button"
-					onClick={() => addField()}
-				>
-					+
-							</StyledButton>
-
-			</IngButtonDiv>
-			{/* </IngDiv> */}
-		</>
-	)
-}
+import AddIngredientFrag from "./AddIngredientFragment";
 
 const AddRecipeForm = props => {
-
-	// values, change, disabled, errors, submit
 	const {
 		formValues,
 		change,
@@ -82,32 +12,26 @@ const AddRecipeForm = props => {
 		ingredientChange,
 		catChange
 	} = props
-
 	const onChange = evt => {
 		const { name, value, type, checked } = evt.target
 		const valueToUse = type === 'checkbox' ? checked : value;
 		change(name, valueToUse);
 	}
-
 	const onSubmit = (evt) => {
 		evt.preventDefault()
 		submit()
 	}
-
-
-
 	const IngChange = (evt) => {
 		const { name, value } = evt.target;
 		catChange(name, value)
 	}
-
 
 	return (
 		<>
 			<CreateRecDiv>
 				<h1>Add Your Recipe</h1>
 				<form onSubmit={onSubmit}>
-					<GenInfoDiv>
+					<div className="general-info">
 						<label>Recipe Name:
 							<StyledInput
 								onChange={onChange}
@@ -135,8 +59,8 @@ const AddRecipeForm = props => {
 						<label>Private?
                     <input type='checkbox' name='private' checked={formValues.private} onChange={onChange} />
 						</label>
-					</GenInfoDiv>
-					<CatDiv>
+					</div>
+					<div className="category-div">
 						<StyledSelect id="course" name="course" onChange={IngChange}>
 							<option defaultValue value="null">--pick a course--</option>
 							<option value="appetizer">Appetizer</option>
@@ -171,7 +95,7 @@ const AddRecipeForm = props => {
 							<option value="lowsugar">Low/no Sugar</option>
 							<option value="lowsodium">Low Sodium</option>
 							<option value="organic">Organic</option>
-							<option value="quickeasy">Quick n Easy</option>
+							<option value="quickeasy">Quick 'n' Easy</option>
 							<option value="raw">Raw</option>
 							<option value="vegan">Vegan</option>
 							<option value="vegetarian">Vegetarian</option>
@@ -189,9 +113,9 @@ const AddRecipeForm = props => {
 							<option value="stirfry">Stir-fry</option>
 							<option value="panfry">Pan-fry</option>
 						</StyledSelect>
-					</CatDiv>
+					</div>
 
-					<IngDiv className="form-row">
+					<div className="ingredient-div form-row">
 						{formValues.ingredients.map((formValue, index) => (
 							<AddIngredientFrag
 								ingredientChange={ingredientChange}
@@ -202,7 +126,7 @@ const AddRecipeForm = props => {
 								addField={addField}
 							/>
 						))}
-					</IngDiv>
+					</div>
 					<div>
 						<label> Instructions:
 						<InstructionsInput
@@ -231,41 +155,45 @@ const CreateRecDiv = styled.div`
 	padding: 2%;
 	width: 60%;
 	margin: 3%;
-`;
+	.general-info {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		padding: 2%;
+		margin: 1%;
+	}
+	.category-div {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		padding: 2%;
+		margin: 1%;
+		width: 100%;
+	}
+	.ingredient-div {
+		display: flex;
+		flex-flow: column wrap;
+		justify-content: space-evenly;
+		align-items: center;
+		padding: 2%;
+		width: 100%;
+		margin: 1%;
+	}
+	@media (max-width: 1200px) {
+		width: 80%;
 
-const GenInfoDiv = styled.div`
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-	padding: 2%;
-	margin: 1%;
-`;
-
-const CatDiv = styled.div`
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	padding: 2%;
-	margin: 1%;
-	width: 100%;
-`;
-
-const IngDiv = styled.div`
-	display: flex;
-	flex-flow: column-wrap;
-	justify-content: space-evenly;
-	align-items: center;
-	padding: 2%;
-	width: 100%;
-	margin: 1%;
-	// border: 1px solid white;
-`;
-
-const IngButtonDiv = styled.div`
-	display: flex;
-	flex-flow: row-wrap;
-	align-items: center;
-	justify-content: center;
+	}
+	@media (max-width: 800px) {
+		width: 90%;
+		/* min-width: 400px; */
+		.category-div {
+			flex-flow: row wrap;
+			StyledSelect, select {
+				text-align: center;
+				width: 40%;
+			}
+		}
+	}
 `;
 
 const InstructionsInput = styled.input`
@@ -281,16 +209,6 @@ const InstructionsInput = styled.input`
 }
 `;
 
-const StyledIngInput = styled.input`
-margin: 1%;
-border-radius: 20px;
-border: 0px solid black;
-padding: 1%;
-&:hover {
-		background: #edebe9;
-}
-`;
-
 const StyledInput = styled.input`
 margin: 4%;
 border-radius: 20px;
@@ -302,24 +220,12 @@ padding: 2%;
 `;
 
 const StyledSelect = styled.select`
-// border-radius: 20px;
 margin: 0.5%;
 border: 0px solid black;
 padding: 1%;
 &:hover {
 	background: #edebe9;
 }
-`;
-
-const StyledButton = styled(Button)`
-// margin: 10%;
-// border: 0px solid black;
-// display: flex;
-// flex-flow: row-wrap;
-// padding: 50%;
-// height: 2vh;
-	transform: scale(0.5);
-	font-size: 3rem;
 `;
 
 
