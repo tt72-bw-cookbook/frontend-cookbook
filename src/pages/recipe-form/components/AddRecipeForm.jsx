@@ -128,14 +128,16 @@ const AddRecipeForm = props => {
 						))}
 					</div>
 					<div>
-						<label> Instructions:
-						<InstructionsInput
-								onChange={onChange}
-								value={formValues.instructions}
-								name='instructions'
-								type='text'
-							/>
-						</label>
+						{/* <label> Instructions:
+							</label>  */}
+						<textarea
+							placeholder="Instructions: "
+							onChange={onChange}
+							value={formValues.instructions}
+							name="instructions"
+							cols="40"
+							rows="10"
+						/>
 					</div>
 					<Button className='submitButton'>Submit New Recipe</Button>
 				</form>
@@ -179,6 +181,9 @@ const CreateRecDiv = styled.div`
 		width: 100%;
 		margin: 1%;
 	}
+	textarea {
+		resize: none;
+	}
 	@media (max-width: 1200px) {
 		width: 80%;
 
@@ -218,6 +223,7 @@ padding: 2%;
 		background: #edebe9;
 }
 `;
+
 
 const StyledSelect = styled.select`
 margin: 0.5%;
