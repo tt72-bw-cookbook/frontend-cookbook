@@ -197,7 +197,6 @@ export const deleteRecipeById = (id) => {
 export const putRecipeById = (id, updateFields) => {
 	return (dispatch) => {
 		dispatch({ type: PUT_RECIPE_BY_ID_START });
-
 		axiosAuth().put(`recipe/${id}`, updateFields)
 			.then((res) => {
 				dispatch({
