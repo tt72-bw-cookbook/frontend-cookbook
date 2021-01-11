@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import styled from "styled-components";
 import { useDispatch, useSelector } from 'react-redux';
-import { postUserRecipe } from "../../store/vanillaRedux/actions/index"
+import { postUserRecipe, putRecipeById } from "../../store/vanillaRedux/actions/index"
 import axios from "axios"
 import AddRecipeForm from './components/AddRecipeForm';
 import { Header } from "../../common/components"
@@ -51,6 +51,10 @@ const RecipeFormPage = props => {
 		dispatch(postUserRecipe(newRecipe));
 		setFormValues(initialFormValues);
 	};
+	const patchNewRecipe = (newRecipe) => {
+		dispatch(putRecipeById(recipeId, newRecipe));
+		setFormValues(initialFormValues);
+	}
 
 	const inputChange = (name, value) => {
 		setFormValues({
@@ -92,7 +96,11 @@ const RecipeFormPage = props => {
 			categories: formValues.categories,
 			instructions: formValues.instructions.trim(),
 		}
-		postNewRecipe(newRecipe);
+		if (recipeId && recipeId > 0) {
+			patchNewRecipe(newRecipe);
+		} else {
+			postNewRecipe(newRecipe);
+		}
 	}
 
 	if (!user) {
