@@ -2,9 +2,7 @@
 
 ## Deployed Site Links: 
 
-- https://frontend-cookbook.vercel.app/
-- https://frontend-cookbook-git-main.chazkiker2.vercel.app/
-- https://frontend-cookbook.chazkiker2.vercel.app/
+- [See the Deployed Site Here](https://frontend-cookbook.vercel.app/)
  
 
 ## Team Git flow
