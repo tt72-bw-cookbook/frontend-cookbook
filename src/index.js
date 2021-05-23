@@ -8,12 +8,6 @@ import store from './store/store';
 import { ThemeContextProvider } from "./common/theme/ThemeContext";
 import * as serviceWorker from './serviceWorker';
 
-// import { reducer } from './store/vanillaRedux/reducers/index';
-// import { createStore, applyMiddleware } from 'redux';
-// import thunk from 'redux-thunk';
-
-// const store = createStore(reducer, applyMiddleware(thunk))
-
 ReactDOM.render(
 	<React.StrictMode>
 		<Provider store={store}>
