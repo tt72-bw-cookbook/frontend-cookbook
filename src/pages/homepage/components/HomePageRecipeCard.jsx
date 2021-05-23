@@ -2,7 +2,6 @@ import React from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom"
 
-// just renamed this file directly in main branch
 const HomePageRecipeCard = props => {
 	const { recipe } = props
 	const id = recipe.recipeid

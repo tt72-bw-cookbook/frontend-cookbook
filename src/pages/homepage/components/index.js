@@ -1,1 +1,1 @@
-// export { default as HomePageRecipeCard } from "./HomePageRecipeCard";
+export * from "./HomePageRecipeCard";
