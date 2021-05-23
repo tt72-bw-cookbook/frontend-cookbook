@@ -11,15 +11,16 @@ export const fireSearch = createAsyncThunk(
 		Object.entries(categories).forEach(([ctg, opt]) => {
 			console.log(ctg, opt);
 			if (opt !== "") {
-				categoryString += `${ctg}=${opt}`;
+				categoryString += `${categoryString === ""  ? "" : "&"}${ctg}=${opt}`;
 			}
 		})
 		if (querySearch !== "") {
 			finalQuery += `/${querySearch}`
 		}
 		if (categoryString !== "") {
-			finalQuery += `?${categoryString}`
+			finalQuery += `?${categoryString}`;
 		}
+		// https://tt72-cookbook.herokuapp.com/recipes?query=cake&cuisine=american&technique=noCook&dietaryconcerns=kosher&
 		let res = await axios.get(`https://tt72-cookbook.herokuapp.com/recipes${finalQuery}`);
 		return res.data;
 	}
@@ -27,7 +28,7 @@ export const fireSearch = createAsyncThunk(
 
 const searchSlice = createSlice({
 	name: "search",
-	initialState: initialState,
+	initialState,
 	reducers: {
 		updateSearch: (state, action) => {
 			const value = action.payload;
@@ -48,7 +49,6 @@ const searchSlice = createSlice({
 				return;
 			}
 			const filter = state.facets[category][option];
-			// const { course, id } = filter;
 			let queryString = "";
 			if (state.activeFacets.length === 0) {
 				queryString += "?";
@@ -57,8 +57,8 @@ const searchSlice = createSlice({
 			}
 			state.activeFacets.push(filter);
 			state.searchData.searchTerm += queryString + `${category}=${option}`;
-			state.searchData[category] ?
-				state.searchData[category] += `,${option}`
+			state.searchData[category]
+				? state.searchData[category] += `,${option}`
 				: state.searchData[category] = `${category}=${option}`
 		},
 		removeFilter: (state, action) => {
@@ -76,7 +76,7 @@ const searchSlice = createSlice({
 		},
 	},
 	extraReducers: {
-		[fireSearch.pending]: (state, action) => {
+		[fireSearch.pending]: (state, _) => {
 			state.status = "pending";
 		},
 		[fireSearch.fulfilled]: (state, action) => {

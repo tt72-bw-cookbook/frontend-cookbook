@@ -1,8 +1,7 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import styled from "styled-components";
 import { Header, Heading } from "../../common/components/";
-// import { HomePageRecipeCard } from './components';
 import HomePageRecipeCard from "./components/HomePageRecipeCard";
 import SearchContainer from "../search/SearchContainer";
 import { fireSearch } from "../search/slice/searchSlice";
@@ -14,9 +13,7 @@ const HomePageContainer = props => {
 
 	const recipes = recipeData.elements;
 
-
-
-	useEffect(() => {
+	React.useEffect(() => {
 		dispatch(fireSearch(search));
 	}, [dispatch, search])
 
@@ -27,12 +24,11 @@ const HomePageContainer = props => {
 			<HomeBody>
 				<RecipesContainer>
 					{
-						recipes.length > 0 ?
-							// recipes.slice(0, 18)
-							recipes.map(recipe => {
+							recipes?.map(recipe => {
 								return (<HomePageRecipeCard key={recipe.recipeid} recipe={recipe} />);
 							})
-							: <Heading h3>No recipes match that search!</Heading>
+							??
+							<Heading h3>No recipes match that search!</Heading>
 					}
 				</RecipesContainer>
 			</HomeBody>
@@ -45,7 +41,7 @@ const HomeBody = styled.div`
 	flex-flow: column wrap;
 	justify-content: center;
 	align-items: center;
-	
+
 	h1 {
 		margin: 20rem;
 		font-size: 5rem;
